@@ -11,7 +11,7 @@ The machine-readable [catalog](../metrics/catalog.json) contains each owner, def
 - ARR annualizes eligible recurring contract fees, independent of booking amendment amounts and invoice timing. S1 contributes 12,000 and S2 contributes 6,000 at March end. Trial, one-time, cancelled and expired contracts are excluded.
 - ARR policy 1 includes past-due contracts. Policy 2 excludes them, lowering ARR to 12,000. Neither version is labeled universally correct; policy ownership and version are explicit.
 
-The fixture's booking amendment is a commercial commitment adjustment, not a recurring-fee change. That is why it does not automatically change ARR. Financial amounts are in integer cents; the public metric view emits decimal CAD. No foreign exchange or tax is modeled.
+The fixture's booking amendment is a commercial commitment adjustment, not a recurring-fee change. That is why it does not automatically change ARR. Financial amounts are in integer cents; the public metric view emits dollar values. No foreign exchange or tax is modeled.
 
 ## Cohort interpretation
 
