@@ -1,0 +1,13 @@
+version: 2
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: account_history
+      - name: opportunity_events
+      - name: booking_events
+      - name: invoice_lines
+      - name: payment_allocations
+      - name: subscription_contracts
+      - name: calendar
+      - name: coverage

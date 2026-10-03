@@ -1,0 +1,35 @@
+[
+  {
+    "metric_id": "open_pipeline",
+    "title": "Open pipeline",
+    "owner": "Sales Operations",
+    "definition": "Sum of open opportunity value at the reporting date.",
+    "grain": "Opportunity/day snapshot",
+    "time_basis": "Period-end date",
+    "filters": "stage=open",
+    "permitted_dimensions": ["region","ALL"],
+    "null_behavior": "Zero for covered regions with no eligible activity; missing coverage blocks release.",
+    "additivity": "Not additive across snapshot dates.",
+    "version": "1.0",
+    "caveats": "Account region/owner at snapshot date; potential value, not a commitment.",
+    "implementation": "dbt/models/marts/mart_metric_values.sql"
+  },
+  {
+    "metric_id":"net_bookings","title":"Net bookings","owner":"Revenue Operations","definition":"Signed contract booking events plus signed amendment deltas.","grain":"Booking event","time_basis":"Event date within quarter","filters":"All signed booking events","permitted_dimensions":["region","ALL"],"null_behavior":"Zero for covered regions with no eligible activity; missing coverage blocks release.","additivity":"Additive across disjoint dates and accounts.","version":"1.0","caveats":"Uses booking events, not won CRM amounts; one-off and recurring commitments are included.","implementation":"dbt/models/marts/mart_metric_values.sql"
+  },
+  {
+    "metric_id":"net_invoiced","title":"Net invoiced","owner":"Finance","definition":"Invoice lines plus negative credit lines.","grain":"Invoice/credit line","time_basis":"Line event date within quarter","filters":"All invoice and credit lines","permitted_dimensions":["region","ALL"],"null_behavior":"Zero for covered regions with no eligible activity; missing coverage blocks release.","additivity":"Additive across disjoint dates and accounts.","version":"1.0","caveats":"Not recognized revenue. Credit timing can differ from contract amendments.","implementation":"dbt/models/marts/mart_metric_values.sql"
+  },
+  {
+    "metric_id":"cash_received","title":"Cash received","owner":"Finance","definition":"Cash allocations to the invoices included in the supplied source.","grain":"Payment allocation","time_basis":"Allocation event date within quarter","filters":"All supplied allocations","permitted_dimensions":["region","ALL"],"null_behavior":"Zero for covered regions with no eligible activity; missing coverage blocks release.","additivity":"Additive across disjoint dates and accounts.","version":"1.0","caveats":"Allocated cash only; not bank balance. Unallocated receipts, FX and refunds are outside scope.","implementation":"dbt/models/marts/mart_metric_values.sql"
+  },
+  {
+    "metric_id":"period_end_arr","title":"Period-end ARR","owner":"Finance / Revenue Operations","definition":"Annualized eligible recurring contract fee at month end.","grain":"Contract/month-end","time_basis":"Final day of reporting quarter","filters":"Recurring, not trial; start inclusive and end exclusive","permitted_dimensions":["region","ALL"],"null_behavior":"Zero for covered regions with no eligible activity; missing coverage blocks release.","additivity":"Additive across accounts, not across month-end balances.","version":"1.0","caveats":"Policy 1 includes past-due contracts; annualization is fee times 12 divided by billing months. Not recognized revenue.","implementation":"dbt/models/marts/mart_metric_values.sql"
+  },
+  {
+    "metric_id":"cohort_win_rate","title":"30-day opportunity-cohort win rate","owner":"Marketing / Sales Operations","definition":"Mature opportunities first won within 30 days of creation divided by mature created opportunities.","grain":"Opportunity, grouped by creation cohort","time_basis":"Creation in quarter; 30-day observation window complete by report end","filters":"Exclude immature opportunities from both numerator and denominator","permitted_dimensions":["region","ALL"],"null_behavior":"Null when mature denominator is zero; immature count is exposed.","additivity":"Recompute from summed wins and mature opportunities; never average rates.","version":"1.0","caveats":"Region is at creation, not current ownership. First win is used; subsequent reopenings are outside this model. March immature rows remain visible.","implementation":"dbt/models/marts/mart_metric_values.sql"
+  },
+  {
+    "metric_id":"period_end_arr","title":"Period-end ARR","owner":"Finance / Revenue Operations","definition":"Annualized eligible recurring contract fee at month end.","grain":"Contract/month-end","time_basis":"Final day of reporting quarter","filters":"Recurring, not trial; start inclusive and end exclusive; exclude past_due=1","permitted_dimensions":["region","ALL"],"null_behavior":"Zero for covered regions with no eligible activity; missing coverage blocks release.","additivity":"Additive across accounts, not across month-end balances.","version":"2.0","caveats":"Policy 2 excludes past-due contracts. This is a definition change, not a source correction. No accounting compliance claim.","implementation":"dbt/models/marts/mart_metric_values.sql"
+  }
+]

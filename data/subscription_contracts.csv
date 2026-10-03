@@ -1,0 +1,7 @@
+contract_id,account_id,start_date,end_date,fee_cents,billing_months,contract_type,is_trial,past_due
+S1,A1,2026-02-10,2027-02-10,1200000,12,recurring,0,0
+S2,A2,2026-03-10,2027-03-10,50000,1,recurring,0,1
+S3,A4,2026-02-01,2026-03-20,240000,12,recurring,0,0
+S4,A3,2026-01-01,2027-01-01,9999900,12,recurring,1,0
+S5,A3,2026-01-01,2027-01-01,7000000,12,one_time,0,0
+S6,A3,2026-01-01,2026-03-01,100000,1,recurring,0,0

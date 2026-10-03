@@ -1,0 +1,6 @@
+allocation_id,payment_id,invoice_id,account_id,event_date,amount_cents
+P1,R1,I1,A1,2026-02-15,300000
+P2,R2,I1,A1,2026-02-25,200000
+P3,R3,I2,A1,2026-03-10,300000
+P4,R4,I3,A2,2026-03-20,200000
+P5,R5,I4,A4,2026-02-10,100000

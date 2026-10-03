@@ -1,0 +1,25 @@
+revenue_metrics:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('REVENUE_DB', '../.local/warehouse.duckdb') }}"
+      schema: analytics
+      threads: 1
+      settings:
+        threads: 2
+        memory_limit: 2GB
+        preserve_insertion_order: false
+    snowflake:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT', '') }}"
+      user: "{{ env_var('SNOWFLAKE_USER', '') }}"
+      private_key_path: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PATH', '') }}"
+      private_key_passphrase: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PASSPHRASE', '') }}"
+      role: RMP_BUILD
+      database: REVENUE_METRICS_DEMO
+      warehouse: RMP_WH
+      schema: "{{ env_var('REVENUE_BUILD_SCHEMA', 'BUILD_DEMO') }}"
+      threads: 2
+      client_session_keep_alive: false
+      query_tag: revenue_metrics_platform

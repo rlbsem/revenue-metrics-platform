@@ -1,0 +1,7 @@
+source_name,complete_from,complete_through
+account_history,2026-01-01,2026-03-31
+opportunity_events,2026-01-01,2026-03-31
+booking_events,2026-01-01,2026-03-31
+invoice_lines,2026-01-01,2026-03-31
+payment_allocations,2026-01-01,2026-03-31
+subscription_contracts,2026-01-01,2026-03-31

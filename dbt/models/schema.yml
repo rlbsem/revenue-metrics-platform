@@ -1,0 +1,69 @@
+version: 2
+models:
+  - name: stg_opportunities
+    description: "One latest received revision per CRM event."
+    columns:
+      - name: event_id
+        tests: [unique, not_null]
+  - name: stg_subscriptions
+    description: "One contract; eligibility and annualized fee."
+    columns:
+      - name: contract_id
+        tests: [unique, not_null]
+  - name: dim_account
+    description: "One account effective interval [valid_from, valid_to)."
+    columns:
+      - name: account_version_id
+        tests: [unique, not_null]
+  - name: dim_date
+    description: "One calendar day."
+    columns:
+      - name: date_day
+        tests: [unique, not_null]
+  - name: fct_opportunity_daily
+    description: "One opportunity at end of each reporting day."
+    columns:
+      - name: opportunity_day_key
+        tests: [unique, not_null]
+  - name: fct_booking_events
+    description: "One signed contract booking event; amendments are deltas."
+    columns:
+      - name: booking_event_id
+        tests: [unique, not_null]
+  - name: fct_invoice_lines
+    description: "One signed invoice or credit line."
+    columns:
+      - name: line_id
+        tests: [unique, not_null]
+  - name: fct_payment_allocations
+    description: "One cash allocation to an invoice."
+    columns:
+      - name: allocation_id
+        tests: [unique, not_null]
+  - name: fct_subscription_period
+    description: "One contract per month end."
+    columns:
+      - name: contract_period_key
+        tests: [unique, not_null]
+  - name: mart_pipeline
+    description: "One account per day with account attributes at that date."
+  - name: mart_flows
+    description: "One account and event date with independently aggregated flows."
+  - name: mart_arr
+    description: "One account per month end."
+  - name: mart_cohorts
+    description: "One creation month and creation-time region; 30-day outcomes."
+  - name: mart_metric_values
+    description: "One metric and region (including ALL) per configured quarter."
+  - name: mart_discrepancy_bridge
+    description: "One account per configured quarter; explained commercial differences."
+exposures:
+  - name: quarterly_business_review
+    type: dashboard
+    maturity: medium
+    owner: {name: Revenue Analytics, email: analytics@example.invalid}
+    depends_on: [ref('mart_metric_values'), ref('mart_discrepancy_bridge')]
+  - name: analyst_export
+    type: application
+    owner: {name: Revenue Analytics, email: analytics@example.invalid}
+    depends_on: [ref('mart_metric_values')]

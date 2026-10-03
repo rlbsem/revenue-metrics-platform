@@ -1,0 +1,348 @@
+{
+  "model.revenue_metrics.dim_account": {
+    "depends_on": [
+      "source.revenue_metrics.raw.account_history"
+    ],
+    "description": "One account effective interval [valid_from, valid_to).",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.dim_date": {
+    "depends_on": [
+      "source.revenue_metrics.raw.calendar"
+    ],
+    "description": "One calendar day.",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.fct_booking_events": {
+    "depends_on": [
+      "source.revenue_metrics.raw.booking_events"
+    ],
+    "description": "One signed contract booking event; amendments are deltas.",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.fct_invoice_lines": {
+    "depends_on": [
+      "source.revenue_metrics.raw.invoice_lines"
+    ],
+    "description": "One signed invoice or credit line.",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.fct_opportunity_daily": {
+    "depends_on": [
+      "model.revenue_metrics.stg_opportunities",
+      "model.revenue_metrics.dim_date"
+    ],
+    "description": "One opportunity at end of each reporting day.",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.fct_payment_allocations": {
+    "depends_on": [
+      "source.revenue_metrics.raw.payment_allocations"
+    ],
+    "description": "One cash allocation to an invoice.",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.fct_subscription_period": {
+    "depends_on": [
+      "model.revenue_metrics.stg_subscriptions",
+      "model.revenue_metrics.dim_date"
+    ],
+    "description": "One contract per month end.",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.mart_arr": {
+    "depends_on": [
+      "model.revenue_metrics.fct_subscription_period",
+      "model.revenue_metrics.dim_account"
+    ],
+    "description": "One account per month end.",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.mart_cohorts": {
+    "depends_on": [
+      "model.revenue_metrics.stg_opportunities",
+      "model.revenue_metrics.dim_date",
+      "model.revenue_metrics.dim_account"
+    ],
+    "description": "One creation month and creation-time region; 30-day outcomes.",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.mart_discrepancy_bridge": {
+    "depends_on": [
+      "model.revenue_metrics.mart_flows",
+      "model.revenue_metrics.dim_account"
+    ],
+    "description": "One account per configured quarter; explained commercial differences.",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.mart_flows": {
+    "depends_on": [
+      "model.revenue_metrics.fct_booking_events",
+      "model.revenue_metrics.fct_invoice_lines",
+      "model.revenue_metrics.fct_payment_allocations",
+      "model.revenue_metrics.dim_account"
+    ],
+    "description": "One account and event date with independently aggregated flows.",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.mart_metric_values": {
+    "depends_on": [
+      "model.revenue_metrics.dim_account",
+      "model.revenue_metrics.mart_pipeline",
+      "model.revenue_metrics.mart_flows",
+      "model.revenue_metrics.mart_arr",
+      "model.revenue_metrics.mart_cohorts"
+    ],
+    "description": "One metric and region (including ALL) per configured quarter.",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.mart_pipeline": {
+    "depends_on": [
+      "model.revenue_metrics.fct_opportunity_daily",
+      "model.revenue_metrics.dim_account"
+    ],
+    "description": "One account per day with account attributes at that date.",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.stg_opportunities": {
+    "depends_on": [
+      "source.revenue_metrics.raw.opportunity_events"
+    ],
+    "description": "One latest received revision per CRM event.",
+    "resource_type": "model"
+  },
+  "model.revenue_metrics.stg_subscriptions": {
+    "depends_on": [
+      "source.revenue_metrics.raw.subscription_contracts"
+    ],
+    "description": "One contract; eligibility and annualized fee.",
+    "resource_type": "model"
+  },
+  "test.revenue_metrics.assert_account_references": {
+    "depends_on": [
+      "model.revenue_metrics.fct_booking_events",
+      "model.revenue_metrics.fct_invoice_lines",
+      "model.revenue_metrics.fct_payment_allocations",
+      "model.revenue_metrics.fct_opportunity_daily",
+      "model.revenue_metrics.fct_subscription_period",
+      "model.revenue_metrics.dim_account"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.assert_contract_references": {
+    "depends_on": [
+      "model.revenue_metrics.fct_booking_events",
+      "model.revenue_metrics.stg_subscriptions",
+      "model.revenue_metrics.fct_invoice_lines"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.assert_contract_validity": {
+    "depends_on": [
+      "model.revenue_metrics.stg_subscriptions"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.assert_flow_conservation": {
+    "depends_on": [
+      "model.revenue_metrics.fct_booking_events",
+      "model.revenue_metrics.mart_flows",
+      "model.revenue_metrics.fct_invoice_lines",
+      "model.revenue_metrics.fct_payment_allocations"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.assert_invoice_settlement": {
+    "depends_on": [
+      "model.revenue_metrics.fct_invoice_lines",
+      "model.revenue_metrics.fct_payment_allocations"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.assert_metric_shape": {
+    "depends_on": [
+      "model.revenue_metrics.mart_metric_values"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.assert_opportunity_contract": {
+    "depends_on": [
+      "model.revenue_metrics.stg_opportunities"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.assert_payment_invoice_reference": {
+    "depends_on": [
+      "model.revenue_metrics.fct_payment_allocations",
+      "model.revenue_metrics.fct_invoice_lines"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.assert_raw_revision_unique": {
+    "depends_on": [
+      "source.revenue_metrics.raw.opportunity_events"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.assert_required_fact_fields": {
+    "depends_on": [
+      "model.revenue_metrics.fct_booking_events",
+      "model.revenue_metrics.fct_invoice_lines",
+      "model.revenue_metrics.fct_payment_allocations",
+      "model.revenue_metrics.stg_subscriptions",
+      "model.revenue_metrics.stg_opportunities",
+      "model.revenue_metrics.dim_account"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.assert_scd_intervals": {
+    "depends_on": [
+      "model.revenue_metrics.dim_account"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.assert_source_coverage": {
+    "depends_on": [
+      "source.revenue_metrics.raw.coverage"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.not_null_dim_account_account_version_id.956f97e023": {
+    "depends_on": [
+      "model.revenue_metrics.dim_account"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.not_null_dim_date_date_day.e3f312efb2": {
+    "depends_on": [
+      "model.revenue_metrics.dim_date"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.not_null_fct_booking_events_booking_event_id.bb5998017c": {
+    "depends_on": [
+      "model.revenue_metrics.fct_booking_events"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.not_null_fct_invoice_lines_line_id.6f58cdee9b": {
+    "depends_on": [
+      "model.revenue_metrics.fct_invoice_lines"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.not_null_fct_opportunity_daily_opportunity_day_key.d488988ebf": {
+    "depends_on": [
+      "model.revenue_metrics.fct_opportunity_daily"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.not_null_fct_payment_allocations_allocation_id.d3a9f1f778": {
+    "depends_on": [
+      "model.revenue_metrics.fct_payment_allocations"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.not_null_fct_subscription_period_contract_period_key.0c9046cc23": {
+    "depends_on": [
+      "model.revenue_metrics.fct_subscription_period"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.not_null_stg_opportunities_event_id.a1ef70569b": {
+    "depends_on": [
+      "model.revenue_metrics.stg_opportunities"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.not_null_stg_subscriptions_contract_id.2c9d4c503f": {
+    "depends_on": [
+      "model.revenue_metrics.stg_subscriptions"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.unique_dim_account_account_version_id.081635f4f9": {
+    "depends_on": [
+      "model.revenue_metrics.dim_account"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.unique_dim_date_date_day.d56fd19199": {
+    "depends_on": [
+      "model.revenue_metrics.dim_date"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.unique_fct_booking_events_booking_event_id.33c401e9c1": {
+    "depends_on": [
+      "model.revenue_metrics.fct_booking_events"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.unique_fct_invoice_lines_line_id.56e7ba6f2a": {
+    "depends_on": [
+      "model.revenue_metrics.fct_invoice_lines"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.unique_fct_opportunity_daily_opportunity_day_key.fba23a1aed": {
+    "depends_on": [
+      "model.revenue_metrics.fct_opportunity_daily"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.unique_fct_payment_allocations_allocation_id.902a1988a7": {
+    "depends_on": [
+      "model.revenue_metrics.fct_payment_allocations"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.unique_fct_subscription_period_contract_period_key.aa9e8aefeb": {
+    "depends_on": [
+      "model.revenue_metrics.fct_subscription_period"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.unique_stg_opportunities_event_id.2e2c7d09fe": {
+    "depends_on": [
+      "model.revenue_metrics.stg_opportunities"
+    ],
+    "description": "",
+    "resource_type": "test"
+  },
+  "test.revenue_metrics.unique_stg_subscriptions_contract_id.5e620e2c61": {
+    "depends_on": [
+      "model.revenue_metrics.stg_subscriptions"
+    ],
+    "description": "",
+    "resource_type": "test"
+  }
+}

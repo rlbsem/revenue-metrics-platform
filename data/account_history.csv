@@ -1,0 +1,6 @@
+account_version_id,account_id,account_name,owner,region,valid_from,valid_to
+A1_1,A1,Cedar Labs,Maya,North,2025-01-01,2026-02-15
+A1_2,A1,Cedar Labs,Noah,East,2026-02-15,2099-01-01
+A2_1,A2,Maple Systems,Sam,West,2025-01-01,2099-01-01
+A3_1,A3,Birch Works,Maya,North,2025-01-01,2099-01-01
+A4_1,A4,Spruce Data,Sam,West,2025-01-01,2099-01-01

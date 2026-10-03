@@ -1,0 +1,17 @@
+{
+  "differences": [
+    {
+      "metric_id": "period_end_arr",
+      "region": "ALL",
+      "v1": "18000.00000000",
+      "v2": "12000.00000000"
+    },
+    {
+      "metric_id": "period_end_arr",
+      "region": "West",
+      "v1": "6000.00000000",
+      "v2": "0.00000000"
+    }
+  ],
+  "reason": "ARR policy 2 excludes past-due contracts; source facts unchanged."
+}

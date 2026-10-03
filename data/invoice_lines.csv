@@ -1,0 +1,6 @@
+line_id,invoice_id,contract_id,account_id,event_date,amount_cents,line_type
+L1,I1,S1,A1,2026-02-11,700000,invoice
+L2,I2,S1,A1,2026-03-01,500000,invoice
+L3,I2,S1,A1,2026-03-25,-100000,credit
+L4,I3,S2,A2,2026-03-12,400000,invoice
+L5,I4,S3,A4,2026-02-03,100000,invoice

@@ -1,0 +1,6 @@
+{
+  "error_counts": {
+    "account_attributes_keys":0,"booked_fee_matches_contract":0,"booking_attributes_keys":0,"booking_event_totals":0,"booking_lineage":0,"commercial_events_keys":0,"commitment_economics":0,"contract_attributes_keys":0,"descriptor_references":0,"fee_segments_do_not_overlap":0,"installed_wins_outside_current_cohort":0,"invoice_fee_and_service_dates":0,"quarterly_event_dates":0,"won_commercial_authority":0
+  },
+  "status":"passed"
+}

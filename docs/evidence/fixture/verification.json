@@ -1,0 +1,14 @@
+{
+  "dbt_data_tests": 30,
+  "dbt_models": 15,
+  "deterministic_replay": true,
+  "github_actions": "configured, not executed by this local verification",
+  "local_execution": "passed",
+  "markdown_links": "passed",
+  "platform": "Windows",
+  "pytest_summary": "30 passed in 52.40s",
+  "python": "3.12.14",
+  "release_id": "d62d17045e7d94d6de41bda02b58ac1058f6885c81f01f08005a604d585fe947",
+  "snowflake": "pending_credentials",
+  "streamlit": "AppTest exercised all six cards and region selection"
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "status": "passed",
+    "test": "test_independent_quarter_and_account_bridge"
+  },
+  {
+    "status": "passed",
+    "test": "test_fanout_is_detected_by_dbt"
+  },
+  {
+    "status": "passed",
+    "test": "test_historical_owner_boundary_and_current_owner_difference"
+  },
+  {
+    "status": "passed",
+    "test": "test_booking_amendment_and_partial_credit_remain_separate"
+  },
+  {
+    "status": "passed",
+    "test": "test_ratio_uses_counts_not_average_rates"
+  },
+  {
+    "status": "passed",
+    "test": "test_immature_cohort_is_not_a_loss"
+  },
+  {
+    "status": "passed",
+    "test": "test_pipeline_is_not_additive_over_time"
+  },
+  {
+    "status": "passed",
+    "test": "test_arr_eligibility_and_end_exclusive"
+  },
+  {
+    "status": "passed",
+    "test": "test_invalid_inputs_are_rejected[delete from raw.coverage where source_name='invoice_lines'-assert_source_coverage]"
+  },
+  {
+    "status": "passed",
+    "test": "test_invalid_inputs_are_rejected[update raw.coverage set complete_through='2026-03-15' where source_name='opportunity_events'-assert_source_coverage]"
+  },
+  {
+    "status": "passed",
+    "test": "test_invalid_inputs_are_rejected[update analytics.fct_booking_events set account_id='UNKNOWN' where booking_event_id='B1'-assert_account_references]"
+  },
+  {
+    "status": "passed",
+    "test": "test_invalid_inputs_are_rejected[update analytics.dim_account set valid_to='2026-03-01' where account_version_id='A1_1'-assert_scd_intervals]"
+  },
+  {
+    "status": "passed",
+    "test": "test_invalid_inputs_are_rejected[update analytics.stg_subscriptions set billing_months=0 where contract_id='S1'-assert_contract_validity]"
+  },
+  {
+    "status": "passed",
+    "test": "test_invalid_inputs_are_rejected[update analytics.fct_payment_allocations set invoice_id='UNKNOWN' where allocation_id='P1'-assert_payment_invoice_reference]"
+  },
+  {
+    "status": "passed",
+    "test": "test_backdated_correction_incremental_full_equivalence"
+  },
+  {
+    "status": "passed",
+    "test": "test_forward_date_correction_removes_obsolete_snapshot_keys"
+  },
+  {
+    "status": "passed",
+    "test": "test_metric_catalog_contains_full_contracts"
+  },
+  {
+    "status": "passed",
+    "test": "test_consumer_parity_and_streamlit"
+  },
+  {
+    "status": "passed",
+    "test": "test_stale_consumer_and_tampered_payload_rejected"
+  },
+  {
+    "status": "passed",
+    "test": "test_metric_definition_change_is_new_release"
+  },
+  {
+    "status": "passed",
+    "test": "test_failed_build_or_quality_gate_preserves_release[delete from raw.coverage where source_name='booking_events']"
+  },
+  {
+    "status": "passed",
+    "test": "test_failed_build_or_quality_gate_preserves_release[drop table raw.invoice_lines]"
+  },
+  {
+    "status": "passed",
+    "test": "test_unknown_region_and_path_traversal_refused"
+  },
+  {
+    "status": "passed",
+    "test": "test_same_seed_is_byte_identical_and_other_seed_changes_sources"
+  },
+  {
+    "status": "passed",
+    "test": "test_profile_configuration_and_manifest"
+  },
+  {
+    "status": "passed",
+    "test": "test_source_economics_and_descriptive_references"
+  },
+  {
+    "status": "passed",
+    "test": "test_generated_sources_execute_dbt_and_correction_is_not_a_noop"
+  },
+  {
+    "status": "passed",
+    "test": "test_financial_relationship_failures_rejected[update analytics.fct_invoice_lines set contract_id='UNKNOWN' where line_id='L1'-assert_contract_references]"
+  },
+  {
+    "status": "passed",
+    "test": "test_financial_relationship_failures_rejected[update analytics.fct_payment_allocations set amount_cents=99999999 where allocation_id='P1'-assert_invoice_settlement]"
+  },
+  {
+    "status": "passed",
+    "test": "test_bookings_cannot_use_lost_opportunities"
+  }
+]

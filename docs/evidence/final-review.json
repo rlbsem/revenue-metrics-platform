@@ -1,0 +1,34 @@
+{
+  "accounts": 60000,
+  "daily_opportunity_rows": 12470664,
+  "github_actions": "not executed on GitHub",
+  "large_generated_data": "excluded under .local; fixture data remains committed",
+  "markdown_links": "passed",
+  "scope": "Established-company business timeline revision",
+  "secret_scan": "narrow signature and credential-file checks passed; reviewed changed sources and documentation",
+  "snowflake_offline_parse": "passed; actual cloud execution pending credentials",
+  "source_economics": {
+    "error_counts": {
+      "account_attributes_keys": 0,
+      "booked_fee_matches_contract": 0,
+      "booking_attributes_keys": 0,
+      "booking_event_totals": 0,
+      "booking_lineage": 0,
+      "commercial_events_keys": 0,
+      "commitment_economics": 0,
+      "contract_attributes_keys": 0,
+      "descriptor_references": 0,
+      "fee_segments_do_not_overlap": 0,
+      "installed_wins_outside_current_cohort": 0,
+      "invoice_fee_and_service_dates": 0,
+      "quarterly_event_dates": 0,
+      "won_commercial_authority": 0
+    },
+    "status": "passed"
+  },
+  "static_checks": "ruff check, format check and compileall passed",
+  "status": "passed",
+  "streamlit": "final six displayed metrics and installed-base explanation passed AppTest; browser screenshot separately captured",
+  "stress": "profile preserved; not executed",
+  "unchanged_fixture_dbt_and_metric_files": 45
+}

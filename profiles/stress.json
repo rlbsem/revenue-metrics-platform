@@ -1,0 +1,6 @@
+{
+  "profile":"stress","seed":20261003,"accounts":180000,"ended_contract_every":50,"correction_every":200,
+  "segment_monthly_cents":{"SMB":30000,"Mid-market":150000,"Enterprise":400000},
+  "product_percent":{"Core":85,"Growth":100,"Suite":120},
+  "new_customer_probability":0.02,"prospect_outcome_weights":[30,32,38]
+}

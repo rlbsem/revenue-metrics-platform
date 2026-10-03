@@ -1,0 +1,57 @@
+{
+  "config": {
+    "accounts": 60000,
+    "correction_every": 200,
+    "ended_contract_every": 50,
+    "new_customer_probability": 0.02,
+    "product_percent": {
+      "Core": 85,
+      "Growth": 100,
+      "Suite": 120
+    },
+    "profile": "enterprise",
+    "prospect_outcome_weights": [
+      30,
+      32,
+      38
+    ],
+    "seed": 20261003,
+    "segment_monthly_cents": {
+      "Enterprise": 400000,
+      "Mid-market": 150000,
+      "SMB": 30000
+    }
+  },
+  "files": {
+    "account_attributes.csv": "990c6fa9d6fa734763a66d27ec4ca6ebac8cd9e70d1da86ffca64884406975f7",
+    "account_history.csv": "f22b4e2c8569321389a0ac612b5dc6e83419fb0efa5f6eef102b5aa8ef33c0f8",
+    "booking_attributes.csv": "590efc3b9e5e6da2ba044d8ea2265ddc94519da79fe8b59b480faf5fe54f9ba2",
+    "booking_events.csv": "a294180ab7a374b41556721925bee1b7802d91a9823f906d83a5b74add81f379",
+    "calendar.csv": "c95f5bb25803d26c6177a1116162c05269e03906878d373abaf65e784e9205cc",
+    "commercial_events.csv": "d1d016c34a206f3074d9e6255175eb61058eda751a19c5ea305e621455acf314",
+    "contract_attributes.csv": "5264b3d98103a5d477e34116e2e30b8fefb47f633ff63bbec2fbd8140aa9fd57",
+    "coverage.csv": "de1abba91968213e743a5e8d7bf50a47fe0c6c4190fc27080545c54a93894df9",
+    "invoice_lines.csv": "7e8c69401a515f32fa4e96bf0569831f74105f461a1974cb426a424eb625447e",
+    "late_opportunity_events.csv": "e97fe34aec6edd8cfdcb1f47221e6a65d8ebc2e610c24fc01e2d25064a192bbd",
+    "opportunity_events.csv": "ae2d181bb75ab4ba1bcc8feb63ea8bd6bb7b15ada996875437acf6bddf270d4f",
+    "payment_allocations.csv": "c0180da0b67983a54c938563b682517b0c02db4a3c7b8dece5ef77268a201287",
+    "subscription_contracts.csv": "3f8bbe86a4f7fa81e77f835daf23a656a619087d4c1cf87be05aec22e9980de8"
+  },
+  "generator_version": 2,
+  "row_counts": {
+    "account_attributes": 60000,
+    "account_history": 68571,
+    "booking_attributes": 345504,
+    "booking_events": 345504,
+    "calendar": 90,
+    "commercial_events": 28792,
+    "contract_attributes": 73927,
+    "coverage": 6,
+    "invoice_lines": 775133,
+    "late_opportunity_events": 901,
+    "opportunity_events": 333146,
+    "payment_allocations": 329053,
+    "subscription_contracts": 73927
+  },
+  "source_fingerprint": "04c906a66d9575cdad7c82e229110bf689aeaacf4d225def61686e76b21debe8"
+}

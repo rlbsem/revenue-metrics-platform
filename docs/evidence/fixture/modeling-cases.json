@@ -1,0 +1,12 @@
+{
+  "historical_pipeline_correction": {
+    "base_cents": 1200000,
+    "corrected_cents": 2100000,
+    "date": "2026-02-04"
+  },
+  "incremental_clean_release_equal": true,
+  "invoice_join_fanout": {
+    "correct_cents": 1600000,
+    "naive_join_cents": 2300000
+  }
+}

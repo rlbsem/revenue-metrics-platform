@@ -1,0 +1,12 @@
+event_id,opportunity_id,account_id,created_date,effective_date,stage,amount_cents,origin,ingest_seq
+E1,O1,A1,2026-01-05,2026-01-05,open,1200000,Marketing,1
+E2,O1,A1,2026-01-05,2026-02-10,won,1200000,Marketing,1
+E3,O2,A2,2026-02-05,2026-02-05,open,600000,Sales,1
+E4,O2,A2,2026-02-05,2026-03-10,won,600000,Sales,1
+E5,O3,A1,2026-03-15,2026-03-15,open,400000,Marketing,1
+E6,O4,A3,2026-01-10,2026-01-10,open,300000,Marketing,1
+E7,O4,A3,2026-01-10,2026-01-20,lost,300000,Marketing,1
+E8,O5,A4,2026-01-20,2026-01-20,open,200000,Sales,1
+E9,O5,A4,2026-01-20,2026-02-01,won,200000,Sales,1
+E10,O6,A2,2026-02-10,2026-02-10,open,100000,Sales,1
+E11,O6,A2,2026-02-10,2026-02-20,lost,100000,Sales,1

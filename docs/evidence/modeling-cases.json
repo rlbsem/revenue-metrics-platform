@@ -1,0 +1,296 @@
+{
+  "all_corrected_model_signatures": {
+    "dim_account": [
+      68571,
+      7296183243193411747,
+      630901560927521621114751
+    ],
+    "dim_date": [
+      90,
+      9797947721705984245,
+      833994414183339903951
+    ],
+    "fct_booking_events": [
+      345504,
+      3195166801344394956,
+      3199083839784929125255626
+    ],
+    "fct_invoice_lines": [
+      775133,
+      6014402357538375513,
+      7148806698991438042941487
+    ],
+    "fct_opportunity_daily": [
+      12470664,
+      7101365865915910524,
+      114999725257092582877690756
+    ],
+    "fct_payment_allocations": [
+      329053,
+      10084020012799508387,
+      3032777939125733671634507
+    ],
+    "fct_subscription_period": [
+      221781,
+      3510399305821576745,
+      2044103067367395362359907
+    ],
+    "mart_arr": [
+      180000,
+      9671192582006191292,
+      1658730380705605783864528
+    ],
+    "mart_cohorts": [
+      15,
+      10272146083732844546,
+      163712887194717879406
+    ],
+    "mart_discrepancy_bridge": [
+      48020,
+      11254096405724159079,
+      443589194547405780385043
+    ],
+    "mart_flows": [
+      546059,
+      672204367453249734,
+      5034604268628024130792310
+    ],
+    "mart_metric_values": [
+      36,
+      14900638001639913826,
+      341323533025963048708
+    ],
+    "mart_pipeline": [
+      5395893,
+      18326639198699955580,
+      49779159983523854643608114
+    ],
+    "stg_opportunities": [
+      333146,
+      11655590607661900771,
+      3069644293838805632072855
+    ],
+    "stg_subscriptions": [
+      73927,
+      2298935676838797884,
+      682456448808002961615370
+    ]
+  },
+  "bounded_discrepancy_examples": [
+    {
+      "account_id": "A000001",
+      "account_name": "Synthetic Account 000001",
+      "bookings": 2916.0,
+      "bookings_less_invoices": 2187.0,
+      "cash": 729.0,
+      "explanation": "Contract value not yet invoiced in this period",
+      "invoiced": 729.0,
+      "invoices_less_cash": 0.0
+    },
+    {
+      "account_id": "A000002",
+      "account_name": "Synthetic Account 000002",
+      "bookings": 5140.8,
+      "bookings_less_invoices": 3855.6000000000004,
+      "cash": 1285.2,
+      "explanation": "Contract value not yet invoiced in this period",
+      "invoiced": 1285.2,
+      "invoices_less_cash": 0.0
+    },
+    {
+      "account_id": "A000003",
+      "account_name": "Synthetic Account 000003",
+      "bookings": 2448.0,
+      "bookings_less_invoices": 1836.0,
+      "cash": 612.0,
+      "explanation": "Contract value not yet invoiced in this period",
+      "invoiced": 612.0,
+      "invoices_less_cash": 0.0
+    },
+    {
+      "account_id": "A000004",
+      "account_name": "Synthetic Account 000004",
+      "bookings": 88.65,
+      "bookings_less_invoices": -790.0500000000001,
+      "cash": 645.39,
+      "explanation": "Net invoicing exceeds amended bookings in this period",
+      "invoiced": 878.7,
+      "invoices_less_cash": 233.31000000000006
+    },
+    {
+      "account_id": "A000005",
+      "account_name": "Synthetic Account 000005",
+      "bookings": 3874.29,
+      "bookings_less_invoices": 2900.27,
+      "cash": 992.29,
+      "explanation": "Contract value not yet invoiced in this period",
+      "invoiced": 974.02,
+      "invoices_less_cash": -18.269999999999982
+    },
+    {
+      "account_id": "A000006",
+      "account_name": "Synthetic Account 000006",
+      "bookings": 0.0,
+      "bookings_less_invoices": -849.15,
+      "cash": 849.15,
+      "explanation": "Net invoicing exceeds amended bookings in this period",
+      "invoiced": 849.15,
+      "invoices_less_cash": 0.0
+    },
+    {
+      "account_id": "A000010",
+      "account_name": "Synthetic Account 000010",
+      "bookings": 4284.0,
+      "bookings_less_invoices": 3266.55,
+      "cash": 1017.45,
+      "explanation": "Contract value not yet invoiced in this period",
+      "invoiced": 1017.45,
+      "invoices_less_cash": 0.0
+    },
+    {
+      "account_id": "A000011",
+      "account_name": "Synthetic Account 000011",
+      "bookings": 4492.8,
+      "bookings_less_invoices": 3369.6000000000004,
+      "cash": 1123.2,
+      "explanation": "Contract value not yet invoiced in this period",
+      "invoiced": 1123.2,
+      "invoices_less_cash": 0.0
+    },
+    {
+      "account_id": "A000012",
+      "account_name": "Synthetic Account 000012",
+      "bookings": -29.37,
+      "bookings_less_invoices": -951.44,
+      "cash": 704.52,
+      "explanation": "Net invoicing exceeds amended bookings in this period",
+      "invoiced": 922.07,
+      "invoices_less_cash": 217.55000000000007
+    },
+    {
+      "account_id": "A000013",
+      "account_name": "Synthetic Account 000013",
+      "bookings": 0.0,
+      "bookings_less_invoices": -891.0,
+      "cash": 891.0,
+      "explanation": "Net invoicing exceeds amended bookings in this period",
+      "invoiced": 891.0,
+      "invoices_less_cash": 0.0
+    },
+    {
+      "account_id": "A000014",
+      "account_name": "Synthetic Account 000014",
+      "bookings": 119.84,
+      "bookings_less_invoices": -716.8,
+      "cash": 818.72,
+      "explanation": "Net invoicing exceeds amended bookings in this period",
+      "invoiced": 836.64,
+      "invoices_less_cash": 17.91999999999996
+    },
+    {
+      "account_id": "A000015",
+      "account_name": "Synthetic Account 000015",
+      "bookings": 145.35,
+      "bookings_less_invoices": -404.0799999999999,
+      "cash": 537.65,
+      "explanation": "Net invoicing exceeds amended bookings in this period",
+      "invoiced": 549.43,
+      "invoices_less_cash": 11.779999999999973
+    },
+    {
+      "account_id": "A000016",
+      "account_name": "Synthetic Account 000016",
+      "bookings": 3960.0,
+      "bookings_less_invoices": 2970.0,
+      "cash": 742.5,
+      "explanation": "Contract value not yet invoiced in this period",
+      "invoiced": 990.0,
+      "invoices_less_cash": 247.5
+    },
+    {
+      "account_id": "A000017",
+      "account_name": "Synthetic Account 000017",
+      "bookings": 4492.8,
+      "bookings_less_invoices": 0.0,
+      "cash": 4492.8,
+      "explanation": "Bookings and invoicing align for this period",
+      "invoiced": 4492.8,
+      "invoices_less_cash": 0.0
+    },
+    {
+      "account_id": "A000019",
+      "account_name": "Synthetic Account 000019",
+      "bookings": 4320.0,
+      "bookings_less_invoices": 0.0,
+      "cash": 4320.0,
+      "explanation": "Bookings and invoicing align for this period",
+      "invoiced": 4320.0,
+      "invoices_less_cash": 0.0
+    },
+    {
+      "account_id": "A000020",
+      "account_name": "Synthetic Account 000020",
+      "bookings": 0.0,
+      "bookings_less_invoices": -902.88,
+      "cash": 677.16,
+      "explanation": "Net invoicing exceeds amended bookings in this period",
+      "invoiced": 902.88,
+      "invoices_less_cash": 225.72000000000003
+    },
+    {
+      "account_id": "A000021",
+      "account_name": "Synthetic Account 000021",
+      "bookings": 0.0,
+      "bookings_less_invoices": -910.35,
+      "cash": 910.35,
+      "explanation": "Net invoicing exceeds amended bookings in this period",
+      "invoiced": 910.35,
+      "invoices_less_cash": 0.0
+    },
+    {
+      "account_id": "A000022",
+      "account_name": "Synthetic Account 000022",
+      "bookings": 0.0,
+      "bookings_less_invoices": -1008.0,
+      "cash": 1008.0,
+      "explanation": "Net invoicing exceeds amended bookings in this period",
+      "invoiced": 1008.0,
+      "invoices_less_cash": 0.0
+    },
+    {
+      "account_id": "A000023",
+      "account_name": "Synthetic Account 000023",
+      "bookings": 237.73,
+      "bookings_less_invoices": -628.79,
+      "cash": 836.64,
+      "explanation": "Net invoicing exceeds amended bookings in this period",
+      "invoiced": 866.52,
+      "invoices_less_cash": 29.879999999999995
+    },
+    {
+      "account_id": "A000024",
+      "account_name": "Synthetic Account 000024",
+      "bookings": 190.7,
+      "bookings_less_invoices": -504.43,
+      "cash": 510.54,
+      "explanation": "Net invoicing exceeds amended bookings in this period",
+      "invoiced": 695.13,
+      "invoices_less_cash": 184.58999999999997
+    }
+  ],
+  "correction_rows": 901,
+  "daily_fact_before": [
+    12469464,
+    164523309386154728,
+    114986043966230909748395688
+  ],
+  "daily_fact_corrected": [
+    12470664,
+    7101365865915910524,
+    114999725257092582877690756
+  ],
+  "incremental_full_model_signatures_equal": true,
+  "profile": "enterprise",
+  "published_release_equal": true,
+  "signature_method": "row count, XOR and sum of DuckDB row hashes; probabilistic comparison. Exact rowsets also tested on canonical fixture."
+}

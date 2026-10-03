@@ -1,0 +1,5 @@
+booking_event_id,contract_id,account_id,event_date,amount_cents,event_type
+B1,S1,A1,2026-02-10,1200000,new
+B2,S1,A1,2026-03-20,-200000,amendment
+B3,S2,A2,2026-03-10,600000,new
+B4,S3,A4,2026-02-01,200000,new

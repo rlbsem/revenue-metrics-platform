@@ -1,0 +1,3 @@
+event_id,opportunity_id,account_id,created_date,effective_date,stage,amount_cents,origin,ingest_seq
+E3,O2,A2,2026-02-03,2026-02-03,open,900000,Sales,2
+E4,O2,A2,2026-02-03,2026-03-10,won,600000,Sales,2

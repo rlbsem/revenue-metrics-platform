@@ -1,0 +1,38 @@
+name: Verify configured Snowflake account
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cloud:
+    runs-on: ubuntu-latest
+    environment: snowflake-demo
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PRIVATE_KEY_PASSPHRASE: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_PASSPHRASE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.lock
+      - run: python -m pip install --no-deps --no-build-isolation -e .
+      - name: Materialize secret key outside repository
+        shell: bash
+        env:
+          PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_PEM }}
+        run: |
+          umask 077
+          printf '%s' "$PRIVATE_KEY" > "$RUNNER_TEMP/snowflake.p8"
+          echo "SNOWFLAKE_PRIVATE_KEY_PATH=$RUNNER_TEMP/snowflake.p8" >> "$GITHUB_ENV"
+      - run: python scripts/verify_snowflake.py --require-cloud
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: sanitized-cloud-verification
+          path: .local/snowflake/verification.json
+      - name: Remove temporary key
+        if: always()
+        shell: bash
+        run: rm -f -- "$RUNNER_TEMP/snowflake.p8"

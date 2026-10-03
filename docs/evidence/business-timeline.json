@@ -1,0 +1,135 @@
+{
+  "acquisition_years": [
+    {
+      "accounts": 9812,
+      "acquired_year": 2020
+    },
+    {
+      "accounts": 9648,
+      "acquired_year": 2021
+    },
+    {
+      "accounts": 9717,
+      "acquired_year": 2022
+    },
+    {
+      "accounts": 9852,
+      "acquired_year": 2023
+    },
+    {
+      "accounts": 9907,
+      "acquired_year": 2024
+    },
+    {
+      "accounts": 9839,
+      "acquired_year": 2025
+    },
+    {
+      "accounts": 1225,
+      "acquired_year": 2026
+    }
+  ],
+  "active_accounts_without_q1_bookings": 33834,
+  "cohort": {
+    "definition_version": "1.0",
+    "denominator": "84093.00",
+    "excluded": 36227,
+    "metric_id": "cohort_win_rate",
+    "numerator": "15700.00",
+    "period_end": "2026-03-31",
+    "period_start": "2026-01-01",
+    "region": "ALL",
+    "unit": "ratio",
+    "value": "0.18669806"
+  },
+  "metrics": {
+    "cash_received": "174611954.38000000",
+    "cohort_win_rate": "0.18669806",
+    "net_bookings": "197458588.59000000",
+    "net_invoiced": "189422794.55000000",
+    "open_pipeline": "222336753.02000000",
+    "period_end_arr": "754389953.40000000"
+  },
+  "q1_commercial_events": [
+    {
+      "event_type": "cancellation",
+      "events": 1180,
+      "net_bookings": "-2195073.54"
+    },
+    {
+      "event_type": "contraction",
+      "events": 5850,
+      "net_bookings": "-3615047.86"
+    },
+    {
+      "event_type": "expansion",
+      "events": 3289,
+      "net_bookings": "1988641.35"
+    },
+    {
+      "event_type": "new_business",
+      "events": 1225,
+      "net_bookings": "15035799.00"
+    },
+    {
+      "event_type": "renewal",
+      "events": 14747,
+      "net_bookings": "184699182.96"
+    },
+    {
+      "event_type": "upgrade",
+      "events": 2501,
+      "net_bookings": "1545086.68"
+    }
+  ],
+  "renewal_months": [
+    {
+      "contracts": 5221,
+      "renewal_month": 1
+    },
+    {
+      "contracts": 5400,
+      "renewal_month": 2
+    },
+    {
+      "contracts": 5351,
+      "renewal_month": 3
+    },
+    {
+      "contracts": 4776,
+      "renewal_month": 4
+    },
+    {
+      "contracts": 4872,
+      "renewal_month": 5
+    },
+    {
+      "contracts": 4756,
+      "renewal_month": 6
+    },
+    {
+      "contracts": 4960,
+      "renewal_month": 7
+    },
+    {
+      "contracts": 5054,
+      "renewal_month": 8
+    },
+    {
+      "contracts": 5009,
+      "renewal_month": 9
+    },
+    {
+      "contracts": 4994,
+      "renewal_month": 10
+    },
+    {
+      "contracts": 4858,
+      "renewal_month": 11
+    },
+    {
+      "contracts": 4749,
+      "renewal_month": 12
+    }
+  ]
+}
