@@ -85,6 +85,7 @@ def generate(destination: Path, profile="enterprise", *, config=None):
                 term_start,
                 term_end,
             )
+            # Twelve service-period commitment components, not twelve independently won deals.
             for part in range(12):
                 cents = amount // 12 if part < 11 else amount - (amount // 12) * 11
                 bid = eid + f"B{part:02d}"
@@ -147,6 +148,7 @@ def generate(destination: Path, profile="enterprise", *, config=None):
             term_end = term_start.replace(year=term_start.year + 1)
             oid = f"O{n:06d}H"
             acquisition_created = acquired - timedelta(days=rng.randint(35, 100))
+            # Current-quarter acquisition/expansion evaluation is independent of installed ARR.
             prospects = []
             for j in range(2):
                 poid = f"O{n:06d}P{j}"
@@ -195,6 +197,7 @@ def generate(destination: Path, profile="enterprise", *, config=None):
             )
             cid = f"C{n:06d}A"
             prior_cid = cid + "PRE"
+            # Fee-effective segments prevent a March amendment from restating January ARR.
             segments = [(cid, acquired, term_end, monthly)]
             if change:
                 segments = [
@@ -243,6 +246,7 @@ def generate(destination: Path, profile="enterprise", *, config=None):
                     term_end,
                 )
             if change and change[0] != term_start:
+                # Signed remaining-term adjustment; prior-year term when amendment precedes renewal.
                 change_term_start = (
                     term_start if change[0] >= term_start else term_start.replace(year=2025)
                 )
@@ -334,6 +338,8 @@ def generate(destination: Path, profile="enterprise", *, config=None):
             bills = (
                 [date(2026, month, bill_day) for month in (1, 2, 3)] if term == 1 else [term_start]
             )
+            # Include the December invoice for monthly opening receivables; annual carry-in
+            # invoices are retained with their original dates. Flows are still quarter-filtered.
             if term == 1 and not new_customer:
                 bills.insert(0, date(2025, 12, bill_day))
             for issued in bills:

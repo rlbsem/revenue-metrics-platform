@@ -95,6 +95,7 @@ def main():
     result = review(base / "published")
     sample = evidence / "published"
     sample.mkdir(exist_ok=True)
+    # Keep exactly the current generated example, leaving old local workspaces untouched.
     for old in sample.glob("*.json"):
         old.unlink()
     shutil.copyfile(base / "published/current.json", sample / "current.json")
@@ -145,6 +146,7 @@ def main():
         for k, v in manifest["nodes"].items()
     }
     (evidence / "dbt-lineage.json").write_text(canonical(lineage), encoding="utf-8")
+    # docs generate can replace run_results; use actual build results from the incremental build.
     build_results = json.loads((base / "dbt-target/run_results.json").read_text())
     statuses = [{"node": r["unique_id"], "status": r["status"]} for r in build_results["results"]]
     assert all(r["status"] in ("success", "pass") for r in statuses)
@@ -210,6 +212,7 @@ def main():
         "",
     ]
     (evidence / "commercial-review.md").write_text("\n".join(report), encoding="utf-8")
+    # Materialize this link target before checking all documentation links; no pass claim yet.
     (evidence / "verification.json").write_text(
         canonical({"local_execution": "checks_in_progress"}), encoding="utf-8"
     )

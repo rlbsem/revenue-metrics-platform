@@ -25,10 +25,6 @@ The established enterprise Q1 review produces **CAD197.46M in net bookings, CAD1
 
 ## See the commercial review
 
-![Executed Streamlit commercial review](docs/evidence/business-review.jpg)
-
-[Installed-base explanation in the running app](docs/evidence/business-timeline.jpg).
-
 Read the [generated review and account-level discrepancy bridge](docs/evidence/commercial-review.md), inspect the [analyst export](docs/evidence/analyst-export.csv), or run the business app below. Both consumers use the same validated rows from `mart_metric_values`; the app contains no separate metric formulas.
 
 ## Architecture

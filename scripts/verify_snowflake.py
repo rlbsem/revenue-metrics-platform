@@ -86,6 +86,7 @@ def verify(
     with connect("RMP_LOADER") as conn:
         cursor = conn.cursor()
         for table, ddl in tables.items():
+            # This command replaces synthetic source tables in the fixed demo database only.
             cursor.execute(f"create or replace table RAW.{table} ({ddl})")
             with (source_dir / f"{table}.csv").open(newline="", encoding="utf-8") as f:
                 reader = csv.reader(f)
@@ -104,6 +105,7 @@ def verify(
                 )
         if manifest:
             from revenue_platform.scenario_checks import validate_scenario
+
             validate_scenario(cursor)
     run_dbt(workspace / "unused.duckdb", workspace, full_refresh=True, target="snowflake")
     with connect("RMP_BUILD") as conn:
@@ -143,6 +145,7 @@ def verify(
             assert_expected(snapshot)
         payload = make_payload(snapshot, "1.0", "snowflake")
         from revenue_platform.runtime import digest
+
         release_id = digest(payload)
         cursor.execute(
             "create table if not exists CONSUMER.RELEASE_HISTORY (release_id varchar, payload variant)"
@@ -150,6 +153,7 @@ def verify(
         cursor.execute(
             "create table if not exists CONSUMER.CURRENT_RELEASE (release_id varchar, payload variant)"
         )
+        # A single current payload makes all metric/bridge/definition fields change together.
         cursor.execute("begin")
         try:
             cursor.execute(
@@ -225,6 +229,7 @@ def main():
             args.workspace, args.require_cloud, args.status_only, args.profile, args.source_dir
         )
     except Exception as error:
+        # Avoid serializing connection details or key material from SDK exceptions.
         print(
             f"Snowflake verification failed ({type(error).__name__}); inspect the local dbt logs if created."
         )

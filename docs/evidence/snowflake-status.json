@@ -1,6 +1,10 @@
 {
   "executed_cloud": false,
-  "missing_variable_names": ["SNOWFLAKE_ACCOUNT","SNOWFLAKE_USER","SNOWFLAKE_PRIVATE_KEY_PATH"],
+  "missing_variable_names": [
+    "SNOWFLAKE_ACCOUNT",
+    "SNOWFLAKE_USER",
+    "SNOWFLAKE_PRIVATE_KEY_PATH"
+  ],
   "note": "DuckDB tests do not establish Snowflake execution, grants or warehouse performance.",
   "status": "pending_credentials"
 }

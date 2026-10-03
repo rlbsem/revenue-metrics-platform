@@ -26,6 +26,7 @@ def test_independent_quarter_and_account_bridge(built):
 
 
 def test_fanout_is_detected_by_dbt(database, tmp_path):
+    # A real common defect: each invoice line is repeated for every payment on its invoice.
     with duckdb.connect(str(database)) as con:
         wrong = con.execute(
             "select sum(i.amount_cents) from analytics.fct_invoice_lines i join analytics.fct_payment_allocations p using(invoice_id)"
