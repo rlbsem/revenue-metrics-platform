@@ -41,6 +41,18 @@ flowchart LR
     F --> G[Validated commercial review]
     G --> H[Streamlit business review]
     G --> I[Analyst CSV export]
+
+    classDef input fill:#dbeafe,stroke:#2563eb,color:#0f172a,stroke-width:2px;
+    classDef foundation fill:#bfdbfe,stroke:#1d4ed8,color:#0f172a,stroke-width:2px;
+    classDef process fill:#93c5fd,stroke:#1e40af,color:#0f172a,stroke-width:2px;
+    classDef control fill:#60a5fa,stroke:#1e3a8a,color:#ffffff,stroke-width:2px;
+    classDef output fill:#2563eb,stroke:#1e3a8a,color:#ffffff,stroke-width:2px;
+
+    class F1,F2,F3 input;
+    class B foundation;
+    class C,D,E process;
+    class F,G control;
+    class H,I output;
 ```
 
 The local target uses DuckDB. The Snowflake path loads the same sources, executes the same model graph and profile-appropriate validation, then verifies a read-only warehouse consumer and role denials. [Architecture and execution boundaries](docs/architecture.md).
