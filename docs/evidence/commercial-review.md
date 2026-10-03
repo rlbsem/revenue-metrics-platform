@@ -1,6 +1,6 @@
 # Enterprise commercial review
 
-Synthetic Q1 2026 B2B SaaS business. CAD. This is a scenario, not an accounting or production-scale claim.
+Synthetic Q1 2026 B2B SaaS business. This is a scenario, not an accounting or production-scale claim.
 
 | Metric | Value | Version |
 |---|---:|---|
