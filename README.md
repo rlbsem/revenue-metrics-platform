@@ -2,9 +2,9 @@
 
 **Marketing sees pipeline. Sales sees bookings. Finance sees invoices and cash. Why don't the numbers agree?**
 
-This governed commercial analytics platform explains the differences through dimensional models, six shared metrics and two consumer paths. Its default demonstration is a deterministic synthetic B2B SaaS enterprise with approximately **CAD755M period-end ARR**. A separate hand-authored fixture supplies exact, independently checkable edge cases.
+This governed commercial analytics platform explains the differences through dimensional models, six shared metrics and two consumer paths. Its default demonstration is a deterministic synthetic B2B SaaS enterprise with approximately **$755M period-end ARR**. A separate hand-authored fixture supplies exact, independently checkable edge cases.
 
-The established enterprise Q1 review produces **CAD197.46M in net bookings, CAD189.42M net invoiced and CAD174.61M allocated cash**. Period-end installed ARR is CAD754.39M; open pipeline is CAD222.34M. The mature 30-day current-quarter cohort win rate is 18.67%.
+The established enterprise Q1 review produces **$197.46M in net bookings, $189.42M net invoiced and $174.61M allocated cash**. Period-end installed ARR is $754.39M; open pipeline is $222.34M. The mature 30-day current-quarter cohort win rate is 18.67%.
 
 **Installed ARR ≠ quarterly bookings ≠ quarterly invoicing ≠ quarterly cash.** Customers acquired over 2020–2025 continue to contribute ARR. Only signed Q1 new business, renewals, expansions, upgrades, contractions and cancellations enter Q1 bookings. Billing continues for existing contracts; some collections settle opening invoices.
 
@@ -17,7 +17,7 @@ The established enterprise Q1 review produces **CAD197.46M in net bookings, CAD1
 | Signed Q1 commercial events behind those components | 28,792 |
 | Invoice/credit lines, including supporting opening invoices | 775,133 |
 | Payment allocations, including retained historical allocations | 329,053 |
-| Period-end ARR | CAD754,389,953.40 |
+| Period-end ARR | $754,389,953.40 |
 
 33,834 active accounts have no Q1 booking. [Generated scale summary](docs/evidence/scale-summary.json) and [acquisition/renewal timeline](docs/evidence/business-timeline.json). Each signed event has twelve service-period commitment components; these are not twelve separately won deals. ARR emerges from dated contracts and explicit fees. Runtime-generated source rows stay outside GitHub and the delivery ZIP.
 
