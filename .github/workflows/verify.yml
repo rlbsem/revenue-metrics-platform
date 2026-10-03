@@ -9,7 +9,11 @@ jobs:
   local:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            venv_python: .venv/bin/python
+          - os: windows-latest
+            venv_python: .venv/Scripts/python.exe
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -17,9 +21,16 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-      - run: python -m pip install -r requirements.lock
-      - run: python -m pip install --no-deps --no-build-isolation -e .
-      - run: python scripts/verify.py
+      - run: python -m venv .venv
+      - name: Install locked dependencies
+        shell: bash
+        run: ${{ matrix.venv_python }} -m pip install -r requirements.lock
+      - name: Install project
+        shell: bash
+        run: ${{ matrix.venv_python }} -m pip install --no-deps --no-build-isolation -e .
+      - name: Verify
+        shell: bash
+        run: ${{ matrix.venv_python }} scripts/verify.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
