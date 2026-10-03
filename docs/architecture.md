@@ -14,7 +14,7 @@ Account history is an input contract of complete SCD2 intervals; dbt does not pr
 
 CRM events have stable event IDs and monotonically increasing received batch sequences. The staging view selects the latest received revision for each event before applying effective dates. The incremental opportunity fact replaces the full affected opportunity history, including removal of obsolete day keys when an effective date moves forward. Downstream marts rebuild. This is single-writer, complete-source-history processing; it does not support arbitrary source deletion, concurrent ingestion, or a report-window change without a full refresh.
 
-The late fixture was received after the initial quarter review and backdates O2's creation/open amount. It restates February 4 pipeline from 12,000 to 21,000 CAD without changing quarter-end pipeline. Release source fingerprints distinguish the two received histories. This is not a general bitemporal query engine.
+The late fixture was received after the initial quarter review and backdates O2's creation/open amount. It restates February 4 pipeline from $12,000 to $21,000 without changing quarter-end pipeline. Release source fingerprints distinguish the two received histories. This is not a general bitemporal query engine.
 
 ## Shared metrics and consumers
 
