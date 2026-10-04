@@ -49,9 +49,9 @@ def update_readme(result):
         return float(rows[key]["value"])
 
     report = (
-        f"The established enterprise Q1 review produces **CAD{money('net_bookings') / 1e6:,.2f}M in net bookings, "
-        f"CAD{money('net_invoiced') / 1e6:,.2f}M net invoiced and CAD{money('cash_received') / 1e6:,.2f}M allocated cash**. "
-        f"Period-end installed ARR is CAD{money('period_end_arr') / 1e6:,.2f}M; open pipeline is CAD{money('open_pipeline') / 1e6:,.2f}M. "
+        f"The established enterprise Q1 review produces **${money('net_bookings') / 1e6:,.2f}M in net bookings, "
+        f"${money('net_invoiced') / 1e6:,.2f}M net invoiced and ${money('cash_received') / 1e6:,.2f}M allocated cash**. "
+        f"Period-end installed ARR is ${money('period_end_arr') / 1e6:,.2f}M; open pipeline is ${money('open_pipeline') / 1e6:,.2f}M. "
         f"The mature 30-day current-quarter cohort win rate is {money('cohort_win_rate'):.2%}.\n\n"
         "**Installed ARR ≠ quarterly bookings ≠ quarterly invoicing ≠ quarterly cash.** "
         "Customers acquired over 2020–2025 continue to contribute ARR. Only signed Q1 new business, renewals, expansions, upgrades, contractions and cancellations enter Q1 bookings. Billing continues for existing contracts; some collections settle opening invoices.\n\n"
@@ -63,7 +63,7 @@ def update_readme(result):
         f"| Signed Q1 commercial events behind those components | {counts['commercial_events']:,} |\n"
         f"| Invoice/credit lines, including supporting opening invoices | {counts['invoice_lines']:,} |\n"
         f"| Payment allocations, including retained historical allocations | {counts['payment_allocations']:,} |\n"
-        f"| Period-end ARR | CAD{money('period_end_arr'):,.2f} |\n\n"
+        f"| Period-end ARR | ${money('period_end_arr'):,.2f} |\n\n"
         f"{info['timeline']['active_accounts_without_q1_bookings']:,} active accounts have no Q1 booking. "
         "[Generated scale summary](docs/evidence/scale-summary.json) and [acquisition/renewal timeline](docs/evidence/business-timeline.json). "
         "Each signed event has twelve service-period commitment components; these are not twelve separately won deals. "
@@ -76,7 +76,7 @@ def update_readme(result):
         if "The enterprise Q1 review" in text
         else text.index("The established enterprise Q1 review")
     )
-    finish = text.index("\n\n**All businesses", start)
+    finish = text.index("\n\n## Architecture", start)
     path.write_text(text[:start] + report + text[finish:], encoding="utf-8")
 
 
@@ -143,13 +143,13 @@ def verify():
     assert not app.exception
     assert len(app.metric) == 6
     expected = {r["metric_id"]: r for r in result["metrics"] if r["region"] == "ALL"}
-    assert app.metric[4].value == f"${float(expected['period_end_arr']['value']):,.0f}"
+    assert app.metric[4].value == f"${float(expected['period_end_arr']['value']) / 1e6:,.2f}M"
     app.selectbox[0].select("EMEA").run()
     assert not app.exception
     emea = next(
         r for r in result["metrics"] if r["metric_id"] == "period_end_arr" and r["region"] == "EMEA"
     )
-    assert app.metric[4].value == f"${float(emea['value']):,.0f}"
+    assert app.metric[4].value == f"${float(emea['value']) / 1e6:,.2f}M"
     app.selectbox[1].select("Enterprise").run()
     app.selectbox[2].select("Suite").run()
     assert not app.exception
@@ -214,7 +214,7 @@ def verify():
     report = [
         "# Enterprise commercial review",
         "",
-        "Synthetic Q1 2026 B2B SaaS business. CAD. This is a scenario, not an accounting or production-scale claim.",
+        "Synthetic Q1 2026 B2B SaaS business. This is a scenario, not an accounting or production-scale claim.",
         "",
         "| Metric | Value | Version |",
         "|---|---:|---|",

@@ -14,7 +14,7 @@
     "profile": "enterprise",
     "published_release_equal": true,
     "python": "3.12.14",
-    "release_id": "6a7b68262317729a3499273759d95df4fda3bc914a685e16c145dfe8ff19507e",
+    "release_id": "c1228f85d5e2e8fa4793d6f8386812c76e53873e08c1df696065d392b5546938",
     "source_economics": "passed; all source-level economic and booking-authority checks",
     "source_repeat_byte_hashes_equal": true,
     "status": "passed",
@@ -22,14 +22,14 @@
     "stress": "configured; not executed, no measured performance claim",
     "timing_caveat": "Single local execution on a shared Windows workstation; not a controlled benchmark or production capacity claim. Incremental command rebuilds all non-incremental models.",
     "timings_seconds": {
-      "bounded_snapshot_and_source_hashes": 8.403,
-      "bulk_load": 3.335,
-      "corrected_full_refresh_dbt_build": 16.673,
-      "corrected_incremental_dbt_build": 10.865,
-      "dbt_docs": 2.319,
-      "initial_dbt_build": 15.828,
-      "repeat_source_generation": 4.726,
-      "source_generation": 4.018
+      "bounded_snapshot_and_source_hashes": 7.704,
+      "bulk_load": 3.153,
+      "corrected_full_refresh_dbt_build": 16.717,
+      "corrected_incremental_dbt_build": 11.83,
+      "dbt_docs": 2.582,
+      "initial_dbt_build": 15.885,
+      "repeat_source_generation": 4.087,
+      "source_generation": 4.001
     }
   },
   "fixture": {
@@ -40,9 +40,9 @@
     "local_execution": "passed",
     "markdown_links": "passed",
     "platform": "Windows",
-    "pytest_summary": "30 passed in 52.40s",
+    "pytest_summary": "30 passed in 58.14s",
     "python": "3.12.14",
-    "release_id": "d62d17045e7d94d6de41bda02b58ac1058f6885c81f01f08005a604d585fe947",
+    "release_id": "6771841bd850e4ae5edd535c9f6ed033128e0b2161ada57b112834dc110ea718",
     "snowflake": "pending_credentials",
     "streamlit": "AppTest exercised all six cards and region selection"
   },

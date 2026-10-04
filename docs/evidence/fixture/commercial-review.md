@@ -1,6 +1,6 @@
 # Q1 2026 commercial review
 
-All values and source systems are synthetic. CAD.
+All values and source systems are synthetic.
 
 | Metric | Value | Definition |
 |---|---:|---|
@@ -23,10 +23,10 @@ The 20% win rate is 1 win / 5 mature opportunities; one immature opportunity is 
 
 The gaps are timing and commercial-definition differences. They are not forced to zero. A1 has a signed amendment and partial credit; A2/A4 have uninvoiced commitments. Allocated cash leaves a net $5,000 invoice gap. This sample has no opening balances; this difference is not a general accounts-receivable balance.
 
-The deliberately incorrect invoice/payment join produces CAD23,000, instead of CAD16,000. The conservation test rejects the inflated mart.
+The deliberately incorrect invoice/payment join produces $23,000, instead of $16,000. The conservation test rejects the inflated mart.
 
-The backdated CRM correction changes February 4 pipeline from CAD12,000 to CAD21,000. The final quarter-end pipeline remains CAD4,000. Incremental processing matches a clean rebuild.
+The backdated CRM correction changes February 4 pipeline from $12,000 to $21,000. The final quarter-end pipeline remains $4,000. Incremental processing matches a clean rebuild.
 
-ARR policy 2 excludes past-due contracts and changes quarter-end ARR from CAD18,000 to CAD12,000. That is a definition change, not a change to source facts.
+ARR policy 2 excludes past-due contracts and changes quarter-end ARR from $18,000 to $12,000. That is a definition change, not a change to source facts.
 
-Release: `d62d17045e7d94d6de41bda02b58ac1058f6885c81f01f08005a604d585fe947`. Read the [analyst export](analyst-export.csv), [modeling cases](modeling-cases.json), [definition change](definition-change.json) and [dbt results](dbt-results.json).
+Release: `6771841bd850e4ae5edd535c9f6ed033128e0b2161ada57b112834dc110ea718`. Read the [analyst export](analyst-export.csv), [modeling cases](modeling-cases.json), [definition change](definition-change.json) and [dbt results](dbt-results.json).

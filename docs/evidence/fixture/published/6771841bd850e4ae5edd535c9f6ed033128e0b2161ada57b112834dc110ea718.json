@@ -1,0 +1,526 @@
+{
+  "arr_policy": "1.0",
+  "bridge": [
+    {
+      "account_id": "A1",
+      "account_name": "Cedar Labs",
+      "bookings": 10000.0,
+      "bookings_less_invoices": -1000.0,
+      "cash": 8000.0,
+      "explanation": "Net invoicing exceeds amended bookings in this period",
+      "invoiced": 11000.0,
+      "invoices_less_cash": 3000.0
+    },
+    {
+      "account_id": "A2",
+      "account_name": "Maple Systems",
+      "bookings": 6000.0,
+      "bookings_less_invoices": 2000.0,
+      "cash": 2000.0,
+      "explanation": "Contract value not yet invoiced in this period",
+      "invoiced": 4000.0,
+      "invoices_less_cash": 2000.0
+    },
+    {
+      "account_id": "A4",
+      "account_name": "Spruce Data",
+      "bookings": 2000.0,
+      "bookings_less_invoices": 1000.0,
+      "cash": 1000.0,
+      "explanation": "Contract value not yet invoiced in this period",
+      "invoiced": 1000.0,
+      "invoices_less_cash": 0.0
+    }
+  ],
+  "cohorts": [
+    {
+      "cohort_month": "2026-01-01",
+      "mature_opportunities": 2,
+      "opportunities": 2,
+      "region": "North",
+      "win_rate": "0.00000000",
+      "wins": 0
+    },
+    {
+      "cohort_month": "2026-01-01",
+      "mature_opportunities": 1,
+      "opportunities": 1,
+      "region": "West",
+      "win_rate": "1.00000000",
+      "wins": 1
+    },
+    {
+      "cohort_month": "2026-02-01",
+      "mature_opportunities": 2,
+      "opportunities": 2,
+      "region": "West",
+      "win_rate": "0.00000000",
+      "wins": 0
+    },
+    {
+      "cohort_month": "2026-03-01",
+      "mature_opportunities": 0,
+      "opportunities": 1,
+      "region": "East",
+      "win_rate": null,
+      "wins": 0
+    }
+  ],
+  "coverage": [
+    {
+      "complete_from": "2026-01-01",
+      "complete_through": "2026-03-31",
+      "source_name": "account_history"
+    },
+    {
+      "complete_from": "2026-01-01",
+      "complete_through": "2026-03-31",
+      "source_name": "booking_events"
+    },
+    {
+      "complete_from": "2026-01-01",
+      "complete_through": "2026-03-31",
+      "source_name": "invoice_lines"
+    },
+    {
+      "complete_from": "2026-01-01",
+      "complete_through": "2026-03-31",
+      "source_name": "opportunity_events"
+    },
+    {
+      "complete_from": "2026-01-01",
+      "complete_through": "2026-03-31",
+      "source_name": "payment_allocations"
+    },
+    {
+      "complete_from": "2026-01-01",
+      "complete_through": "2026-03-31",
+      "source_name": "subscription_contracts"
+    }
+  ],
+  "definitions": [
+    {
+      "additivity": "Not additive across snapshot dates.",
+      "caveats": "Account region/owner at snapshot date; potential value, not a commitment.",
+      "definition": "Sum of open opportunity value at the reporting date.",
+      "filters": "stage=open",
+      "grain": "Opportunity/day snapshot",
+      "implementation": "dbt/models/marts/mart_metric_values.sql",
+      "metric_id": "open_pipeline",
+      "null_behavior": "Zero for covered regions with no eligible activity; missing coverage blocks release.",
+      "owner": "Sales Operations",
+      "permitted_dimensions": [
+        "region",
+        "ALL"
+      ],
+      "time_basis": "Period-end date",
+      "title": "Open pipeline",
+      "version": "1.0"
+    },
+    {
+      "additivity": "Additive across disjoint dates and accounts.",
+      "caveats": "Uses booking events, not won CRM amounts; one-off and recurring commitments are included.",
+      "definition": "Signed contract booking events plus signed amendment deltas.",
+      "filters": "All signed booking events",
+      "grain": "Booking event",
+      "implementation": "dbt/models/marts/mart_metric_values.sql",
+      "metric_id": "net_bookings",
+      "null_behavior": "Zero for covered regions with no eligible activity; missing coverage blocks release.",
+      "owner": "Revenue Operations",
+      "permitted_dimensions": [
+        "region",
+        "ALL"
+      ],
+      "time_basis": "Event date within quarter",
+      "title": "Net bookings",
+      "version": "1.0"
+    },
+    {
+      "additivity": "Additive across disjoint dates and accounts.",
+      "caveats": "Not recognized revenue. Credit timing can differ from contract amendments.",
+      "definition": "Invoice lines plus negative credit lines.",
+      "filters": "All invoice and credit lines",
+      "grain": "Invoice/credit line",
+      "implementation": "dbt/models/marts/mart_metric_values.sql",
+      "metric_id": "net_invoiced",
+      "null_behavior": "Zero for covered regions with no eligible activity; missing coverage blocks release.",
+      "owner": "Finance",
+      "permitted_dimensions": [
+        "region",
+        "ALL"
+      ],
+      "time_basis": "Line event date within quarter",
+      "title": "Net invoiced",
+      "version": "1.0"
+    },
+    {
+      "additivity": "Additive across disjoint dates and accounts.",
+      "caveats": "Allocated cash only; not bank balance. Unallocated receipts, FX and refunds are outside scope.",
+      "definition": "Cash allocations to the invoices included in the supplied source.",
+      "filters": "All supplied allocations",
+      "grain": "Payment allocation",
+      "implementation": "dbt/models/marts/mart_metric_values.sql",
+      "metric_id": "cash_received",
+      "null_behavior": "Zero for covered regions with no eligible activity; missing coverage blocks release.",
+      "owner": "Finance",
+      "permitted_dimensions": [
+        "region",
+        "ALL"
+      ],
+      "time_basis": "Allocation event date within quarter",
+      "title": "Cash received",
+      "version": "1.0"
+    },
+    {
+      "additivity": "Additive across accounts, not across month-end balances.",
+      "caveats": "Policy 1 includes past-due contracts; annualization is fee times 12 divided by billing months. Not recognized revenue.",
+      "definition": "Annualized eligible recurring contract fee at month end.",
+      "filters": "Recurring, not trial; start inclusive and end exclusive",
+      "grain": "Contract/month-end",
+      "implementation": "dbt/models/marts/mart_metric_values.sql",
+      "metric_id": "period_end_arr",
+      "null_behavior": "Zero for covered regions with no eligible activity; missing coverage blocks release.",
+      "owner": "Finance / Revenue Operations",
+      "permitted_dimensions": [
+        "region",
+        "ALL"
+      ],
+      "time_basis": "Final day of reporting quarter",
+      "title": "Period-end ARR",
+      "version": "1.0"
+    },
+    {
+      "additivity": "Recompute from summed wins and mature opportunities; never average rates.",
+      "caveats": "Region is at creation, not current ownership. First win is used; subsequent reopenings are outside this model. March immature rows remain visible.",
+      "definition": "Mature opportunities first won within 30 days of creation divided by mature created opportunities.",
+      "filters": "Exclude immature opportunities from both numerator and denominator",
+      "grain": "Opportunity, grouped by creation cohort",
+      "implementation": "dbt/models/marts/mart_metric_values.sql",
+      "metric_id": "cohort_win_rate",
+      "null_behavior": "Null when mature denominator is zero; immature count is exposed.",
+      "owner": "Marketing / Sales Operations",
+      "permitted_dimensions": [
+        "region",
+        "ALL"
+      ],
+      "time_basis": "Creation in quarter; 30-day observation window complete by report end",
+      "title": "30-day opportunity-cohort win rate",
+      "version": "1.0"
+    },
+    {
+      "additivity": "Additive across accounts, not across month-end balances.",
+      "caveats": "Policy 2 excludes past-due contracts. This is a definition change, not a source correction. No accounting compliance claim.",
+      "definition": "Annualized eligible recurring contract fee at month end.",
+      "filters": "Recurring, not trial; start inclusive and end exclusive; exclude past_due=1",
+      "grain": "Contract/month-end",
+      "implementation": "dbt/models/marts/mart_metric_values.sql",
+      "metric_id": "period_end_arr",
+      "null_behavior": "Zero for covered regions with no eligible activity; missing coverage blocks release.",
+      "owner": "Finance / Revenue Operations",
+      "permitted_dimensions": [
+        "region",
+        "ALL"
+      ],
+      "time_basis": "Final day of reporting quarter",
+      "title": "Period-end ARR",
+      "version": "2.0"
+    }
+  ],
+  "format_version": 1,
+  "metrics": [
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "cash_received",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "ALL",
+      "unit": "CAD",
+      "value": "11000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "cash_received",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "East",
+      "unit": "CAD",
+      "value": "8000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "cash_received",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "North",
+      "unit": "CAD",
+      "value": "0.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "cash_received",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "West",
+      "unit": "CAD",
+      "value": "3000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": "5.00",
+      "excluded": 1,
+      "metric_id": "cohort_win_rate",
+      "numerator": "1.00",
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "ALL",
+      "unit": "ratio",
+      "value": "0.20000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": "0.00",
+      "excluded": 1,
+      "metric_id": "cohort_win_rate",
+      "numerator": "0.00",
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "East",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": "2.00",
+      "excluded": 0,
+      "metric_id": "cohort_win_rate",
+      "numerator": "0.00",
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "North",
+      "unit": "ratio",
+      "value": "0.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": "3.00",
+      "excluded": 0,
+      "metric_id": "cohort_win_rate",
+      "numerator": "1.00",
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "West",
+      "unit": "ratio",
+      "value": "0.33333333"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_bookings",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "ALL",
+      "unit": "CAD",
+      "value": "18000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_bookings",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "East",
+      "unit": "CAD",
+      "value": "-2000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_bookings",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "North",
+      "unit": "CAD",
+      "value": "12000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_bookings",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "West",
+      "unit": "CAD",
+      "value": "8000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_invoiced",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "ALL",
+      "unit": "CAD",
+      "value": "16000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_invoiced",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "East",
+      "unit": "CAD",
+      "value": "4000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_invoiced",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "North",
+      "unit": "CAD",
+      "value": "7000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_invoiced",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "West",
+      "unit": "CAD",
+      "value": "5000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "open_pipeline",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "ALL",
+      "unit": "CAD",
+      "value": "4000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "open_pipeline",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "East",
+      "unit": "CAD",
+      "value": "4000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "open_pipeline",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "North",
+      "unit": "CAD",
+      "value": "0.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "open_pipeline",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "West",
+      "unit": "CAD",
+      "value": "0.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "period_end_arr",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "ALL",
+      "unit": "CAD",
+      "value": "18000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "period_end_arr",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "East",
+      "unit": "CAD",
+      "value": "12000.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "period_end_arr",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "North",
+      "unit": "CAD",
+      "value": "0.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "period_end_arr",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "West",
+      "unit": "CAD",
+      "value": "6000.00000000"
+    }
+  ],
+  "model_fingerprint": "65c34b2ccfbf256c98513ac52eaaddd53ddb9f04f4bb48f5b16f633a4d3286b0",
+  "period_end": "2026-03-31",
+  "period_start": "2026-01-01",
+  "source_fingerprint": "cb38103573836e96dcfb73e39982675a4d7427310604b45e68bfea3b599914c5",
+  "synthetic": true,
+  "target": "duckdb"
+}

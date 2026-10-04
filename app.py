@@ -59,7 +59,11 @@ for column, (key, label) in zip(st.columns(6), labels, strict=True):
     display = (
         "Not mature"
         if amount is None
-        else (f"{amount:.1%}" if row["unit"] == "ratio" else f"${amount:,.0f}")
+        else (
+            f"{amount:.1%}"
+            if row["unit"] == "ratio"
+            else (f"${amount / 1e6:,.2f}M" if abs(amount) >= 1e6 else f"${amount:,.0f}")
+        )
     )
 
     column.metric(label, display)

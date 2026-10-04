@@ -6,9 +6,9 @@
   "local_execution": "passed",
   "markdown_links": "passed",
   "platform": "Windows",
-  "pytest_summary": "30 passed in 52.40s",
+  "pytest_summary": "30 passed in 58.14s",
   "python": "3.12.14",
-  "release_id": "d62d17045e7d94d6de41bda02b58ac1058f6885c81f01f08005a604d585fe947",
+  "release_id": "6771841bd850e4ae5edd535c9f6ed033128e0b2161ada57b112834dc110ea718",
   "snowflake": "pending_credentials",
   "streamlit": "AppTest exercised all six cards and region selection"
 }

@@ -4,6 +4,20 @@
 
 This governed commercial analytics platform explains the differences through dimensional models, six shared metrics and two consumer paths. Its default demonstration is a deterministic synthetic B2B SaaS enterprise with approximately **$755M period-end ARR**. A separate hand-authored fixture supplies exact, independently checkable edge cases.
 
+**All businesses, records and outcomes are synthetic.** The local DuckDB/dbt pipeline and Streamlit consumer execute. **Snowflake cloud execution is pending credentials:** the adapter, raw loader, role/grant SQL, isolated build schemas, consumer view and verification command are implemented, but local tests do not prove cloud behavior.
+
+![Actual enterprise commercial review: pipeline, bookings, invoices, cash, ARR and cohort win rate](docs/images/commercial-review.jpg)
+
+*Actual Streamlit application, executed against the synthetic enterprise sources. Installed ARR and quarterly flows answer different commercial questions.*
+
+## See the commercial review
+
+Read the [generated review and account-level discrepancy bridge](docs/evidence/commercial-review.md), inspect the [analyst export](docs/evidence/analyst-export.csv), or run the business app below. Both consumers use the same validated rows from `mart_metric_values`; the app contains no separate metric formulas.
+
+![Actual account discrepancy bridge with signed commitments, invoice flows and cash allocations](docs/images/account-discrepancy-bridge.jpg)
+
+*The account bridge explains differences in commitments, billing and collection timing. These quarterly flow differences are not an accounts-receivable balance. The generated profile shows the first 20 account IDs, not a representative sample.*
+
 The established enterprise Q1 review produces **$197.46M in net bookings, $189.42M net invoiced and $174.61M allocated cash**. Period-end installed ARR is $754.39M; open pipeline is $222.34M. The mature 30-day current-quarter cohort win rate is 18.67%.
 
 **Installed ARR ≠ quarterly bookings ≠ quarterly invoicing ≠ quarterly cash.** Customers acquired over 2020–2025 continue to contribute ARR. Only signed Q1 new business, renewals, expansions, upgrades, contractions and cancellations enter Q1 bookings. Billing continues for existing contracts; some collections settle opening invoices.
@@ -20,12 +34,6 @@ The established enterprise Q1 review produces **$197.46M in net bookings, $189.4
 | Period-end ARR | $754,389,953.40 |
 
 33,834 active accounts have no Q1 booking. [Generated scale summary](docs/evidence/scale-summary.json) and [acquisition/renewal timeline](docs/evidence/business-timeline.json). Each signed event has twelve service-period commitment components; these are not twelve separately won deals. ARR emerges from dated contracts and explicit fees. Runtime-generated source rows stay outside GitHub and the delivery ZIP.
-
-**All businesses, records and outcomes are synthetic.** The local DuckDB/dbt pipeline and Streamlit consumer execute. **Snowflake cloud execution is pending credentials:** the adapter, raw loader, role/grant SQL, isolated build schemas, consumer view and verification command are implemented, but local tests do not prove cloud behavior.
-
-## See the commercial review
-
-Read the [generated review and account-level discrepancy bridge](docs/evidence/commercial-review.md), inspect the [analyst export](docs/evidence/analyst-export.csv), or run the business app below. Both consumers use the same validated rows from `mart_metric_values`; the app contains no separate metric formulas.
 
 ## Architecture
 
@@ -153,7 +161,7 @@ Tests cover fanout, SCD2 boundaries, amendments, credits, backdated corrections,
 - [Executed dbt results](docs/evidence/dbt-results.json) and [lineage](docs/evidence/dbt-lineage.json)
 - [Local verification](docs/evidence/verification.json) and [Snowflake status](docs/evidence/snowflake-status.json)
 
-GitHub Actions workflows are included. A local verification result is **not** a claim that GitHub-hosted CI has run.
+[Hosted commercial analytics verification has passed on Windows and Ubuntu](https://github.com/rlbsem/revenue-metrics-platform/actions/runs/37162768203). Local verification and GitHub-hosted workflow results are separate evidence; Snowflake cloud execution remains pending credentials.
 
 To create a clean upload ZIP after verification, run `python scripts/package.py`. The package manifest covers every delivered file except itself; the ZIP is reopened and every recorded hash is checked. Local databases, caches, virtual environments and credential files are excluded.
 

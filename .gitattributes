@@ -1,0 +1,2 @@
+# Preserve delivered evidence bytes and package SHA-256 values across checkouts.
+* -text
