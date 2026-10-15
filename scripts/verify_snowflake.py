@@ -41,6 +41,21 @@ from revenue_platform.snowflake_controls import (
 )
 
 
+def save_node_results(workspace, label, results):
+    """Allowlist executed dbt outcomes; raw manifests/logs remain private."""
+    outcomes = [
+        {
+            "node": item["unique_id"],
+            "status": item["status"],
+            "seconds": item["execution_time"],
+            "query_id": item.get("adapter_response", {}).get("query_id"),
+        }
+        for item in results["results"]
+    ]
+    (workspace / (label + "-results.json")).write_text(canonical(outcomes), encoding="utf-8")
+    return outcomes
+
+
 def _execute(workspace, require_cloud=False, status_only=False, profile="fixture", source_dir=None):
     workspace.mkdir(parents=True, exist_ok=True)
     missing = [key for key in REQUIRED if not os.environ.get(key)]
@@ -87,15 +102,7 @@ def _execute(workspace, require_cloud=False, status_only=False, profile="fixture
         )
         timings[label] = round(time.perf_counter() - started, 3)
         results = json.loads((result / "run_results.json").read_text())
-        outcomes = [
-            {
-                "node": item["unique_id"],
-                "status": item["status"],
-                "seconds": item["execution_time"],
-                "query_id": item.get("adapter_response", {}).get("query_id"),
-            }
-            for item in results["results"]
-        ]
+        outcomes = save_node_results(workspace, label, results)
         if (
             any(row["status"] not in ("success", "pass") for row in outcomes)
             or sum(row["node"].startswith("model.") for row in outcomes) != len(MODELS)
@@ -103,7 +110,6 @@ def _execute(workspace, require_cloud=False, status_only=False, profile="fixture
         ):
             raise AssertionError("Incomplete dbt build/test evidence")
         query_ids.extend(row["query_id"] for row in outcomes if row["query_id"])
-        (workspace / (label + "-results.json")).write_text(canonical(outcomes), encoding="utf-8")
         return result
 
     def sample_daily_fact():
@@ -165,6 +171,7 @@ def _execute(workspace, require_cloud=False, status_only=False, profile="fixture
         comparisons = compare_model_multisets(
             conn.cursor(), schema, rebuilt_schema, MODELS, query_ids
         )
+        (workspace / "model-comparisons.json").write_text(canonical(comparisons), encoding="utf-8")
 
     with closing(connect("RMP_BUILD")) as conn:
         cursor = conn.cursor()
@@ -289,6 +296,8 @@ def _execute(workspace, require_cloud=False, status_only=False, profile="fixture
             failed = json.loads(
                 (workspace / "rejected-coverage/dbt-target/run_results.json").read_text()
             )
+            rejected = save_node_results(workspace, "rejected-coverage", failed)
+            query_ids.extend(row["query_id"] for row in rejected if row["query_id"])
             if not any(
                 r["status"] == "fail" and "assert_source_coverage" in r["unique_id"]
                 for r in failed["results"]
@@ -313,6 +322,14 @@ def _execute(workspace, require_cloud=False, status_only=False, profile="fixture
             target="snowflake",
             test_only="assert_source_coverage",
         )
+        restored = save_node_results(
+            workspace,
+            "restored-coverage",
+            json.loads((workspace / "restored-coverage/dbt-target/run_results.json").read_text()),
+        )
+        if not restored or any(row["status"] != "pass" for row in restored):
+            raise AssertionError("Restored coverage quality gate did not pass")
+        query_ids.extend(row["query_id"] for row in restored if row["query_id"])
         promote(cursor, release_id, payload)
         assert publication_state(cursor) == [(release_id, payload)]
         promote(cursor, release_id, payload)  # repeated promotion must not duplicate history
@@ -334,7 +351,8 @@ def _execute(workspace, require_cloud=False, status_only=False, profile="fixture
         history = records(
             conn.cursor().execute(
                 "SELECT query_id,query_type,execution_status,total_elapsed_time,bytes_scanned,"
-                "rows_produced,bytes_spilled_to_local_storage,bytes_spilled_to_remote_storage "
+                "rows_produced,execution_time,compilation_time,queued_provisioning_time,"
+                "queued_overload_time,credits_used_cloud_services "
                 "FROM TABLE(INFORMATION_SCHEMA.QUERY_HISTORY(RESULT_LIMIT=>10000)) "
                 "WHERE query_tag=%s ORDER BY start_time",
                 (os.environ["RMP_QUERY_TAG"],),
@@ -369,6 +387,11 @@ def _execute(workspace, require_cloud=False, status_only=False, profile="fixture
         "credential_boundary": "Separate consumer user and key; stronger role switching denied",
         "release_id": release_id,
         "query_ids": sorted(set(query_ids)),
+        "query_history_limits": {
+            "spill_statistics": "Not exposed by INFORMATION_SCHEMA.QUERY_HISTORY; not measured",
+            "cloud_services_credits": "Reported query attribution before billing adjustments; "
+            "not warehouse compute credits or final billed consumption",
+        },
         "denied_operations": denied,
         "timings_seconds": timings,
         "late_correction": {
@@ -387,7 +410,14 @@ def _execute(workspace, require_cloud=False, status_only=False, profile="fixture
     return 0
 
 
-def verify(workspace, require_cloud=False, status_only=False, profile="fixture", source_dir=None):
+def verify(
+    workspace,
+    require_cloud=False,
+    status_only=False,
+    profile="fixture",
+    source_dir=None,
+    owner_confirmed_fixture_monitor=False,
+):
     """No cloud query or provisioning occurs until independent credentials exist."""
     workspace = Path(workspace)
     workspace.mkdir(parents=True, exist_ok=True)
@@ -409,21 +439,42 @@ def verify(workspace, require_cloud=False, status_only=False, profile="fixture",
     }
     (workspace / "verification.json").write_text(canonical(record), encoding="utf-8")
     try:
+        if owner_confirmed_fixture_monitor and profile != "fixture":
+            raise ValueError("Owner fixture monitor confirmation cannot authorize another profile")
         approval = {"enterprise": "RMP_ENTERPRISE_APPROVED", "stress": "RMP_STRESS_APPROVED"}
         if profile in approval and os.environ.get(approval[profile]) != "yes":
             raise ValueError("Owner approval is required before this non-fixture cloud execution")
         distinct_credentials()
         with closing(connect("RMP_BUILD")) as gate:
-            warehouse = warehouse_preflight(gate.cursor())
+            record["executed_cloud"] = True
+            warehouse = warehouse_preflight(
+                gate.cursor(), owner_confirmed_fixture_monitor=owner_confirmed_fixture_monitor
+            )
+            record["warehouse_observed"] = warehouse
             with exclusive_run(gate):
                 try:
                     result = _execute(workspace, require_cloud, False, profile, source_dir)
                 finally:
                     # A second connection keeps warehouse DDL out of the gate transaction.
                     with closing(connect("RMP_BUILD")) as operator:
-                        operator.cursor().execute("ALTER WAREHOUSE RMP_WH SUSPEND")
+                        operation = operator.cursor()
+                        operation.execute("SHOW WAREHOUSES LIKE 'RMP_WH'")
+                        names = [c[0].lower() for c in operation.description]
+                        observed = dict(zip(names, operation.fetchone(), strict=True))
+                        if observed["state"] != "SUSPENDED":
+                            operation.execute("ALTER WAREHOUSE RMP_WH SUSPEND")
+                        operation.execute("SHOW WAREHOUSES LIKE 'RMP_WH'")
+                        final_warehouse = dict(zip(names, operation.fetchone(), strict=True))
+                        if final_warehouse["state"] != "SUSPENDED":
+                            raise AssertionError("Dedicated warehouse did not suspend")
+                        suspension_query_id = operation.sfqid
+                        record["warehouse_final_state"] = final_warehouse["state"]
+                        record["warehouse_final_state_query_id"] = suspension_query_id
             record = json.loads((workspace / "verification.json").read_text())
             record["warehouse_observed"] = warehouse
+            record["warehouse_final_state"] = final_warehouse["state"]
+            record["warehouse_final_state_query_id"] = suspension_query_id
+            record["acceptance_passed"] = True
             record["started_at"] = started.isoformat()
             record["finished_at"] = datetime.now(timezone.utc).isoformat()
             record["run_isolation"] = (
@@ -438,7 +489,7 @@ def verify(workspace, require_cloud=False, status_only=False, profile="fixture",
     except Exception as error:
         record.update(
             status="failed",
-            executed_cloud=False,
+            acceptance_passed=False,
             error_class=type(error).__name__,
             finished_at=datetime.now(timezone.utc).isoformat(),
         )
@@ -460,6 +511,12 @@ def main():
     parser.add_argument("--workspace", type=Path, default=ROOT / ".local/snowflake")
     parser.add_argument("--require-cloud", action="store_true")
     parser.add_argument("--status-only", action="store_true")
+    parser.add_argument(
+        "--owner-confirmed-fixture-monitor",
+        action="store_true",
+        help="Fixture only: owner has executed the administrator postflight successfully; "
+        "record this authority when the restricted role cannot see monitor metadata",
+    )
     parser.add_argument(
         "--config-file",
         type=Path,
@@ -484,7 +541,12 @@ def main():
                 raise ValueError("Set the account identifier in the private configuration")
             os.environ.update(settings)
         return verify(
-            args.workspace, args.require_cloud, args.status_only, args.profile, args.source_dir
+            args.workspace,
+            args.require_cloud,
+            args.status_only,
+            args.profile,
+            args.source_dir,
+            args.owner_confirmed_fixture_monitor,
         )
     except Exception as error:
         # Avoid serializing connection details or key material from SDK exceptions.

@@ -245,6 +245,22 @@
   },
   {
     "status": "passed",
+    "test": "test_owner_confirmation_does_not_invent_live_monitor_visibility[None]"
+  },
+  {
+    "status": "passed",
+    "test": "test_owner_confirmation_does_not_invent_live_monitor_visibility[null]"
+  },
+  {
+    "status": "passed",
+    "test": "test_owner_confirmation_does_not_invent_live_monitor_visibility[OTHER_MONITOR]"
+  },
+  {
+    "status": "passed",
+    "test": "test_owner_fixture_confirmation_cannot_authorize_enterprise"
+  },
+  {
+    "status": "passed",
     "test": "test_missing_credentials_never_calls_cloud_and_clears_stale_success"
   },
   {

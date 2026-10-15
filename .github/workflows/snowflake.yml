@@ -15,6 +15,11 @@ on:
         type: boolean
         required: true
         default: false
+      owner_confirmed_fixture_monitor:
+        description: "Fixture only: administrator postflight actually returned READY_FOR_FIXTURE"
+        type: boolean
+        required: true
+        default: false
 # The verifier uses a dedicated database with shared RAW source tables.
 # Never overlap protected cloud-verification workflows.
 concurrency:
@@ -57,7 +62,15 @@ jobs:
       - name: Verify isolated baseline, correction and exact full equivalence
         env:
           VERIFIED_PROFILE: ${{ inputs.profile }}
-        run: python scripts/verify_snowflake.py --require-cloud --profile "$VERIFIED_PROFILE"
+          OWNER_CONFIRMED_FIXTURE_MONITOR: ${{ inputs.owner_confirmed_fixture_monitor }}
+        shell: bash
+        run: |
+          args=(--require-cloud --profile "$VERIFIED_PROFILE")
+          if [[ "$OWNER_CONFIRMED_FIXTURE_MONITOR" == 'true' ]]; then
+            test "$VERIFIED_PROFILE" = fixture
+            args+=(--owner-confirmed-fixture-monitor)
+          fi
+          python scripts/verify_snowflake.py "${args[@]}"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
@@ -66,6 +79,7 @@ jobs:
             .local/snowflake/verification.json
             .local/snowflake/*-results.json
             .local/snowflake/query-history.json
+            .local/snowflake/model-comparisons.json
       - name: Remove temporary key
         if: always()
         shell: bash

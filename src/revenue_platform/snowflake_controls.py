@@ -115,7 +115,7 @@ def load_csv(cursor, path, table, ddl, query_ids):
     return total
 
 
-def warehouse_preflight(cursor):
+def warehouse_preflight(cursor, *, owner_confirmed_fixture_monitor=False):
     cursor.execute("SHOW WAREHOUSES LIKE 'RMP_WH'")
     names = [column[0].lower() for column in cursor.description]
     warehouses = [dict(zip(names, row, strict=True)) for row in cursor.fetchall()]
@@ -131,9 +131,13 @@ def warehouse_preflight(cursor):
         or str(row.get("enable_query_acceleration", "false")).lower() == "true"
     ):
         raise AssertionError("Warehouse exceeds bounded standard XSMALL configuration")
-    if not row.get("resource_monitor") or str(row["resource_monitor"]).lower() == "null":
+    monitor = row.get("resource_monitor")
+    monitor_visible = bool(monitor) and str(monitor).lower() != "null"
+    if monitor_visible and monitor != "RMP_FIXTURE_BUDGET":
+        raise AssertionError("Unexpected dedicated fixture monitor")
+    if not monitor_visible and not owner_confirmed_fixture_monitor:
         raise AssertionError("Assign the owner-approved resource monitor before execution")
-    return {
+    observed = {
         key: row.get(key)
         for key in (
             "size",
@@ -142,8 +146,16 @@ def warehouse_preflight(cursor):
             "max_cluster_count",
             "type",
             "enable_query_acceleration",
+            "resource_monitor",
         )
     }
+    observed["monitor_evidence"] = (
+        "Runtime-visible attachment; monitor quota requires administrator evidence"
+        if monitor_visible
+        else "Not visible to runtime role; owner confirmed successful administrator postflight "
+        "for RMP_FIXTURE_BUDGET, one credit, NEVER reset, 90/100 suspension thresholds"
+    )
+    return observed
 
 
 @contextmanager

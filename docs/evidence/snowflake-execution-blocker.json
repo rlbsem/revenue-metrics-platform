@@ -1,22 +1,12 @@
 {
-  "observed_on": "2026-10-14",
+  "cloud_resources_provisioned_by_agent": false,
   "connector_probe": {
-    "query": "SELECT 1 AS connection_check",
-    "returned_sql_result": false,
     "agent_error_code": 399504,
-    "message": "Access denied for trial accounts."
+    "message": "Access denied for trial accounts.",
+    "query": "SELECT 1 AS connection_check",
+    "returned_sql_result": false
   },
-  "python_dbt_execution": {
-    "status": "pending_credentials",
-    "executed_cloud": false,
-    "owner_confirmed_no_registered_runtime_key_pair": true,
-    "fixture_command_refuses_without_credentials": true
-  },
-  "prepared": [
-    "Private encrypted runner and reader keys outside repository",
-    "One owner-run SQL handoff; no SQL executed",
-    "Cloud acceptance verifier and credential-free regression tests"
-  ],
+  "enterprise_execution_authorized": false,
   "minimum_next_access": "Owner reviews/runs private owner-setup.sql in Snowsight and sets the account identifier in private runtime.json",
   "not_established": [
     "Native Snowflake model or test success",
@@ -24,19 +14,37 @@
     "Warehouse credit consumption",
     "Standard SQL trial-account restriction"
   ],
-  "enterprise_execution_authorized": false,
-  "cloud_resources_provisioned_by_agent": false,
+  "observed_on": "2026-10-14",
   "owner_setup_review": {
     "administrator_sql_executed": false,
-    "owner_confirmed_not_executed": true,
     "collision_preflight": "Prepared in one aborting block before provisioning; requires owner execution",
+    "existing_encrypted_keys_and_private_config_preserved": true,
+    "oauth_configuration_changed": false,
     "observed_settings_postflight": "Prepared for XSMALL / 60 seconds / attached one-credit NEVER monitor with 90/100 thresholds; not executed",
+    "owner_confirmed_not_executed": true,
+    "redundant_monitor_grant_removed": true,
     "runner_warehouse_grants": [
       "USAGE",
       "OPERATE"
-    ],
-    "redundant_monitor_grant_removed": true,
-    "existing_encrypted_keys_and_private_config_preserved": true,
-    "oauth_configuration_changed": false
-  }
+    ]
+  },
+  "prepared": [
+    "Private encrypted runner and reader keys outside repository",
+    "One owner-run SQL handoff; no SQL executed",
+    "Cloud acceptance verifier and credential-free regression tests"
+  ],
+  "python_dbt_execution": {
+    "executed_cloud": false,
+    "fixture_command_refuses_without_credentials": true,
+    "owner_confirmed_no_registered_runtime_key_pair": true,
+    "status": "pending_credentials"
+  },
+  "resolved_by": {
+    "credentials_rotated": false,
+    "evidence": "snowflake/fixture/verification.json",
+    "oauth_changed": false,
+    "owner_setup_confirmed_executed": true,
+    "status": "native_fixture_passed"
+  },
+  "scope": "Historical pre-registration blocker; superseded by executed native fixture acceptance"
 }

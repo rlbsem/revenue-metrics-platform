@@ -1,0 +1,137 @@
+[
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 5,
+    "incremental_only_groups": 0,
+    "incremental_rows": 5,
+    "model": "dim_account"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 90,
+    "incremental_only_groups": 0,
+    "incremental_rows": 90,
+    "model": "dim_date"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 4,
+    "incremental_only_groups": 0,
+    "incremental_rows": 4,
+    "model": "fct_booking_events"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 5,
+    "incremental_only_groups": 0,
+    "incremental_rows": 5,
+    "model": "fct_invoice_lines"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 362,
+    "incremental_only_groups": 0,
+    "incremental_rows": 362,
+    "model": "fct_opportunity_daily"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 5,
+    "incremental_only_groups": 0,
+    "incremental_rows": 5,
+    "model": "fct_payment_allocations"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 18,
+    "incremental_only_groups": 0,
+    "incremental_rows": 18,
+    "model": "fct_subscription_period"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 12,
+    "incremental_only_groups": 0,
+    "incremental_rows": 12,
+    "model": "mart_arr"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 4,
+    "incremental_only_groups": 0,
+    "incremental_rows": 4,
+    "model": "mart_cohorts"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 3,
+    "incremental_only_groups": 0,
+    "incremental_rows": 3,
+    "model": "mart_discrepancy_bridge"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 14,
+    "incremental_only_groups": 0,
+    "incremental_rows": 14,
+    "model": "mart_flows"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 24,
+    "incremental_only_groups": 0,
+    "incremental_rows": 24,
+    "model": "mart_metric_values"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 295,
+    "incremental_only_groups": 0,
+    "incremental_rows": 295,
+    "model": "mart_pipeline"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 11,
+    "incremental_only_groups": 0,
+    "incremental_rows": 11,
+    "model": "stg_opportunities"
+  },
+  {
+    "column_contract_equal": true,
+    "exact_multiset_equal": true,
+    "full_only_groups": 0,
+    "full_rows": 6,
+    "incremental_only_groups": 0,
+    "incremental_rows": 6,
+    "model": "stg_subscriptions"
+  }
+]

@@ -1,17 +1,29 @@
 # Snowflake managed-warehouse acceptance
 
-**Cloud acceptance is pending runtime credentials.** Local regression results are not
-Snowflake results. On 2026-10-14 the connected ChatGPT SQL tool returned agent error
+**[Native fixture acceptance passed](evidence/snowflake/fixture/README.md).** Three
+actual dbt-snowflake builds each passed 15 models and 30 tests; all model comparisons,
+consumer RBAC probes and publication safety checks passed. Sanitized evidence retains
+461 query IDs and an observed final SUSPENDED warehouse state. Enterprise/stress
+cloud execution and final billed consumption remain unverified. Local regression
+results are separate from Snowflake results.
+
+On 2026-10-14 the connected ChatGPT SQL tool returned agent error
 399504, `Access denied for trial accounts`, for `SELECT 1`. No SQL result was returned.
 That proves the connector path is blocked; it does not establish that standard SQL
-or key-pair access to this trial is blocked. No account upgrade is required by this
-repository. ChatGPT OAuth is independent of Python/dbt authentication.
+or key-pair access to this trial is blocked. Standard key-pair access subsequently
+executed the acceptance successfully, without an account upgrade or OAuth changes.
+ChatGPT OAuth is independent of Python/dbt authentication.
 
 [Executed local review and source hashes](evidence/snowflake-local-review.json) and
-[observed execution blocker](evidence/snowflake-execution-blocker.json) are separate
-from native cloud acceptance. The local review records the executed full-suite results.
+[historical execution blocker](evidence/snowflake-execution-blocker.json) are separate
+from [executed native cloud acceptance](evidence/snowflake/fixture/verification.json).
+The local review records the executed full-suite results.
 
 ## Minimum one-time owner handoff
+
+The owner completed this setup for the recorded run. Do not repeat it for that
+environment. The following procedure is for reproducing the project in a new,
+dedicated environment; the strict bootstrap intentionally rejects existing names.
 
 Use Python Connector/dbt-snowflake key-pair authentication. No new OAuth integration,
 external model, paid subscription or application hosting is needed. The runner uses
@@ -81,6 +93,17 @@ If setup fails during that write, its 60-second auto-suspend remains the fallbac
 python scripts/verify_snowflake.py --require-cloud --profile fixture --config-file <private-directory>/runtime.json --workspace .local/cloud-fixture
 ```
 
+The restricted build role can observe size and suspension settings while lacking
+resource-monitor visibility: the native trial returned `resource_monitor: null`,
+no visible resource monitors, and a permission denial for DESCRIBE WAREHOUSE.
+If the owner has **actually executed the generated administrator postflight and
+confirmed READY_FOR_FIXTURE**, add `--owner-confirmed-fixture-monitor`. This narrowly
+scoped fixture option records the owner-confirmed one-credit monitor separately from
+runtime-observed metadata. It never reports a hidden attachment as independently
+observed, never accepts a visibly different monitor, and cannot authorize enterprise
+or stress execution. Warehouse size/suspension/cluster/acceleration guards still apply.
+No new grants, rotated credentials or repeated administrator setup are required.
+
 Environment-based execution requires `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`,
 `SNOWFLAKE_PRIVATE_KEY_PATH`, `SNOWFLAKE_CONSUMER_USER`, and
 `SNOWFLAKE_CONSUMER_PRIVATE_KEY_PATH`. Each identity also supports its corresponding
@@ -126,8 +149,12 @@ records, `query-history.json`, dbt logs/targets and the validated publication fo
 Streamlit/CSV. Publish only reviewed sanitized projections. Raw dbt manifests,
 profiles and logs can include account metadata and are not uploaded by cloud CI.
 
-Query history retains IDs/types/status, elapsed time, scan and spill measurements,
-without SQL text, user names or account identifiers. A unique run query tag is
+Query history retains IDs/types/status, timing, scan measurements and reported query
+cloud-service attribution, without SQL text, user names or account identifiers.
+Spill columns are not exposed by the executed INFORMATION_SCHEMA function and are
+not reported as zero. The point-in-time snapshot can contain the collector itself
+as RUNNING with invalid elapsed metadata; consumption aggregates exclude that row.
+A unique run query tag is
 inherited by dbt. Reporting visibility/limits must be checked; this does not establish
 complete account-wide audit history.
 
@@ -136,8 +163,30 @@ real UTC start/end times. Hour buckets can contain other work and arrive after
 reporting latency. Empty output means pending, never zero cost. Separate actual
 credits from elapsed time, retention/storage and contracted credit price. A successful
 SQL run can have metering pending; the complete acceptance package still needs review.
+The recorded runtime metering query succeeded but returned no rows. This function
+only returns results to ACCOUNTADMIN or a role with global MONITOR USAGE; the
+restricted runtime role has neither. [Actual measurements and access limitation](evidence/snowflake/fixture/resource-consumption.json)
+keep billed compute credits unavailable rather than inventing a zero. No broader
+monitoring grant was added. Review billing separately if required for a larger run.
+
+Export validated evidence without another cloud connection:
+
+```text
+python scripts/export_snowflake_evidence.py --workspace .local/cloud-fixture
+```
+
+The exporter checks native success, implementation hashes, all model comparisons,
+the real rejected/restored quality gates, publication integrity, CSV parity and
+Streamlit behavior before copying allowlisted artifacts. Ordinary local/CI verification
+checks the archived native source binding offline and labels it as recorded execution.
 
 ## Enterprise approval and stopping point
+
+[The enterprise readiness assessment](evidence/snowflake/enterprise-readiness.json)
+records the unchanged 60,000-account / 2,434,554-source-row profile, existing resource
+limits and the missing billing/remaining-credit observations. No dollar estimate or
+enterprise cloud result is inferred from the small fixture. This is a separate future
+benchmark requiring approval, not a result claimed by the fixture acceptance.
 
 Review the executed fixture, actual warehouse settings, trial balance, metering and
 generated row counts first. Estimate the larger run from observed behavior with a
@@ -170,7 +219,8 @@ even on failure. Keep secrets out of pull-request workflows and logs.
 Start with fixture. Enterprise dispatch additionally requires `enterprise_approved=true`
 after explicit owner approval. Cloud CI uploads only allowlisted sanitized JSON,
 including failure metadata. Hosted local CI success is not Snowflake execution.
-Keep the PR draft while native acceptance is pending.
+Keep the PR draft until native acceptance and final-head CI pass; merging remains
+an explicit owner decision. A fixture acceptance does not claim an enterprise benchmark.
 
 Primary references: [Python authentication](https://docs.snowflake.com/en/developer-guide/python-connector/python-connector-connect),
 [key-pair registration](https://docs.snowflake.com/en/user-guide/key-pair-auth),

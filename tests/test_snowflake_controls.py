@@ -226,6 +226,50 @@ def test_warehouse_preflight_refuses_cost_expansion(change):
         warehouse_preflight(Warehouse())
 
 
+@pytest.mark.parametrize("monitor", [None, "null", "OTHER_MONITOR"])
+def test_owner_confirmation_does_not_invent_live_monitor_visibility(monitor):
+    values = {
+        "name": "RMP_WH",
+        "size": "X-Small",
+        "auto_suspend": 60,
+        "min_cluster_count": 1,
+        "max_cluster_count": 1,
+        "resource_monitor": monitor,
+        "type": "STANDARD",
+    }
+
+    class Warehouse(Cursor):
+        description = [(key,) for key in values]
+
+        def fetchall(self):
+            return [tuple(values.values())]
+
+    if monitor == "OTHER_MONITOR":
+        with pytest.raises(AssertionError, match="Unexpected dedicated"):
+            warehouse_preflight(Warehouse(), owner_confirmed_fixture_monitor=True)
+    else:
+        result = warehouse_preflight(Warehouse(), owner_confirmed_fixture_monitor=True)
+        assert result["resource_monitor"] == monitor
+        assert "owner confirmed" in result["monitor_evidence"]
+        values["size"] = "LARGE"
+        with pytest.raises(AssertionError, match="bounded"):
+            warehouse_preflight(Warehouse(), owner_confirmed_fixture_monitor=True)
+
+
+def test_owner_fixture_confirmation_cannot_authorize_enterprise(tmp_path, monkeypatch):
+    spec = importlib.util.spec_from_file_location(
+        "cloud_verifier", ROOT / "scripts/verify_snowflake.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    for name in REQUIRED:
+        monkeypatch.setenv(name, "unit-test-only")
+    monkeypatch.setenv("RMP_ENTERPRISE_APPROVED", "yes")
+    monkeypatch.setattr(module, "connect", lambda _: pytest.fail("Cloud connection attempted"))
+    with pytest.raises(ValueError, match="cannot authorize another profile"):
+        module.verify(tmp_path, profile="enterprise", owner_confirmed_fixture_monitor=True)
+
+
 def test_missing_credentials_never_calls_cloud_and_clears_stale_success(tmp_path, monkeypatch):
     spec = importlib.util.spec_from_file_location(
         "cloud_verifier", ROOT / "scripts/verify_snowflake.py"

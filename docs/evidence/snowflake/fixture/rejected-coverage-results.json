@@ -1,0 +1,8 @@
+[
+  {
+    "node": "test.revenue_metrics.assert_source_coverage",
+    "query_id": "01c7bc96-0209-00a8-0011-d6b6000234c2",
+    "seconds": 2.6979072093963623,
+    "status": "fail"
+  }
+]

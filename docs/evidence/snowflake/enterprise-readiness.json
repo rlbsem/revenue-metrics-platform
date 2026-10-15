@@ -1,0 +1,49 @@
+{
+  "approval_status": "No enterprise execution authorization supplied in the fixture-only request",
+  "candidate_resource_configuration": {
+    "auto_suspend_seconds": 60,
+    "automatic_quota_or_size_increase": false,
+    "existing_monitor_quota_credits": 1,
+    "max_clusters": 1,
+    "query_acceleration": false,
+    "statement_timeout_seconds": 300,
+    "warehouse": "Existing standard XSMALL only"
+  },
+  "claims_boundary": "Current PR supplies executed native fixture acceptance and unchanged locally verified enterprise behavior; no enterprise Snowflake benchmark or cost guarantee",
+  "cost_assessment": {
+    "billed_compute_credits": "Unavailable to intentionally restricted runtime role",
+    "dollar_estimate": "Not defensibly established without actual metering, remaining budget and credit price",
+    "extrapolation": "Fixture orchestration times do not predict enterprise scan, ingestion or materialization costs",
+    "remaining_monitor_credits": "Not observed; do not assume a fresh credit",
+    "stopping_rule": "No enterprise run or additional resource provisioning without separate approval; keep statement timeouts and monitor in force"
+  },
+  "existing_enterprise_profile": {
+    "accounts": 60000,
+    "active_subscriptions": 60000,
+    "daily_opportunity_calendar_cross_product_upper_bound": 17633430,
+    "opportunities": 195927,
+    "period_end_arr_cad": "754389953.40000000",
+    "source_counts": {
+      "account_attributes": 60000,
+      "account_history": 68571,
+      "booking_attributes": 345504,
+      "booking_events": 345504,
+      "calendar": 90,
+      "commercial_events": 28792,
+      "contract_attributes": 73927,
+      "coverage": 6,
+      "invoice_lines": 775133,
+      "opportunity_events": 334047,
+      "payment_allocations": 329053,
+      "subscription_contracts": 73927
+    },
+    "source_rows": 2434554
+  },
+  "fixture_acceptance": "passed; see fixture/verification.json",
+  "status": "not_executed_on_Snowflake",
+  "technical_preconditions": [
+    "Review real fixture evidence and native source economics at larger scale",
+    "Establish monitor visibility for enterprise preflight; the fixture owner-confirmation flag cannot authorize enterprise",
+    "Review remaining monitored credit allowance and actual billing before committing to a benchmark"
+  ]
+}
