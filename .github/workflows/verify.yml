@@ -28,9 +28,6 @@ jobs:
       - name: Install project
         shell: bash
         run: ${{ matrix.venv_python }} -m pip install --no-deps --no-build-isolation -e .
-      - name: Show Python formatting differences (diagnostic)
-        shell: bash
-        run: ${{ matrix.venv_python }} -m ruff format --diff scripts/verify_snowflake.py
       - name: Verify
         shell: bash
         run: ${{ matrix.venv_python }} scripts/verify.py
