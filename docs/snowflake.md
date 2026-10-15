@@ -153,6 +153,13 @@ unrelated-object deletion occurs; retained data can incur storage cost.
 
 ## GitHub verification
 
+The local DuckDB target accepts `RMP_DUCKDB_THREADS` (default 2), retaining the 2GB
+memory limit. Windows CI sets it to 1 after intermittent enterprise dbt subprocess
+termination without a SQL error; Linux keeps 2. This is a bounded execution mitigation,
+not an established engine root cause. CI retains synthetic local dbt failure logs and
+enables Python fault diagnostics; exceptions include the subprocess exit code without
+printing cloud connection details. Model SQL, fixture and enterprise size are unchanged.
+
 Ordinary Windows/Linux PR checks are credential-free. The manual cloud workflow uses
 the protected `snowflake-demo` environment, pinned actions, minimal permissions and
 serialized dispatches. Configure the five required settings above as secrets, using

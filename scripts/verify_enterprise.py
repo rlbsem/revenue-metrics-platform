@@ -204,7 +204,12 @@ def verify():
             "os": platform.platform(),
             "processor": platform.processor(),
             "logical_cpus": os.cpu_count(),
-            "duckdb_settings": {"threads": 2, "memory_limit": "2GB", "dbt_threads": 1},
+            "duckdb_settings": {
+                "scope": "configured dbt profile settings",
+                "threads": int(os.environ.get("RMP_DUCKDB_THREADS", "2")),
+                "memory_limit": "2GB",
+                "dbt_threads": 1,
+            },
             "timing_caveat": "Single local execution on a shared Windows workstation; not a controlled benchmark or production capacity claim. Incremental command rebuilds all non-incremental models.",
             "stress": "configured; not executed, no measured performance claim",
             "release_id": final_release,

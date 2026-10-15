@@ -246,5 +246,25 @@
   {
     "status": "passed",
     "test": "test_missing_credentials_never_calls_cloud_and_clears_stale_success"
+  },
+  {
+    "status": "passed",
+    "test": "test_preflight_failure_replaces_old_success_without_cloud[approval]"
+  },
+  {
+    "status": "passed",
+    "test": "test_preflight_failure_replaces_old_success_without_cloud[credentials]"
+  },
+  {
+    "status": "passed",
+    "test": "test_conflicts_stop_inside_one_block_before_any_creation"
+  },
+  {
+    "status": "passed",
+    "test": "test_bounded_settings_checked_before_compute_and_minimal_warehouse_grants"
+  },
+  {
+    "status": "passed",
+    "test": "test_refresh_preserves_existing_config_and_keys"
   }
 ]

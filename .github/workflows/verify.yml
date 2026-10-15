@@ -12,9 +12,16 @@ jobs:
         include:
           - os: ubuntu-latest
             venv_python: .venv/bin/python
+            duckdb_threads: 2
           - os: windows-latest
             venv_python: .venv/Scripts/python.exe
+            duckdb_threads: 1
     runs-on: ${{ matrix.os }}
+    env:
+      # Bound Windows engine parallelism after abrupt enterprise dbt process exits.
+      # The fixture, model SQL, enterprise scale and equivalence checks are unchanged.
+      RMP_DUCKDB_THREADS: ${{ matrix.duckdb_threads }}
+      PYTHONFAULTHANDLER: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

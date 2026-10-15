@@ -4,10 +4,10 @@
   "financial_model_diff": [],
   "native_snowflake_acceptance": "pending_runtime_key_registration",
   "scope": "Executed local review, not Snowflake execution",
-  "seconds": 109.87,
+  "seconds": 104.872,
   "skipped": 0,
   "source_sha256": {
-    "dbt/profiles.yml": "6641c4e452394c90ce31b58a9d1dabaf65eafee704b7bc63ac6f02d9449c9da0",
+    "dbt/profiles.yml": "5210c5d89a41030bfa0513b420034fe6f7f81f0c9919ba30143ae3e6fd2a2d9d",
     "requirements.lock": "d10209a92df748f1b86649a241bf37583169b8dd69624c8829b237c743ac45e2",
     "scripts/prepare_snowflake_access.py": "2f96bda2743d33621c5cac824c3b7b18a82f349ffecedaf27a8c2a02765b5a71",
     "scripts/verify_snowflake.py": "7b9518d0ec0ce96b9243eda1e66c5bda9ed130d3e128f75376a7cb89a717f572",
@@ -16,7 +16,7 @@
     "src/revenue_platform/cli.py": "229a471331111351f3f35f14cd22a93994595f15c80bc0995f7d2cd105f47ba9",
     "src/revenue_platform/consumer.py": "eb76bf8f460a7fa02606f1d58dff53c78bd2f3e2cc2d91b579483706696caf88",
     "src/revenue_platform/generator.py": "bb63852871fab694a818765e6782985e3a33596104d0332408a1b24807023e57",
-    "src/revenue_platform/runtime.py": "d2b380cc8c314705d6d2510cde9ed570258586f1863c631875fe4b5d8398ebb4",
+    "src/revenue_platform/runtime.py": "6584059a6ee4462bcae361417a51d9138e269072b2d10a38ba222a3111a53197",
     "src/revenue_platform/scenario_checks.py": "1c60911ae62f3c12f80bfab136bc0541e002b2aa6e4d752e88a9d5568be749b0",
     "src/revenue_platform/snowflake_acceptance.py": "43bca6f206117ea4c0ba278590746986116e8e3b88915e19d5f0c98f4b4027ce",
     "src/revenue_platform/snowflake_controls.py": "11815d82fe5144c91f311c9c7a60742393990bf80353472065e1f5ce849e20d1"

@@ -5,7 +5,8 @@
     "duckdb_settings": {
       "dbt_threads": 1,
       "memory_limit": "2GB",
-      "threads": 2
+      "scope": "configured dbt profile settings",
+      "threads": 1
     },
     "incremental_full_model_signatures_equal": true,
     "logical_cpus": 32,
@@ -22,20 +23,20 @@
     "stress": "configured; not executed, no measured performance claim",
     "timing_caveat": "Single local execution on a shared Windows workstation; not a controlled benchmark or production capacity claim. Incremental command rebuilds all non-incremental models.",
     "timings_seconds": {
-      "bounded_snapshot_and_source_hashes": 7.015,
-      "bulk_load": 3.299,
-      "corrected_full_refresh_dbt_build": 16.524,
-      "corrected_incremental_dbt_build": 15.058,
-      "dbt_docs": 6.064,
-      "initial_dbt_build": 20.2,
-      "repeat_source_generation": 3.991,
-      "source_generation": 4.333
+      "bounded_snapshot_and_source_hashes": 6.994,
+      "bulk_load": 3.015,
+      "corrected_full_refresh_dbt_build": 23.977,
+      "corrected_incremental_dbt_build": 15.205,
+      "dbt_docs": 5.286,
+      "initial_dbt_build": 24.205,
+      "repeat_source_generation": 3.894,
+      "source_generation": 3.862
     }
   },
   "final_regression": {
     "evidence": "snowflake-local-review.json",
     "failures": 0,
-    "scope": "Full suite after owner setup preflight and privilege review",
+    "scope": "Full suite and full enterprise pipeline after bounded Windows execution adjustment",
     "tests": 67
   },
   "fixture": {
@@ -46,7 +47,7 @@
     "local_execution": "passed",
     "markdown_links": "passed",
     "platform": "Windows",
-    "pytest_summary": "62 passed in 111.20s (0:01:51)",
+    "pytest_summary": "67 passed in 104.87s (0:01:44)",
     "python": "3.12.14",
     "release_id": "6771841bd850e4ae5edd535c9f6ed033128e0b2161ada57b112834dc110ea718",
     "snowflake": "pending_credentials",
