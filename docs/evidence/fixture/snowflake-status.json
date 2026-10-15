@@ -3,7 +3,9 @@
   "missing_variable_names": [
     "SNOWFLAKE_ACCOUNT",
     "SNOWFLAKE_USER",
-    "SNOWFLAKE_PRIVATE_KEY_PATH"
+    "SNOWFLAKE_PRIVATE_KEY_PATH",
+    "SNOWFLAKE_CONSUMER_USER",
+    "SNOWFLAKE_CONSUMER_PRIVATE_KEY_PATH"
   ],
   "note": "DuckDB tests do not establish Snowflake execution, grants or warehouse performance.",
   "status": "pending_credentials"

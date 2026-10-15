@@ -1,0 +1,29 @@
+{
+  "observed_on": "2026-10-14",
+  "connector_probe": {
+    "query": "SELECT 1 AS connection_check",
+    "returned_sql_result": false,
+    "agent_error_code": 399504,
+    "message": "Access denied for trial accounts."
+  },
+  "python_dbt_execution": {
+    "status": "pending_credentials",
+    "executed_cloud": false,
+    "owner_confirmed_no_registered_runtime_key_pair": true,
+    "fixture_command_refuses_without_credentials": true
+  },
+  "prepared": [
+    "Private encrypted runner and reader keys outside repository",
+    "One owner-run SQL handoff; no SQL executed",
+    "Cloud acceptance verifier and credential-free regression tests"
+  ],
+  "minimum_next_access": "Owner reviews/runs private owner-setup.sql in Snowsight and sets the account identifier in private runtime.json",
+  "not_established": [
+    "Native Snowflake model or test success",
+    "Native transaction and incremental failure recovery",
+    "Warehouse credit consumption",
+    "Standard SQL trial-account restriction"
+  ],
+  "enterprise_execution_authorized": false,
+  "cloud_resources_provisioned_by_agent": false
+}

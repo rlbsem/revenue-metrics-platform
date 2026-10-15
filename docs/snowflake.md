@@ -1,58 +1,136 @@
-# Snowflake setup and verification
+# Snowflake managed-warehouse acceptance
 
-**Current public evidence status: managed-warehouse execution pending.** The repository's saved acceptance report is local DuckDB evidence. Having a connected ChatGPT Snowflake app is not execution of this verifier: this Python/dbt path uses key-pair authentication and requires its own dedicated demo roles and warehouse. Do not change `executed_cloud` to true until the entire run succeeds and its evidence is reviewed.
+**Cloud acceptance is pending runtime credentials.** Local regression results are not
+Snowflake results. On 2026-10-14 the connected ChatGPT SQL tool returned agent error
+399504, `Access denied for trial accounts`, for `SELECT 1`. No SQL result was returned.
+That proves the connector path is blocked; it does not establish that standard SQL
+or key-pair access to this trial is blocked. No account upgrade is required by this
+repository. ChatGPT OAuth is independent of Python/dbt authentication.
 
-## Account setup
+[Executed local review and source hashes](evidence/snowflake-local-review.json) and
+[observed execution blocker](evidence/snowflake-execution-blocker.json) are separate
+from native cloud acceptance. The local review passed 64 tests.
 
-1. Use a dedicated demo account/database with permission to create roles, a warehouse and schemas. Review and run [bootstrap.sql](../snowflake/bootstrap.sql) as the named administrator roles.
-2. Register a key pair on an appropriate Snowflake user using your account's security process. Keep the private key outside the repository. Assign `RMP_LOADER`, `RMP_BUILD` and `RMP_CONSUMER` for the demo verifier. Separate service identities are preferable for a deployment; this demo verifies active-role boundaries with secondary roles disabled.
-3. Set `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, `SNOWFLAKE_PRIVATE_KEY_PATH`, and the optional private-key passphrase in the shell or secret store. [.env.example](../.env.example) names the variables; no automatic dotenv loading occurs.
-4. Run `python scripts/verify_snowflake.py --require-cloud` from the repository root. It returns nonzero for missing credentials, connection failure, failing dbt models/tests, unexpected results or failed access checks.
+## Minimum one-time owner handoff
 
-The Python connector reads the key; dbt uses the same environment-backed key-path profile. The account must permit key-pair authentication for that user. [dbt Snowflake configuration](https://docs.getdbt.com/docs/core/connect-data-platform/snowflake-setup).
+Use Python Connector/dbt-snowflake key-pair authentication. No new OAuth integration,
+external model, paid subscription or application hosting is needed. The runner uses
+RMP_LOADER/RMP_BUILD. A **different user and key pair** has only RMP_CONSUMER. The
+verifier refuses shared identities/keys and unexpected reader role grants, disables
+secondary roles, and tests stronger-role switching, raw reads and publication writes.
 
-## Privilege boundaries
+With Python 3.12 and the locked dependencies installed:
 
-| Role | Allowed operations | Intentionally absent |
-|---|---|---|
-| RMP_LOADER | Create/replace and load synthetic RAW tables | Consumer publication grants |
-| RMP_BUILD | Read RAW; create isolated build schemas; build/test; publish in CONSUMER | RAW mutation privileges |
-| RMP_CONSUMER | Warehouse/database/schema usage and SELECT on CURRENT_METRICS | RAW access and publication writes |
+```text
+python scripts/prepare_snowflake_access.py --directory <absolute-private-directory-outside-repository>
+```
 
-This is ordinary Snowflake RBAC, not edition-dependent row-access/masking policy proof. Grants are documented in [bootstrap SQL](../snowflake/bootstrap.sql). The consumer verifier accepts only authorization errors for its negative probes, not arbitrary query failures.
+This creates two encrypted RSA keys, private `runtime.json`, and `owner-setup.sql`.
+It executes no SQL. Windows folder ACLs restrict access to the creating identity;
+POSIX uses owner-only permissions. Passphrases are in the private config: protect
+the entire directory. Never upload it or paste its contents into chat.
 
-## What the command does
+The owner reviews and executes the generated `owner-setup.sql` in Snowsight, then
+sets only `SNOWFLAKE_ACCOUNT` in the private JSON to the organization/account
+identifier. The SQL creates dedicated demo roles, service users, schemas and the
+standard XSMALL warehouse. Inspect any pre-existing resources; do not reuse an
+unrelated database. User-name collisions fail instead of overwriting registered keys.
 
-The command replaces **only the synthetic RAW tables in the fixed REVENUE_METRICS_DEMO database**, then builds into fresh `BUILD_<id>` and `FULL_<id>` schemas. Treat that database as exclusively owned by this exercise. Keep old build schemas for investigation or remove them explicitly after review; the script does not recursively drop unrelated database objects.
+The SQL includes a one-credit non-resetting fixture resource monitor, 60-second
+auto-suspend and query timeouts. Review that bounded allocation before execution.
+A credit monitor is not an exact dollar cap and does not cover storage or all cloud
+services. The verifier never increases quotas or resizes/provisions resources.
 
-### Cloud correction and exact-rebuild acceptance sequence
+```text
+python scripts/verify_snowflake.py --require-cloud --profile fixture --config-file <private-directory>/runtime.json --workspace .local/cloud-fixture
+```
 
-The cloud verifier now performs these distinct operations in order:
+Environment-based execution requires `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`,
+`SNOWFLAKE_PRIVATE_KEY_PATH`, `SNOWFLAKE_CONSUMER_USER`, and
+`SNOWFLAKE_CONSUMER_PRIVATE_KEY_PATH`. Each identity also supports its corresponding
+`PRIVATE_KEY_PASSPHRASE`. Keep all account/user/key values out of public evidence.
 
-1. Load the original synthetic source batch **without** late opportunity revisions.
-2. Run a baseline Snowflake/dbt full build and retain bounded opportunity-day evidence.
-3. Insert the actual late-event CSV into RAW, and validate generated source economics.
-4. Run dbt **incrementally** against the original build schema and confirm that a corrected opportunity changed.
-5. Run a separate corrected **full build in another schema**.
-6. Compare every model both ways with symmetric Snowflake `EXCEPT` over **complete rows grouped by their counts**. This detects missing, changed **and duplicated** rows, rather than relying on hashes, one-way set differences, or row counts alone.
-7. Only after these checks and existing source/metric assertions pass, update the versioned consumer publication and verify that restricted consumers cannot read RAW or mutate the published release.
+## Native acceptance sequence
 
-The verifier saves sanitized model-row counts, correction evidence, query IDs, and three measured dbt-build durations. These are acceptance measurements, **not** proof of cost or throughput until an actual run is recorded. Current adapter unit tests validate SQL construction without claiming cloud semantics. The actual `GROUP BY ALL` / `EXCEPT` statements and incremental pre-hook remain **unverified on Snowflake** until the first successful credentialed run.
+1. Observe actual warehouse settings; refuse a larger/multi-cluster, accelerated,
+   unmonitored or non-suspending warehouse.
+2. Hold an administrator-owned singleton gate in a dedicated DML transaction.
+   DDL uses other connections. Supported verifiers serialize their shared
+   RAW/CONSUMER access; direct administrator/manual SQL can bypass this protocol
+   and must remain quiesced.
+3. Load the exact original sources without corrections. CSV headers and row widths
+   must match the declared contract (opportunity events have nine fields).
+4. Build all 15 models and run all existing dbt tests; retain per-node results.
+5. Append the real late-event batch and run native incremental repair. Require an
+   observable changed daily fact, not merely a successful command.
+6. Independently full-build another schema. Compare every complete-row multiset
+   both ways using grouped values/counts and symmetric EXCEPT. Hash-only signatures
+   and one-way set differences are insufficient.
+7. Apply the unchanged fixture oracle or enterprise source-economic assertions.
+   Check candidate metrics with the independent reader before promotion.
+8. Prove reader denials, rollback after an injected publication failure, and retention
+   of the preceding release after an actual failed source-coverage dbt test. Restore
+   coverage and re-run the quality gate.
+9. Promote using DML only. Initialize the stable reader view/grant before the
+   transaction. Repeat promotion and require one history row; check final reader values.
+10. Save sanitized results/query history and suspend the dedicated warehouse before
+    releasing the gate, including on execution failure.
 
-**Isolation and budget limits:** RAW and CONSUMER are fixed demo schemas; do not run multiple command-line or externally initiated verifications concurrently. The protected GitHub workflow serializes its own dispatches, but cannot lock out unrelated manual Snowflake sessions. Use only the dedicated synthetic database, start with `--profile fixture`, check the account's actual warehouse size/credit balance, and approve the enterprise run separately. The script does not configure a hard dollar budget, cloud resource monitor or automated teardown. Suspend the demo warehouse when finished and remove isolated build schemas only after reviewing evidence. None of these steps is a basis for an automatic spending authorization.
+These fault probes cover specified pre-commit and quality-gate boundaries, not
+universal crash atomicity. A lost commit acknowledgment is uncertain: inspect
+CURRENT_RELEASE/RELEASE_HISTORY before retrying. Failed acceptance does not mean
+no SQL or committed effect occurred. Native gate contention/process-death and
+interrupted incremental recovery need credentialed experiments before being claimed.
+Local SQL/fake-cursor tests do not prove Snowflake compatibility or operations.
 
-Successful dbt tests and profile validation precede publication: enterprise scale/economic invariants by default, or hand-authored exact outputs with `--profile fixture`. The consumer payload is replaced in a transaction so all six metrics and their definitions share one version. Historical payloads remain in RELEASE_HISTORY. The read-only view is checked against dbt output. It records sanitized query IDs and permission outcomes in `.local/snowflake/verification.json`, and exports the same validated publication for Streamlit/analyst use.
+## Evidence and consumption
 
-Raw query logs remain local and are not in the ZIP. Exceptions are summarized by class rather than publishing connection details. Do not commit private keys, `.env`, account-specific profiles or diagnostic logs.
+The private workspace retains `verification.json`, three `*-results.json` build
+records, `query-history.json`, dbt logs/targets and the validated publication for
+Streamlit/CSV. Publish only reviewed sanitized projections. Raw dbt manifests,
+profiles and logs can include account metadata and are not uploaded by cloud CI.
 
-The supplied warehouse starts at XSMALL with auto-suspend; actual charges depend on account configuration and use. No cost/performance estimate is claimed. Suspend/drop the dedicated warehouse when finished if appropriate for your account. Query IDs are execution evidence, not a performance benchmark.
+Query history retains IDs/types/status, elapsed time, scan and spill measurements,
+without SQL text, user names or account identifiers. A unique run query tag is
+inherited by dbt. Reporting visibility/limits must be checked; this does not establish
+complete account-wide audit history.
 
-## CI
+`snowflake/consumption.sql` provides an owner-run dedicated-warehouse export using
+real UTC start/end times. Hour buckets can contain other work and arrive after
+reporting latency. Empty output means pending, never zero cost. Separate actual
+credits from elapsed time, retention/storage and contracted credit price. A successful
+SQL run can have metering pending; the complete acceptance package still needs review.
 
-The manually triggered Snowflake workflow uses a `snowflake-demo` environment and secrets, requests fixture or enterprise explicitly (fixture by default), and serializes protected cloud runs. It never runs on ordinary pull requests. Configure the environment and credentials before dispatch. The local Windows/Linux workflow needs no cloud credentials. Neither workflow is claimed as hosted-successful before GitHub actually runs it.
+## Enterprise approval and stopping point
 
-## Generated sources
+Review the executed fixture, actual warehouse settings, trial balance, metering and
+generated row counts first. Estimate the larger run from observed behavior with a
+conservative allowance; do not infer credits from time alone. Request owner approval
+before enterprise execution or any quota/resource increase. After explicit approval,
+set `RMP_ENTERPRISE_APPROVED=yes` and select enterprise. The CLI defaults to fixture
+and refuses enterprise cloud execution without this guard. Stress remains optional,
+unexecuted, and requires its own `RMP_STRESS_APPROVED=yes` authorization.
 
-The default command generates the enterprise CSVs locally, then loads them through `RMP_LOADER` in bounded batches of 10,000 rows. Use `--source-dir .local/demo/sources` to reuse a generated dataset, or `--profile fixture` for exact cases. The optional stress profile is selectable but has no execution claim. The same loader/build/consumer roles, isolated build schema, dbt quality gates and negative permission probes apply.
+Keep BUILD_/FULL_ schemas for investigation until reviewed. The owner may then remove
+only recorded run schemas and obsolete candidate grants. No automatic database or
+unrelated-object deletion occurs; retained data can incur storage cost.
 
-Enterprise publications stream source fingerprints and bound account bridge examples; they do not fetch millions of source records into a single Python list or cloud VARIANT payload. The supplied adapter has been parsed offline, but offline parsing does not prove SQL execution or privileges. The [cloud status record](evidence/snowflake-status.json) is the authority for actual execution.
+## GitHub verification
+
+Ordinary Windows/Linux PR checks are credential-free. The manual cloud workflow uses
+the protected `snowflake-demo` environment, pinned actions, minimal permissions and
+serialized dispatches. Configure the five required settings above as secrets, using
+`SNOWFLAKE_PRIVATE_KEY_PEM` and `SNOWFLAKE_CONSUMER_PRIVATE_KEY_PEM` for key contents
+instead of local paths; include encrypted-key passphrases. Temporary files are removed
+even on failure. Keep secrets out of pull-request workflows and logs.
+
+Start with fixture. Enterprise dispatch additionally requires `enterprise_approved=true`
+after explicit owner approval. Cloud CI uploads only allowlisted sanitized JSON,
+including failure metadata. Hosted local CI success is not Snowflake execution.
+Keep the PR draft while native acceptance is pending.
+
+Primary references: [Python authentication](https://docs.snowflake.com/en/developer-guide/python-connector/python-connector-connect),
+[key-pair registration](https://docs.snowflake.com/en/user-guide/key-pair-auth),
+[transactions](https://docs.snowflake.com/en/sql-reference/transactions),
+[resource monitor limits](https://docs.snowflake.com/en/user-guide/resource-monitors),
+[metering access and buckets](https://docs.snowflake.com/en/sql-reference/functions/warehouse_metering_history).

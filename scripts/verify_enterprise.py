@@ -155,7 +155,8 @@ def verify():
     assert not app.exception
     from verify_snowflake import verify as verify_cloud
 
-    assert verify_cloud(workspace / "snowflake", source_dir=workspace / "sources") == 0
+    # Local verification must never start billed cloud work merely because keys exist.
+    assert verify_cloud(workspace / "snowflake", status_only=True) == 0
     cloud = json.loads((workspace / "snowflake/verification.json").read_text())
     publication = evidence / "published"
     publication.mkdir(exist_ok=True)

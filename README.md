@@ -131,10 +131,10 @@ Supply `--expected-release <identifier>` to reject a stale consumer request. Ent
 
 ## Configure Snowflake
 
-Follow [the Snowflake runbook](docs/snowflake.md), execute [bootstrap grants](snowflake/bootstrap.sql) as an appropriately privileged administrator, and set the variables documented in [.env.example](.env.example). Key files stay outside this repository.
+Follow [the Snowflake runbook and one-time owner handoff](docs/snowflake.md), review [bootstrap grants and the fixture resource guard](snowflake/bootstrap.sql), and configure the separate runner/reader identities documented in [.env.example](.env.example). Key files stay outside this repository.
 
 ```text
-python scripts/verify_snowflake.py --require-cloud
+python scripts/verify_snowflake.py --require-cloud --profile fixture
 ```
 
 With credentials this loads synthetic tables into the dedicated `REVENUE_METRICS_DEMO` database, runs dbt under `RMP_BUILD`, and exercises the `RMP_CONSUMER` role. **It replaces the demo RAW tables; never point this exercise at business data.** Without credentials it reports pending and exits nonzero when `--require-cloud` is used. [Current execution status](docs/evidence/snowflake-status.json).

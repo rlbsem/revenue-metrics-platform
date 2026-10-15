@@ -26,7 +26,7 @@ This is a small release boundary supporting commercial consumption. It is not a 
 
 ## Warehouse boundary
 
-DuckDB runs the local model graph. Snowflake uses the same SQL with a small adapter-specific date-add macro. Its verifier creates an isolated build schema and runs actual dbt before publishing one validated JSON payload transactionally. A consumer view exposes metrics from that payload. The role verifies raw reads and release mutations are denied with secondary roles disabled. A demo user with all roles can deliberately switch roles; real deployment requires separately provisioned identities and account policy.
+DuckDB runs the local model graph. Snowflake uses the same SQL with a small adapter-specific date-add macro. Its verifier prepares baseline, native incremental repair and an independent full-build schema, comparing all 15 complete-row multisets before promotion. A stable consumer view exposes the transactionally published payload. The reader requires a separate user/key with no stronger role grants; negative probes cover raw reads, release writes and role switching. Publication fault probes and a dedicated gate transaction are implemented but native behavior remains subject to the pending credentialed acceptance run. [Execution and approval boundaries](snowflake.md).
 
 Snowflake execution, RBAC enforcement, query behavior and performance remain pending until the configured verifier succeeds. The code is not presented as a measured cloud deployment.
 

@@ -118,5 +118,133 @@
   {
     "status": "passed",
     "test": "test_bookings_cannot_use_lost_opportunities"
+  },
+  {
+    "status": "passed",
+    "test": "test_multiset_difference_preserves_duplicate_frequency_and_null_rows"
+  },
+  {
+    "status": "passed",
+    "test": "test_exact_multiset_comparison_records_both_directions_and_query_ids"
+  },
+  {
+    "status": "passed",
+    "test": "test_differences_abort_before_any_publication[values0]"
+  },
+  {
+    "status": "passed",
+    "test": "test_differences_abort_before_any_publication[values1]"
+  },
+  {
+    "status": "passed",
+    "test": "test_differences_abort_before_any_publication[values2]"
+  },
+  {
+    "status": "passed",
+    "test": "test_untrusted_sql_identifiers_rejected[x;drop table raw]"
+  },
+  {
+    "status": "passed",
+    "test": "test_untrusted_sql_identifiers_rejected[x.y]"
+  },
+  {
+    "status": "passed",
+    "test": "test_untrusted_sql_identifiers_rejected[]"
+  },
+  {
+    "status": "passed",
+    "test": "test_untrusted_sql_identifiers_rejected[x--comment]"
+  },
+  {
+    "status": "passed",
+    "test": "test_equal_row_counts_do_not_hide_changed_column_contract"
+  },
+  {
+    "status": "passed",
+    "test": "test_real_correction_csv_uses_nine_declared_columns"
+  },
+  {
+    "status": "passed",
+    "test": "test_consumer_requires_independent_identity_and_key[user]"
+  },
+  {
+    "status": "passed",
+    "test": "test_consumer_requires_independent_identity_and_key[public_key]"
+  },
+  {
+    "status": "passed",
+    "test": "test_consumer_requires_independent_identity_and_key[neither]"
+  },
+  {
+    "status": "passed",
+    "test": "test_source_contract_rejected_before_insert[wrong\\n1\\n]"
+  },
+  {
+    "status": "passed",
+    "test": "test_source_contract_rejected_before_insert[a,b\\n1\\n]"
+  },
+  {
+    "status": "passed",
+    "test": "test_duplicate_aware_sql_executes_with_null_and_multiplicity"
+  },
+  {
+    "status": "passed",
+    "test": "test_publication_rollback_precedes_any_commit"
+  },
+  {
+    "status": "passed",
+    "test": "test_database_error_rolls_back_and_never_commits"
+  },
+  {
+    "status": "passed",
+    "test": "test_gate_rolls_back_after_failure_and_refuses_invalid_cardinality"
+  },
+  {
+    "status": "passed",
+    "test": "test_only_authorization_denials_are_permission_evidence[2003-42S02-True]"
+  },
+  {
+    "status": "passed",
+    "test": "test_only_authorization_denials_are_permission_evidence[3001-42501-True]"
+  },
+  {
+    "status": "passed",
+    "test": "test_only_authorization_denials_are_permission_evidence[1003-42000-False]"
+  },
+  {
+    "status": "passed",
+    "test": "test_only_authorization_denials_are_permission_evidence[250001-08001-False]"
+  },
+  {
+    "status": "passed",
+    "test": "test_consumer_values_compare_decimals_without_hiding_duplicates"
+  },
+  {
+    "status": "passed",
+    "test": "test_unexpected_consumer_write_permission_cannot_commit_probe"
+  },
+  {
+    "status": "passed",
+    "test": "test_warehouse_preflight_refuses_cost_expansion[change0]"
+  },
+  {
+    "status": "passed",
+    "test": "test_warehouse_preflight_refuses_cost_expansion[change1]"
+  },
+  {
+    "status": "passed",
+    "test": "test_warehouse_preflight_refuses_cost_expansion[change2]"
+  },
+  {
+    "status": "passed",
+    "test": "test_warehouse_preflight_refuses_cost_expansion[change3]"
+  },
+  {
+    "status": "passed",
+    "test": "test_warehouse_preflight_refuses_cost_expansion[change4]"
+  },
+  {
+    "status": "passed",
+    "test": "test_missing_credentials_never_calls_cloud_and_clears_stale_success"
   }
 ]

@@ -33,6 +33,17 @@ def compare_model_multisets(cursor, incremental_schema, full_schema, models, que
         incremental = f"{_identifier(incremental_schema)}.{_identifier(model)}"
         full = f"{_identifier(full_schema)}.{_identifier(model)}"
 
+        shapes = []
+        for relation in (incremental, full):
+            cursor.execute(f"SELECT * FROM {relation} LIMIT 0")
+            shapes.append(
+                [(column[0], column[1], column[4], column[5]) for column in cursor.description]
+            )
+            if query_ids is not None:
+                query_ids.append(cursor.sfqid)
+        if shapes[0] != shapes[1]:
+            raise AssertionError(f"Snowflake incremental/full schema disagreement for {model}")
+
         cursor.execute(f"SELECT COUNT(*) FROM {incremental}")
         incremental_rows = cursor.fetchone()[0]
         if query_ids is not None:
@@ -65,6 +76,7 @@ def compare_model_multisets(cursor, incremental_schema, full_schema, models, que
                 "incremental_only_groups": incremental_only_groups,
                 "full_only_groups": full_only_groups,
                 "exact_multiset_equal": True,
+                "column_contract_equal": True,
             }
         )
     return report

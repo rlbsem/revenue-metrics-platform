@@ -9,6 +9,8 @@ from revenue_platform.snowflake_acceptance import (
 
 
 class FakeCursor:
+    description = [("ID", 0, None, None, 38, 0, True)]
+
     def __init__(self, values):
         self.values = iter(values)
         self.statements = []
@@ -42,8 +44,8 @@ def test_exact_multiset_comparison_records_both_directions_and_query_ids():
     )
     assert len(report) == 2
     assert all(item["exact_multiset_equal"] for item in report)
-    assert len(cursor.statements) == 8
-    assert query_ids == [f"Q{i}" for i in range(1, 9)]
+    assert len(cursor.statements) == 12
+    assert query_ids == [f"Q{i}" for i in range(1, 13)]
 
 
 @pytest.mark.parametrize("values", [[12, 12, 1, 0], [12, 12, 0, 1], [12, 13, 0, 0]])
@@ -57,3 +59,15 @@ def test_differences_abort_before_any_publication(values):
 def test_untrusted_sql_identifiers_rejected(unsafe):
     with pytest.raises(ValueError, match="identifier"):
         multiset_difference_sql(unsafe, "FULL_X", "dim_account")
+
+
+def test_equal_row_counts_do_not_hide_changed_column_contract():
+    class ChangedSchema(FakeCursor):
+        def execute(self, sql):
+            super().execute(sql)
+            if "FULL_X" in sql:
+                self.description = [("OTHER_ID", 0, None, None, 38, 0, True)]
+            return self
+
+    with pytest.raises(AssertionError, match="schema disagreement"):
+        compare_model_multisets(ChangedSchema([]), "BUILD_X", "FULL_X", ["dim_account"])
