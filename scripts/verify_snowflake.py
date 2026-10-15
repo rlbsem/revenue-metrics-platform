@@ -119,6 +119,7 @@ def verify(
             )
             query_ids.append(sample_cursor.sfqid)
             return rows
+
     with connect("RMP_LOADER") as conn:
         cursor = conn.cursor()
         for table, ddl in tables.items():
