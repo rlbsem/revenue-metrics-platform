@@ -8,10 +8,12 @@ import os
 from pathlib import Path
 import re
 import sys
+import time
 from uuid import uuid4
 
 from revenue_platform.runtime import (
     ROOT,
+    MODELS,
     TABLES,
     assert_expected,
     assert_enterprise,
@@ -23,6 +25,7 @@ from revenue_platform.runtime import (
     records,
     run_dbt,
 )
+from revenue_platform.snowflake_acceptance import compare_model_multisets
 
 REQUIRED = ("SNOWFLAKE_ACCOUNT", "SNOWFLAKE_USER", "SNOWFLAKE_PRIVATE_KEY_PATH")
 
@@ -81,8 +84,41 @@ def verify(
         manifest = json.loads((source_dir / "dataset-manifest.json").read_text())
     tables = {**TABLES, **(ATTRIBUTES if manifest else {})}
     schema = "BUILD_" + uuid4().hex.upper()
+    rebuilt_schema = "FULL_" + uuid4().hex.upper()
     os.environ["REVENUE_BUILD_SCHEMA"] = schema
     query_ids = []
+    timings = {}
+    correction_file = source_dir / "late_opportunity_events.csv"
+    with correction_file.open(newline="", encoding="utf-8") as stream:
+        late_reader = csv.DictReader(stream)
+        sample_opportunity = next(late_reader, {}).get("opportunity_id")
+    if not sample_opportunity:
+        raise AssertionError("No actual late correction was provided")
+
+    def timed_build(label, folder, *, full_refresh):
+        started = time.perf_counter()
+        result = run_dbt(
+            workspace / "unused.duckdb",
+            workspace / folder,
+            full_refresh=full_refresh,
+            target="snowflake",
+        )
+        timings[label] = round(time.perf_counter() - started, 3)
+        return result
+
+    def sample_daily_fact():
+        with connect("RMP_BUILD") as build_conn:
+            sample_cursor = build_conn.cursor()
+            rows = records(
+                sample_cursor.execute(
+                    f"select opportunity_day_key,opportunity_id,date_day,stage,amount_cents "
+                    f"from {schema}.fct_opportunity_daily "
+                    "where opportunity_id=%s order by opportunity_day_key",
+                    (sample_opportunity,),
+                )
+            )
+            query_ids.append(sample_cursor.sfqid)
+            return rows
     with connect("RMP_LOADER") as conn:
         cursor = conn.cursor()
         for table, ddl in tables.items():
@@ -96,18 +132,53 @@ def verify(
                         f"insert into RAW.{table} values ({','.join('%s' for _ in header)})", rows
                     )
             query_ids.append(cursor.sfqid)
-        with (source_dir / "late_opportunity_events.csv").open(newline="", encoding="utf-8") as f:
-            reader = csv.reader(f)
-            next(reader)
-            while rows := list(islice(reader, 10000)):
-                cursor.executemany(
-                    "insert into RAW.opportunity_events values (%s,%s,%s,%s,%s,%s,%s,%s,%s)", rows
-                )
         if manifest:
             from revenue_platform.scenario_checks import validate_scenario
 
             validate_scenario(cursor)
-    run_dbt(workspace / "unused.duckdb", workspace, full_refresh=True, target="snowflake")
+
+    # Prove an actual incremental repair: initial build must NOT contain the
+    # correction. A full refresh with the correction preloaded proves neither
+    # the incremental pre-hook nor stale-row replacement.
+    timed_build("initial_full_build", "baseline", full_refresh=True)
+    baseline_sample = sample_daily_fact()
+
+    with connect("RMP_LOADER") as conn:
+        cursor = conn.cursor()
+        with correction_file.open(newline="", encoding="utf-8") as stream:
+            reader = csv.reader(stream)
+            next(reader)
+            total_late_rows = 0
+            while rows := list(islice(reader, 10000)):
+                cursor.executemany(
+                    "insert into RAW.opportunity_events values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                    rows,
+                )
+                total_late_rows += len(rows)
+                query_ids.append(cursor.sfqid)
+        if not total_late_rows:
+            raise AssertionError("Correction batch was empty")
+        if manifest:
+            from revenue_platform.scenario_checks import validate_scenario
+
+            validate_scenario(cursor)
+
+    timed_build("corrected_incremental_build", "incremental", full_refresh=False)
+    corrected_sample = sample_daily_fact()
+    if baseline_sample == corrected_sample:
+        raise AssertionError("Late correction did not change the sampled daily fact")
+
+    # A genuinely independent rebuild has its own schema, not --full-refresh
+    # over the incremental tables. Require duplicate-aware complete-row equality
+    # for every model, including staging and marts, in both directions.
+    os.environ["REVENUE_BUILD_SCHEMA"] = rebuilt_schema
+    timed_build("independent_corrected_full_build", "full", full_refresh=True)
+    os.environ["REVENUE_BUILD_SCHEMA"] = schema
+    with connect("RMP_BUILD") as conn:
+        comparisons = compare_model_multisets(
+            conn.cursor(), schema, rebuilt_schema, MODELS, query_ids
+        )
+
     with connect("RMP_BUILD") as conn:
         cursor = conn.cursor()
         snapshot = {}
@@ -206,7 +277,16 @@ def verify(
         "release_id": release_id,
         "query_ids": query_ids,
         "denied_operations": denied,
-        "warehouse_size": "XSMALL as provisioned by bootstrap; actual runtime size is account-controlled",
+        "timings_seconds": timings,
+        "late_correction": {
+            "rows_loaded": total_late_rows,
+            "sampled_opportunity_changed": True,
+            "initial_daily_fact_rows": len(baseline_sample),
+            "corrected_daily_fact_rows": len(corrected_sample),
+        },
+        "model_comparison": comparisons,
+        "comparison_method": "Symmetric EXCEPT on complete rows grouped with duplicate counts",
+        "warehouse_size": "Verify live warehouse configuration independently; bootstrap requests XSMALL",
         "note": "No throughput, cost saving or production-scale claim. Synthetic dedicated demo database.",
     }
     (workspace / "verification.json").write_text(canonical(result), encoding="utf-8")
