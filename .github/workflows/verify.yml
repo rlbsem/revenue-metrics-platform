@@ -36,3 +36,11 @@ jobs:
         with:
           name: commercial-evidence-${{ matrix.os }}
           path: docs/evidence/
+      - name: Retain local enterprise failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-dbt-diagnostics-${{ matrix.os }}
+          # This workflow runs only DuckDB with synthetic data, never cloud credentials.
+          # Do not add this diagnostic path to the separate Snowflake workflow.
+          path: .local/enterprise-verification/**/dbt-build.log

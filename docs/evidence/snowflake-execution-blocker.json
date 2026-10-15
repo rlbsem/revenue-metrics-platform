@@ -25,5 +25,18 @@
     "Standard SQL trial-account restriction"
   ],
   "enterprise_execution_authorized": false,
-  "cloud_resources_provisioned_by_agent": false
+  "cloud_resources_provisioned_by_agent": false,
+  "owner_setup_review": {
+    "administrator_sql_executed": false,
+    "owner_confirmed_not_executed": true,
+    "collision_preflight": "Prepared in one aborting block before provisioning; requires owner execution",
+    "observed_settings_postflight": "Prepared for XSMALL / 60 seconds / attached one-credit NEVER monitor with 90/100 thresholds; not executed",
+    "runner_warehouse_grants": [
+      "USAGE",
+      "OPERATE"
+    ],
+    "redundant_monitor_grant_removed": true,
+    "existing_encrypted_keys_and_private_config_preserved": true,
+    "oauth_configuration_changed": false
+  }
 }

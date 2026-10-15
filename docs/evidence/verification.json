@@ -35,8 +35,8 @@
   "final_regression": {
     "evidence": "snowflake-local-review.json",
     "failures": 0,
-    "scope": "Full suite after final cloud preflight corrections",
-    "tests": 64
+    "scope": "Full suite after owner setup preflight and privilege review",
+    "tests": 67
   },
   "fixture": {
     "dbt_data_tests": 30,

@@ -4,14 +4,14 @@
   "financial_model_diff": [],
   "native_snowflake_acceptance": "pending_runtime_key_registration",
   "scope": "Executed local review, not Snowflake execution",
-  "seconds": 109.68,
+  "seconds": 109.87,
   "skipped": 0,
   "source_sha256": {
     "dbt/profiles.yml": "6641c4e452394c90ce31b58a9d1dabaf65eafee704b7bc63ac6f02d9449c9da0",
     "requirements.lock": "d10209a92df748f1b86649a241bf37583169b8dd69624c8829b237c743ac45e2",
-    "scripts/prepare_snowflake_access.py": "e3637fdb99df9c385ed18a0fe3d1d29a8eb19decadbbff9fa2cce53c0fab269e",
+    "scripts/prepare_snowflake_access.py": "2f96bda2743d33621c5cac824c3b7b18a82f349ffecedaf27a8c2a02765b5a71",
     "scripts/verify_snowflake.py": "7b9518d0ec0ce96b9243eda1e66c5bda9ed130d3e128f75376a7cb89a717f572",
-    "snowflake/bootstrap.sql": "e051319dfa021e0bf88ee3eac41f31631ca7aab8e7205f77c5041c9f12915ad1",
+    "snowflake/bootstrap.sql": "600a7b0d03197504e1a8975d451ffe57e36d2dd6c9e39cb0d69f50303c7b145c",
     "src/revenue_platform/__init__.py": "b42f405c65b73ae705971955a29b36095e296eabf6e2def1afccc032041b6226",
     "src/revenue_platform/cli.py": "229a471331111351f3f35f14cd22a93994595f15c80bc0995f7d2cd105f47ba9",
     "src/revenue_platform/consumer.py": "eb76bf8f460a7fa02606f1d58dff53c78bd2f3e2cc2d91b579483706696caf88",
@@ -341,7 +341,22 @@
       "class": "tests.test_snowflake_controls",
       "status": "passed",
       "test": "test_preflight_failure_replaces_old_success_without_cloud[credentials]"
+    },
+    {
+      "class": "tests.test_snowflake_setup",
+      "status": "passed",
+      "test": "test_conflicts_stop_inside_one_block_before_any_creation"
+    },
+    {
+      "class": "tests.test_snowflake_setup",
+      "status": "passed",
+      "test": "test_bounded_settings_checked_before_compute_and_minimal_warehouse_grants"
+    },
+    {
+      "class": "tests.test_snowflake_setup",
+      "status": "passed",
+      "test": "test_refresh_preserves_existing_config_and_keys"
     }
   ],
-  "tests": 64
+  "tests": 67
 }

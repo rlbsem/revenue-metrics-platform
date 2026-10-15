@@ -9,7 +9,7 @@ repository. ChatGPT OAuth is independent of Python/dbt authentication.
 
 [Executed local review and source hashes](evidence/snowflake-local-review.json) and
 [observed execution blocker](evidence/snowflake-execution-blocker.json) are separate
-from native cloud acceptance. The local review passed 64 tests.
+from native cloud acceptance. The local review records the executed full-suite results.
 
 ## Minimum one-time owner handoff
 
@@ -30,16 +30,52 @@ It executes no SQL. Windows folder ACLs restrict access to the creating identity
 POSIX uses owner-only permissions. Passphrases are in the private config: protect
 the entire directory. Never upload it or paste its contents into chat.
 
-The owner reviews and executes the generated `owner-setup.sql` in Snowsight, then
-sets only `SNOWFLAKE_ACCOUNT` in the private JSON to the organization/account
-identifier. The SQL creates dedicated demo roles, service users, schemas and the
-standard XSMALL warehouse. Inspect any pre-existing resources; do not reuse an
-unrelated database. User-name collisions fail instead of overwriting registered keys.
+To update the handoff after review **without generating new keys or changing JSON**:
+
+```text
+python scripts/prepare_snowflake_access.py --directory <existing-private-directory> --refresh-owner-sql
+```
+
+In Snowsight, create a SQL worksheet, select **ACCOUNTADMIN**, and paste the complete
+generated `owner-setup.sql`. Execute the whole file, including the single
+`EXECUTE IMMEDIATE $$ ... $$` block. Do not execute selected internal lines or run
+the public template directly: the generated private file contains your public keys.
+
+Before any CREATE, the block checks for the exact demo database, warehouse, monitor,
+three role names and two service-user names. **Any existing target name stops setup**,
+even if it looks compatible. It never adopts, replaces, drops, resizes or rotates keys
+on an existing resource. All checks and provisioning share one block so an exception
+cannot fall through to a later provisioning statement. A concurrent creation also
+fails because CREATE has no IF NOT EXISTS. Do not run another setup concurrently.
+
+The block creates only the dedicated demo objects, retaining administrative ownership.
+It checks observed SHOW metadata for standard XSMALL, one cluster, 60-second
+auto-suspend, auto-resume, initially suspended state, disabled query acceleration,
+and attachment to RMP_FIXTURE_BUDGET. It also checks that monitor's one-credit quota,
+NEVER reset frequency, warehouse-level assignment and 90% suspend / 100% immediate
+suspend thresholds. A failed postflight raises an error rather than reporting readiness.
+
+Expect a final object with `status: READY_FOR_FIXTURE` and the observed settings.
+This confirms setup only, not native acceptance. On **any error**, stop and report
+the failing statement/error; do not bypass checks or blindly rerun. DDL auto-commits,
+so a failure after provisioning begins can leave newly created objects for review.
+
+After success, set only `SNOWFLAKE_ACCOUNT` in the adjacent private JSON to the
+organization/account identifier (not a Snowsight URL), then notify the verifier operator.
+Preserve the existing keys and passphrases. No ChatGPT OAuth configuration changes occur.
+
+RMP_BUILD gets **USAGE and OPERATE** on RMP_WH. USAGE permits queries/auto-resume;
+OPERATE permits explicit final suspension and already provides warehouse query-history
+visibility. MONITOR is redundant and omitted. No runtime role receives warehouse
+MODIFY, OWNERSHIP, MANAGE WAREHOUSES or account-wide monitoring privileges.
 
 The SQL includes a one-credit non-resetting fixture resource monitor, 60-second
 auto-suspend and query timeouts. Review that bounded allocation before execution.
 A credit monitor is not an exact dollar cap and does not cover storage or all cloud
 services. The verifier never increases quotas or resizes/provisions resources.
+The setup itself briefly resumes only that monitored warehouse to seed the one-row
+concurrency gate, then explicitly suspends it; the minimum resume charge can apply.
+If setup fails during that write, its 60-second auto-suspend remains the fallback.
 
 ```text
 python scripts/verify_snowflake.py --require-cloud --profile fixture --config-file <private-directory>/runtime.json --workspace .local/cloud-fixture
@@ -133,4 +169,7 @@ Primary references: [Python authentication](https://docs.snowflake.com/en/develo
 [key-pair registration](https://docs.snowflake.com/en/user-guide/key-pair-auth),
 [transactions](https://docs.snowflake.com/en/sql-reference/transactions),
 [resource monitor limits](https://docs.snowflake.com/en/user-guide/resource-monitors),
+[warehouse privileges](https://docs.snowflake.com/en/sql-reference/sql/alter-warehouse#access-control-requirements),
+[SHOW warehouse metadata](https://docs.snowflake.com/en/sql-reference/sql/show-warehouses),
+[SHOW resource monitors](https://docs.snowflake.com/en/sql-reference/sql/show-resource-monitors),
 [metering access and buckets](https://docs.snowflake.com/en/sql-reference/functions/warehouse_metering_history).
