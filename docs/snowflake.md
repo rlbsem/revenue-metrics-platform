@@ -1,6 +1,6 @@
 # Snowflake setup and verification
 
-**Current status: pending credentials.** The submitted repository was run locally with DuckDB. No Snowflake account was provisioned or queried during that verification.
+**Current public evidence status: managed-warehouse execution pending.** The repository's saved acceptance report is local DuckDB evidence. Having a connected ChatGPT Snowflake app is not execution of this verifier: this Python/dbt path uses key-pair authentication and requires its own dedicated demo roles and warehouse. Do not change `executed_cloud` to true until the entire run succeeds and its evidence is reviewed.
 
 ## Account setup
 
@@ -23,7 +23,23 @@ This is ordinary Snowflake RBAC, not edition-dependent row-access/masking policy
 
 ## What the command does
 
-The command replaces **only the synthetic RAW tables in the fixed REVENUE_METRICS_DEMO database**, then builds into a fresh `BUILD_<id>` schema. Treat that database as exclusively owned by this exercise. Keep old build schemas for investigation or remove them explicitly after review; the script does not recursively drop unrelated database objects.
+The command replaces **only the synthetic RAW tables in the fixed REVENUE_METRICS_DEMO database**, then builds into fresh `BUILD_<id>` and `FULL_<id>` schemas. Treat that database as exclusively owned by this exercise. Keep old build schemas for investigation or remove them explicitly after review; the script does not recursively drop unrelated database objects.
+
+### Cloud correction and exact-rebuild acceptance sequence
+
+The cloud verifier now performs these distinct operations in order:
+
+1. Load the original synthetic source batch **without** late opportunity revisions.
+2. Run a baseline Snowflake/dbt full build and retain bounded opportunity-day evidence.
+3. Insert the actual late-event CSV into RAW, and validate generated source economics.
+4. Run dbt **incrementally** against the original build schema and confirm that a corrected opportunity changed.
+5. Run a separate corrected **full build in another schema**.
+6. Compare every model both ways with symmetric Snowflake `EXCEPT` over **complete rows grouped by their counts**. This detects missing, changed **and duplicated** rows, rather than relying on hashes, one-way set differences, or row counts alone.
+7. Only after these checks and existing source/metric assertions pass, update the versioned consumer publication and verify that restricted consumers cannot read RAW or mutate the published release.
+
+The verifier saves sanitized model-row counts, correction evidence, query IDs, and three measured dbt-build durations. These are acceptance measurements, **not** proof of cost or throughput until an actual run is recorded. Current adapter unit tests validate SQL construction without claiming cloud semantics. The actual `GROUP BY ALL` / `EXCEPT` statements and incremental pre-hook remain **unverified on Snowflake** until the first successful credentialed run.
+
+**Isolation and budget limits:** RAW and CONSUMER are fixed demo schemas; do not run multiple command-line or externally initiated verifications concurrently. The protected GitHub workflow serializes its own dispatches, but cannot lock out unrelated manual Snowflake sessions. Use only the dedicated synthetic database, start with `--profile fixture`, check the account's actual warehouse size/credit balance, and approve the enterprise run separately. The script does not configure a hard dollar budget, cloud resource monitor or automated teardown. Suspend the demo warehouse when finished and remove isolated build schemas only after reviewing evidence. None of these steps is a basis for an automatic spending authorization.
 
 Successful dbt tests and profile validation precede publication: enterprise scale/economic invariants by default, or hand-authored exact outputs with `--profile fixture`. The consumer payload is replaced in a transaction so all six metrics and their definitions share one version. Historical payloads remain in RELEASE_HISTORY. The read-only view is checked against dbt output. It records sanitized query IDs and permission outcomes in `.local/snowflake/verification.json`, and exports the same validated publication for Streamlit/analyst use.
 
@@ -33,7 +49,7 @@ The supplied warehouse starts at XSMALL with auto-suspend; actual charges depend
 
 ## CI
 
-The manually triggered Snowflake workflow uses a `snowflake-demo` environment and secrets. It never runs on ordinary pull requests. Configure the environment and credentials before dispatch. The local Windows/Linux workflow needs no cloud credentials. Neither workflow is claimed as hosted-successful before GitHub actually runs it.
+The manually triggered Snowflake workflow uses a `snowflake-demo` environment and secrets, requests fixture or enterprise explicitly (fixture by default), and serializes protected cloud runs. It never runs on ordinary pull requests. Configure the environment and credentials before dispatch. The local Windows/Linux workflow needs no cloud credentials. Neither workflow is claimed as hosted-successful before GitHub actually runs it.
 
 ## Generated sources
 
