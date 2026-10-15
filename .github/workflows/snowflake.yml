@@ -1,11 +1,26 @@
 name: Verify configured Snowflake account
 on:
   workflow_dispatch:
+    inputs:
+      profile:
+        description: "Bounded synthetic dataset to verify (start with fixture)"
+        type: choice
+        required: true
+        default: fixture
+        options:
+          - fixture
+          - enterprise
+# The verifier uses a dedicated database with shared RAW source tables.
+# Never overlap protected cloud-verification workflows.
+concurrency:
+  group: revenue-metrics-snowflake-demo
+  cancel-in-progress: false
 permissions:
   contents: read
 jobs:
   cloud:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     environment: snowflake-demo
     env:
       SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
@@ -26,7 +41,10 @@ jobs:
           umask 077
           printf '%s' "$PRIVATE_KEY" > "$RUNNER_TEMP/snowflake.p8"
           echo "SNOWFLAKE_PRIVATE_KEY_PATH=$RUNNER_TEMP/snowflake.p8" >> "$GITHUB_ENV"
-      - run: python scripts/verify_snowflake.py --require-cloud
+      - name: Verify isolated baseline, correction and exact full equivalence
+        env:
+          VERIFIED_PROFILE: ${{ inputs.profile }}
+        run: python scripts/verify_snowflake.py --require-cloud --profile "$VERIFIED_PROFILE"
       - uses: actions/upload-artifact@v4
         if: success()
         with:
