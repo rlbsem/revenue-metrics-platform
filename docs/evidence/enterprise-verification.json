@@ -4,7 +4,8 @@
   "duckdb_settings": {
     "dbt_threads": 1,
     "memory_limit": "2GB",
-    "threads": 2
+    "scope": "configured dbt profile settings",
+    "threads": 1
   },
   "incremental_full_model_signatures_equal": true,
   "logical_cpus": 32,
@@ -21,13 +22,13 @@
   "stress": "configured; not executed, no measured performance claim",
   "timing_caveat": "Single local execution on a shared Windows workstation; not a controlled benchmark or production capacity claim. Incremental command rebuilds all non-incremental models.",
   "timings_seconds": {
-    "bounded_snapshot_and_source_hashes": 7.704,
-    "bulk_load": 3.153,
-    "corrected_full_refresh_dbt_build": 16.717,
-    "corrected_incremental_dbt_build": 11.83,
-    "dbt_docs": 2.582,
-    "initial_dbt_build": 15.885,
-    "repeat_source_generation": 4.087,
-    "source_generation": 4.001
+    "bounded_snapshot_and_source_hashes": 7.136,
+    "bulk_load": 3.041,
+    "corrected_full_refresh_dbt_build": 23.574,
+    "corrected_incremental_dbt_build": 15.859,
+    "dbt_docs": 5.048,
+    "initial_dbt_build": 23.779,
+    "repeat_source_generation": 4.013,
+    "source_generation": 3.932
   }
 }

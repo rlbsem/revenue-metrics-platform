@@ -12,9 +12,16 @@ jobs:
         include:
           - os: ubuntu-latest
             venv_python: .venv/bin/python
+            duckdb_threads: 1
           - os: windows-latest
             venv_python: .venv/Scripts/python.exe
+            duckdb_threads: 1
     runs-on: ${{ matrix.os }}
+    env:
+      # Bound local engine parallelism after Windows/Linux native subprocess crashes.
+      # The fixture, model SQL, enterprise scale and equivalence checks are unchanged.
+      RMP_DUCKDB_THREADS: ${{ matrix.duckdb_threads }}
+      PYTHONFAULTHANDLER: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -36,3 +43,11 @@ jobs:
         with:
           name: commercial-evidence-${{ matrix.os }}
           path: docs/evidence/
+      - name: Retain local enterprise failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-dbt-diagnostics-${{ matrix.os }}
+          # This workflow runs only DuckDB with synthetic data, never cloud credentials.
+          # Do not add this diagnostic path to the separate Snowflake workflow.
+          path: .local/enterprise-verification/**/dbt-build.log

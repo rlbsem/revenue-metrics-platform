@@ -1,0 +1,17 @@
+{
+  "all_region_cards": [
+    "$4,000",
+    "$18,000",
+    "$16,000",
+    "$11,000",
+    "$18,000",
+    "20.0%"
+  ],
+  "csv_metric_parity": true,
+  "east_cohort": "Not mature",
+  "east_pipeline": "$4,000",
+  "release_id": "2f2bde9afbbce22598843a0600ccc9b54d5920e819b2c7e19357f270fe7b564f",
+  "scope": "Offline CSV and Streamlit AppTest of the native publication; no new warehouse execution",
+  "source": "Actual validated Snowflake fixture publication",
+  "status": "passed"
+}

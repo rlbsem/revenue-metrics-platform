@@ -1,0 +1,30 @@
+{
+  "acceptance_finished_at": "2026-10-15T01:58:57.397575+00:00",
+  "acceptance_started_at": "2026-10-15T01:56:01.995775+00:00",
+  "observed_at": "2026-10-15T01:59:31.505445+00:00",
+  "primary_reference": "https://docs.snowflake.com/en/sql-reference/functions/warehouse_metering_history",
+  "profile": "fixture",
+  "query_id": "01c7bc97-0209-01fa-0011-d6b6000225de",
+  "query_measurements": {
+    "completed_query_bytes_scanned": 749056,
+    "completed_rows_with_valid_elapsed": 460,
+    "credits_caveat": "Query cloud-service attribution is not warehouse compute credits or final adjusted billing. Parallel query milliseconds are not wall-clock time or billed credits.",
+    "execution_status_counts": {
+      "FAILED_WITH_ERROR": 4,
+      "RUNNING": 1,
+      "SUCCESS": 456
+    },
+    "incomplete_rows_excluded_from_aggregates": 1,
+    "reported_completed_query_cloud_services_credits": "0.011628000",
+    "snapshot_caveat": "The history-collection query itself was RUNNING with a negative server-reported elapsed field in this point-in-time snapshot; retained as observed and excluded from aggregates.",
+    "snapshot_rows": 461,
+    "spill": "Not exposed by the executed INFORMATION_SCHEMA table function; not measured",
+    "total_completed_query_elapsed_milliseconds": 84744
+  },
+  "reason": "WAREHOUSE_METERING_HISTORY returns results only for ACCOUNTADMIN or a role with global MONITOR USAGE. The intentionally restricted runtime role has neither; its successful query returned no rows. Empty output is not zero consumption.",
+  "rows": [],
+  "scope": "Actual dedicated warehouse hourly metering; includes other activity in overlapping hour buckets",
+  "status": "unavailable_to_restricted_runtime_role",
+  "warehouse_final_state": "SUSPENDED",
+  "warehouse_state_query_id": "01c7bc97-0209-00a8-0011-d6b6000234f6"
+}

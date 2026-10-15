@@ -1,0 +1,384 @@
+{
+  "errors": 0,
+  "failures": 0,
+  "financial_model_diff": [],
+  "native_snowflake_acceptance": "verified_fixture; enterprise cloud unexecuted",
+  "scope": "Executed local review, not Snowflake execution",
+  "seconds": 110.708,
+  "skipped": 0,
+  "source_sha256": {
+    "dbt/profiles.yml": "5210c5d89a41030bfa0513b420034fe6f7f81f0c9919ba30143ae3e6fd2a2d9d",
+    "requirements.lock": "d10209a92df748f1b86649a241bf37583169b8dd69624c8829b237c743ac45e2",
+    "scripts/export_snowflake_evidence.py": "ac3c9b29be6653cbf2c79c67f8eb5ce55c31ca3f8c2e3ab625b85be4809e98fd",
+    "scripts/prepare_snowflake_access.py": "2f96bda2743d33621c5cac824c3b7b18a82f349ffecedaf27a8c2a02765b5a71",
+    "scripts/verify.py": "08883b39a1b669ca690e4fab593fcbefbbbd61424208db5b72a713577475bdd2",
+    "scripts/verify_snowflake.py": "46ac5c7bd30ae89a89903f0d19dfb02c06d95304ecd159282acdeb112707986d",
+    "snowflake/bootstrap.sql": "600a7b0d03197504e1a8975d451ffe57e36d2dd6c9e39cb0d69f50303c7b145c",
+    "src/revenue_platform/__init__.py": "b42f405c65b73ae705971955a29b36095e296eabf6e2def1afccc032041b6226",
+    "src/revenue_platform/cli.py": "229a471331111351f3f35f14cd22a93994595f15c80bc0995f7d2cd105f47ba9",
+    "src/revenue_platform/consumer.py": "eb76bf8f460a7fa02606f1d58dff53c78bd2f3e2cc2d91b579483706696caf88",
+    "src/revenue_platform/generator.py": "bb63852871fab694a818765e6782985e3a33596104d0332408a1b24807023e57",
+    "src/revenue_platform/runtime.py": "6584059a6ee4462bcae361417a51d9138e269072b2d10a38ba222a3111a53197",
+    "src/revenue_platform/scenario_checks.py": "1c60911ae62f3c12f80bfab136bc0541e002b2aa6e4d752e88a9d5568be749b0",
+    "src/revenue_platform/snowflake_acceptance.py": "43bca6f206117ea4c0ba278590746986116e8e3b88915e19d5f0c98f4b4027ce",
+    "src/revenue_platform/snowflake_controls.py": "55bb51168055568d1d12fae87aa2d582acdb68a7b02d962cee0390e6b1406be4"
+  },
+  "test_results": [
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_independent_quarter_and_account_bridge"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_fanout_is_detected_by_dbt"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_historical_owner_boundary_and_current_owner_difference"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_booking_amendment_and_partial_credit_remain_separate"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_ratio_uses_counts_not_average_rates"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_immature_cohort_is_not_a_loss"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_pipeline_is_not_additive_over_time"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_arr_eligibility_and_end_exclusive"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_invalid_inputs_are_rejected[delete from raw.coverage where source_name='invoice_lines'-assert_source_coverage]"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_invalid_inputs_are_rejected[update raw.coverage set complete_through='2026-03-15' where source_name='opportunity_events'-assert_source_coverage]"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_invalid_inputs_are_rejected[update analytics.fct_booking_events set account_id='UNKNOWN' where booking_event_id='B1'-assert_account_references]"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_invalid_inputs_are_rejected[update analytics.dim_account set valid_to='2026-03-01' where account_version_id='A1_1'-assert_scd_intervals]"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_invalid_inputs_are_rejected[update analytics.stg_subscriptions set billing_months=0 where contract_id='S1'-assert_contract_validity]"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_invalid_inputs_are_rejected[update analytics.fct_payment_allocations set invoice_id='UNKNOWN' where allocation_id='P1'-assert_payment_invoice_reference]"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_backdated_correction_incremental_full_equivalence"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_forward_date_correction_removes_obsolete_snapshot_keys"
+    },
+    {
+      "class": "tests.test_commercial_models",
+      "status": "passed",
+      "test": "test_metric_catalog_contains_full_contracts"
+    },
+    {
+      "class": "tests.test_consumers_and_release",
+      "status": "passed",
+      "test": "test_consumer_parity_and_streamlit"
+    },
+    {
+      "class": "tests.test_consumers_and_release",
+      "status": "passed",
+      "test": "test_stale_consumer_and_tampered_payload_rejected"
+    },
+    {
+      "class": "tests.test_consumers_and_release",
+      "status": "passed",
+      "test": "test_metric_definition_change_is_new_release"
+    },
+    {
+      "class": "tests.test_consumers_and_release",
+      "status": "passed",
+      "test": "test_failed_build_or_quality_gate_preserves_release[delete from raw.coverage where source_name='booking_events']"
+    },
+    {
+      "class": "tests.test_consumers_and_release",
+      "status": "passed",
+      "test": "test_failed_build_or_quality_gate_preserves_release[drop table raw.invoice_lines]"
+    },
+    {
+      "class": "tests.test_consumers_and_release",
+      "status": "passed",
+      "test": "test_unknown_region_and_path_traversal_refused"
+    },
+    {
+      "class": "tests.test_generation",
+      "status": "passed",
+      "test": "test_same_seed_is_byte_identical_and_other_seed_changes_sources"
+    },
+    {
+      "class": "tests.test_generation",
+      "status": "passed",
+      "test": "test_profile_configuration_and_manifest"
+    },
+    {
+      "class": "tests.test_generation",
+      "status": "passed",
+      "test": "test_source_economics_and_descriptive_references"
+    },
+    {
+      "class": "tests.test_generation",
+      "status": "passed",
+      "test": "test_generated_sources_execute_dbt_and_correction_is_not_a_noop"
+    },
+    {
+      "class": "tests.test_generation",
+      "status": "passed",
+      "test": "test_financial_relationship_failures_rejected[update analytics.fct_invoice_lines set contract_id='UNKNOWN' where line_id='L1'-assert_contract_references]"
+    },
+    {
+      "class": "tests.test_generation",
+      "status": "passed",
+      "test": "test_financial_relationship_failures_rejected[update analytics.fct_payment_allocations set amount_cents=99999999 where allocation_id='P1'-assert_invoice_settlement]"
+    },
+    {
+      "class": "tests.test_generation",
+      "status": "passed",
+      "test": "test_bookings_cannot_use_lost_opportunities"
+    },
+    {
+      "class": "tests.test_snowflake_acceptance",
+      "status": "passed",
+      "test": "test_multiset_difference_preserves_duplicate_frequency_and_null_rows"
+    },
+    {
+      "class": "tests.test_snowflake_acceptance",
+      "status": "passed",
+      "test": "test_exact_multiset_comparison_records_both_directions_and_query_ids"
+    },
+    {
+      "class": "tests.test_snowflake_acceptance",
+      "status": "passed",
+      "test": "test_differences_abort_before_any_publication[values0]"
+    },
+    {
+      "class": "tests.test_snowflake_acceptance",
+      "status": "passed",
+      "test": "test_differences_abort_before_any_publication[values1]"
+    },
+    {
+      "class": "tests.test_snowflake_acceptance",
+      "status": "passed",
+      "test": "test_differences_abort_before_any_publication[values2]"
+    },
+    {
+      "class": "tests.test_snowflake_acceptance",
+      "status": "passed",
+      "test": "test_untrusted_sql_identifiers_rejected[x;drop table raw]"
+    },
+    {
+      "class": "tests.test_snowflake_acceptance",
+      "status": "passed",
+      "test": "test_untrusted_sql_identifiers_rejected[x.y]"
+    },
+    {
+      "class": "tests.test_snowflake_acceptance",
+      "status": "passed",
+      "test": "test_untrusted_sql_identifiers_rejected[]"
+    },
+    {
+      "class": "tests.test_snowflake_acceptance",
+      "status": "passed",
+      "test": "test_untrusted_sql_identifiers_rejected[x--comment]"
+    },
+    {
+      "class": "tests.test_snowflake_acceptance",
+      "status": "passed",
+      "test": "test_equal_row_counts_do_not_hide_changed_column_contract"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_real_correction_csv_uses_nine_declared_columns"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_consumer_requires_independent_identity_and_key[user]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_consumer_requires_independent_identity_and_key[public_key]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_consumer_requires_independent_identity_and_key[neither]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_source_contract_rejected_before_insert[wrong\\n1\\n]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_source_contract_rejected_before_insert[a,b\\n1\\n]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_duplicate_aware_sql_executes_with_null_and_multiplicity"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_publication_rollback_precedes_any_commit"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_database_error_rolls_back_and_never_commits"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_gate_rolls_back_after_failure_and_refuses_invalid_cardinality"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_only_authorization_denials_are_permission_evidence[2003-42S02-True]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_only_authorization_denials_are_permission_evidence[3001-42501-True]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_only_authorization_denials_are_permission_evidence[1003-42000-False]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_only_authorization_denials_are_permission_evidence[250001-08001-False]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_consumer_values_compare_decimals_without_hiding_duplicates"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_unexpected_consumer_write_permission_cannot_commit_probe"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_warehouse_preflight_refuses_cost_expansion[change0]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_warehouse_preflight_refuses_cost_expansion[change1]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_warehouse_preflight_refuses_cost_expansion[change2]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_warehouse_preflight_refuses_cost_expansion[change3]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_warehouse_preflight_refuses_cost_expansion[change4]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_owner_confirmation_does_not_invent_live_monitor_visibility[None]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_owner_confirmation_does_not_invent_live_monitor_visibility[null]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_owner_confirmation_does_not_invent_live_monitor_visibility[OTHER_MONITOR]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_owner_fixture_confirmation_cannot_authorize_enterprise"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_missing_credentials_never_calls_cloud_and_clears_stale_success"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_preflight_failure_replaces_old_success_without_cloud[approval]"
+    },
+    {
+      "class": "tests.test_snowflake_controls",
+      "status": "passed",
+      "test": "test_preflight_failure_replaces_old_success_without_cloud[credentials]"
+    },
+    {
+      "class": "tests.test_snowflake_setup",
+      "status": "passed",
+      "test": "test_conflicts_stop_inside_one_block_before_any_creation"
+    },
+    {
+      "class": "tests.test_snowflake_setup",
+      "status": "passed",
+      "test": "test_bounded_settings_checked_before_compute_and_minimal_warehouse_grants"
+    },
+    {
+      "class": "tests.test_snowflake_setup",
+      "status": "passed",
+      "test": "test_refresh_preserves_existing_config_and_keys"
+    }
+  ],
+  "tests": 71
+}

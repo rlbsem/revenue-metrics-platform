@@ -7,7 +7,7 @@ revenue_metrics:
       schema: analytics
       threads: 1
       settings:
-        threads: 2
+        threads: "{{ env_var('RMP_DUCKDB_THREADS', '2') | int }}"
         memory_limit: 2GB
         preserve_insertion_order: false
     snowflake:
@@ -22,4 +22,4 @@ revenue_metrics:
       schema: "{{ env_var('REVENUE_BUILD_SCHEMA', 'BUILD_DEMO') }}"
       threads: 2
       client_session_keep_alive: false
-      query_tag: revenue_metrics_platform
+      query_tag: "{{ env_var('RMP_QUERY_TAG', 'revenue_metrics_platform') }}"

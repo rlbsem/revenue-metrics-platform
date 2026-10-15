@@ -1,0 +1,272 @@
+[
+  {
+    "node": "model.revenue_metrics.dim_account",
+    "query_id": "01c7bc94-0209-01fa-0011-d6b60002241a",
+    "seconds": 3.668869733810425,
+    "status": "success"
+  },
+  {
+    "node": "model.revenue_metrics.dim_date",
+    "query_id": "01c7bc94-0208-fe97-0011-d6b60001f63a",
+    "seconds": 3.7138915061950684,
+    "status": "success"
+  },
+  {
+    "node": "model.revenue_metrics.fct_booking_events",
+    "query_id": "01c7bc94-0208-fe97-0011-d6b60001f642",
+    "seconds": 1.2186245918273926,
+    "status": "success"
+  },
+  {
+    "node": "model.revenue_metrics.fct_invoice_lines",
+    "query_id": "01c7bc94-0208-fe97-0011-d6b60001f646",
+    "seconds": 1.1856000423431396,
+    "status": "success"
+  },
+  {
+    "node": "model.revenue_metrics.stg_subscriptions",
+    "query_id": "01c7bc94-0209-01fa-0011-d6b600022432",
+    "seconds": 0.5098421573638916,
+    "status": "success"
+  },
+  {
+    "node": "test.revenue_metrics.assert_raw_revision_unique",
+    "query_id": "01c7bc94-0209-00a8-0011-d6b600023336",
+    "seconds": 0.18073463439941406,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.assert_source_coverage",
+    "query_id": "01c7bc94-0208-fe97-0011-d6b60001f652",
+    "seconds": 0.1600639820098877,
+    "status": "pass"
+  },
+  {
+    "node": "model.revenue_metrics.fct_payment_allocations",
+    "query_id": "01c7bc94-0209-00a8-0011-d6b60002332e",
+    "seconds": 1.1076700687408447,
+    "status": "success"
+  },
+  {
+    "node": "test.revenue_metrics.assert_scd_intervals",
+    "query_id": "01c7bc94-0208-fe97-0011-d6b60001f656",
+    "seconds": 0.2820549011230469,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.not_null_dim_account_account_version_id.956f97e023",
+    "query_id": "01c7bc94-0208-fe97-0011-d6b60001f65a",
+    "seconds": 0.1200408935546875,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.unique_dim_account_account_version_id.081635f4f9",
+    "query_id": "01c7bc94-0209-01fa-0011-d6b60002243a",
+    "seconds": 0.18023920059204102,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.not_null_dim_date_date_day.e3f312efb2",
+    "query_id": "01c7bc94-0208-fe97-0011-d6b60001f65e",
+    "seconds": 0.18924522399902344,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.unique_dim_date_date_day.d56fd19199",
+    "query_id": "01c7bc94-0209-00a8-0011-d6b60002333e",
+    "seconds": 0.1942296028137207,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.not_null_fct_booking_events_booking_event_id.bb5998017c",
+    "query_id": "01c7bc94-0209-01fa-0011-d6b60002243e",
+    "seconds": 0.1947181224822998,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.unique_fct_booking_events_booking_event_id.33c401e9c1",
+    "query_id": "01c7bc94-0209-01fa-0011-d6b600022442",
+    "seconds": 0.11450958251953125,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.not_null_fct_invoice_lines_line_id.6f58cdee9b",
+    "query_id": "01c7bc94-0209-01fa-0011-d6b600022446",
+    "seconds": 0.17563080787658691,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.unique_fct_invoice_lines_line_id.56e7ba6f2a",
+    "query_id": "01c7bc94-0209-00a8-0011-d6b600023342",
+    "seconds": 0.21423554420471191,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.assert_contract_validity",
+    "query_id": "01c7bc94-0208-fe97-0011-d6b60001f662",
+    "seconds": 0.1522507667541504,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.not_null_stg_subscriptions_contract_id.2c9d4c503f",
+    "query_id": "01c7bc94-0208-fe97-0011-d6b60001f666",
+    "seconds": 0.11224865913391113,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.assert_contract_references",
+    "query_id": "01c7bc94-0209-00a8-0011-d6b600023346",
+    "seconds": 0.3391125202178955,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.unique_stg_subscriptions_contract_id.5e620e2c61",
+    "query_id": "01c7bc95-0209-01fa-0011-d6b60002244a",
+    "seconds": 0.1530933380126953,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.assert_invoice_settlement",
+    "query_id": "01c7bc95-0209-00a8-0011-d6b60002334a",
+    "seconds": 0.2667560577392578,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.assert_payment_invoice_reference",
+    "query_id": "01c7bc95-0209-00a8-0011-d6b60002334e",
+    "seconds": 0.12395477294921875,
+    "status": "pass"
+  },
+  {
+    "node": "model.revenue_metrics.stg_opportunities",
+    "query_id": "01c7bc95-0209-01fa-0011-d6b60002244e",
+    "seconds": 0.5688083171844482,
+    "status": "success"
+  },
+  {
+    "node": "test.revenue_metrics.not_null_fct_payment_allocations_allocation_id.d3a9f1f778",
+    "query_id": "01c7bc95-0209-00a8-0011-d6b600023356",
+    "seconds": 0.09314703941345215,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.unique_fct_payment_allocations_allocation_id.902a1988a7",
+    "query_id": "01c7bc95-0208-fe97-0011-d6b60001f66e",
+    "seconds": 0.22235846519470215,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.assert_opportunity_contract",
+    "query_id": "01c7bc95-0208-fe97-0011-d6b60001f672",
+    "seconds": 0.23232054710388184,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.assert_required_fact_fields",
+    "query_id": "01c7bc95-0209-01fa-0011-d6b600022452",
+    "seconds": 0.3742072582244873,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.not_null_stg_opportunities_event_id.a1ef70569b",
+    "query_id": "01c7bc95-0208-fe97-0011-d6b60001f676",
+    "seconds": 0.11461949348449707,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.unique_stg_opportunities_event_id.2e2c7d09fe",
+    "query_id": "01c7bc95-0209-01fa-0011-d6b60002245a",
+    "seconds": 0.11586165428161621,
+    "status": "pass"
+  },
+  {
+    "node": "model.revenue_metrics.fct_subscription_period",
+    "query_id": "01c7bc95-0209-00a8-0011-d6b60002335a",
+    "seconds": 1.247931957244873,
+    "status": "success"
+  },
+  {
+    "node": "model.revenue_metrics.mart_flows",
+    "query_id": "01c7bc95-0209-00a8-0011-d6b60002335e",
+    "seconds": 1.0554299354553223,
+    "status": "success"
+  },
+  {
+    "node": "model.revenue_metrics.mart_cohorts",
+    "query_id": "01c7bc95-0209-00a8-0011-d6b600023366",
+    "seconds": 1.0124614238739014,
+    "status": "success"
+  },
+  {
+    "node": "test.revenue_metrics.not_null_fct_subscription_period_contract_period_key.0c9046cc23",
+    "query_id": "01c7bc95-0209-01fa-0011-d6b600022466",
+    "seconds": 0.1869044303894043,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.unique_fct_subscription_period_contract_period_key.aa9e8aefeb",
+    "query_id": "01c7bc95-0209-00a8-0011-d6b600023372",
+    "seconds": 0.19238853454589844,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.assert_flow_conservation",
+    "query_id": "01c7bc95-0209-00a8-0011-d6b600023376",
+    "seconds": 0.2841064929962158,
+    "status": "pass"
+  },
+  {
+    "node": "model.revenue_metrics.mart_arr",
+    "query_id": "01c7bc95-0208-fe97-0011-d6b60001f696",
+    "seconds": 0.9835667610168457,
+    "status": "success"
+  },
+  {
+    "node": "model.revenue_metrics.fct_opportunity_daily",
+    "query_id": "01c7bc95-0209-01fa-0011-d6b60002246a",
+    "seconds": 3.7462105751037598,
+    "status": "success"
+  },
+  {
+    "node": "test.revenue_metrics.assert_account_references",
+    "query_id": "01c7bc95-0208-fe97-0011-d6b60001f6a6",
+    "seconds": 0.530902624130249,
+    "status": "pass"
+  },
+  {
+    "node": "test.revenue_metrics.not_null_fct_opportunity_daily_opportunity_day_key.d488988ebf",
+    "query_id": "01c7bc95-0209-01fa-0011-d6b600022472",
+    "seconds": 0.15998458862304688,
+    "status": "pass"
+  },
+  {
+    "node": "model.revenue_metrics.mart_discrepancy_bridge",
+    "query_id": "01c7bc95-0208-fe97-0011-d6b60001f6a2",
+    "seconds": 1.0070550441741943,
+    "status": "success"
+  },
+  {
+    "node": "test.revenue_metrics.unique_fct_opportunity_daily_opportunity_day_key.fba23a1aed",
+    "query_id": "01c7bc95-0209-01fa-0011-d6b60002247a",
+    "seconds": 0.11443734169006348,
+    "status": "pass"
+  },
+  {
+    "node": "model.revenue_metrics.mart_pipeline",
+    "query_id": "01c7bc95-0209-00a8-0011-d6b600023386",
+    "seconds": 0.9557273387908936,
+    "status": "success"
+  },
+  {
+    "node": "model.revenue_metrics.mart_metric_values",
+    "query_id": "01c7bc95-0209-00a8-0011-d6b60002338a",
+    "seconds": 1.4558978080749512,
+    "status": "success"
+  },
+  {
+    "node": "test.revenue_metrics.assert_metric_shape",
+    "query_id": "01c7bc95-0208-fe97-0011-d6b60001f6aa",
+    "seconds": 0.24611759185791016,
+    "status": "pass"
+  }
+]

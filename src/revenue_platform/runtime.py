@@ -154,7 +154,7 @@ def run_dbt(
     log.write_text(completed.stdout + completed.stderr, encoding="utf-8")
     if completed.returncode:
         # Detailed logs are local; never print a cloud connection exception with account details.
-        raise RuntimeError(f"dbt failed; inspect {log}")
+        raise RuntimeError(f"dbt failed (exit code {completed.returncode}); inspect {log}")
     return workspace / "dbt-target"
 
 

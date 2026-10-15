@@ -1,10 +1,12 @@
 """Complete fixture and enterprise verification, with separate evidence layers."""
 
+import hashlib
 import json
 import re
 import shutil
 
-from revenue_platform.runtime import ROOT, canonical
+from revenue_platform.consumer import review
+from revenue_platform.runtime import ROOT, MODELS, assert_expected, canonical, source_fingerprint
 from verify_fixture import main as verify_fixture
 from verify_enterprise import verify as verify_enterprise
 
@@ -23,6 +25,35 @@ def check_links():
     assert not broken, broken
 
 
+def recorded_snowflake_fixture():
+    """Validate archived native evidence offline; never imply CI executed Snowflake."""
+    folder = ROOT / "docs/evidence/snowflake/fixture"
+    path = folder / "verification.json"
+    if not path.exists():
+        return {"status": "not_recorded"}
+    record = json.loads(path.read_text())
+    assert record["status"] == "passed" and record["executed_cloud"] is True
+    assert record["acceptance_passed"] is True and record["profile"] == "fixture"
+    assert record["warehouse_final_state"] == "SUSPENDED"
+    for name, expected in record["implementation_sha256"].items():
+        assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == expected, name
+    assert {r["model"] for r in record["model_comparison"]} == set(MODELS)
+    assert all(
+        r["exact_multiset_equal"] and r["column_contract_equal"] for r in record["model_comparison"]
+    )
+    payload = review(folder / "published", record["release_id"])
+    assert payload["target"] == "snowflake" and payload["model_fingerprint"] == source_fingerprint()
+    assert_expected(payload)
+    return {
+        "status": "passed",
+        "scope": "Offline validation of recorded native execution, not a new cloud run",
+        "evidence": "snowflake/fixture/verification.json",
+        "finished_at": record["finished_at"],
+        "implementation_hashes_match": True,
+        "model_fingerprint_matches": True,
+    }
+
+
 def main():
     evidence = ROOT / "docs/evidence"
     (evidence / "verification.json").write_text(
@@ -39,6 +70,7 @@ def main():
         "enterprise": enterprise,
         "markdown_links": "passed",
         "snowflake": json.loads((evidence / "snowflake-status.json").read_text())["status"],
+        "recorded_snowflake_fixture": recorded_snowflake_fixture(),
         "github_actions": "configured; not executed in GitHub during this local verification",
     }
     (evidence / "verification.json").write_text(canonical(result), encoding="utf-8")

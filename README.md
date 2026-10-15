@@ -4,7 +4,7 @@
 
 This governed commercial analytics platform explains the differences through dimensional models, six shared metrics and two consumer paths. Its default demonstration is a deterministic synthetic B2B SaaS enterprise with approximately **$755M period-end ARR**. A separate hand-authored fixture supplies exact, independently checkable edge cases.
 
-**All businesses, records and outcomes are synthetic.** The local DuckDB/dbt pipeline and Streamlit consumer execute. **Snowflake cloud execution is pending credentials:** the adapter, raw loader, role/grant SQL, isolated build schemas, consumer view and verification command are implemented, but local tests do not prove cloud behavior.
+**All businesses, records and outcomes are synthetic.** The local DuckDB/dbt pipeline and Streamlit consumer execute. **Native Snowflake fixture acceptance passed:** three real dbt-snowflake builds (baseline, corrected incremental and independent full refresh) each passed 15 models and 30 data tests, with exact model parity, restricted-consumer checks and publication safety verified. The [executed Snowflake fixture evidence](docs/evidence/snowflake/fixture/README.md) retains 461 genuine query IDs. The larger synthetic enterprise scenario remains **locally verified, not cloud-benchmarked**; final billed Snowflake credits were unavailable to the restricted runtime role.
 
 ![Actual enterprise commercial review: pipeline, bookings, invoices, cash, ARR and cohort win rate](docs/images/commercial-review.jpg)
 
@@ -131,13 +131,15 @@ Supply `--expected-release <identifier>` to reject a stale consumer request. Ent
 
 ## Configure Snowflake
 
-Follow [the Snowflake runbook](docs/snowflake.md), execute [bootstrap grants](snowflake/bootstrap.sql) as an appropriately privileged administrator, and set the variables documented in [.env.example](.env.example). Key files stay outside this repository.
+Follow [the Snowflake runbook and one-time owner handoff](docs/snowflake.md), review [bootstrap grants and the fixture resource guard](snowflake/bootstrap.sql), and configure the separate runner/reader identities documented in [.env.example](.env.example). Key files stay outside this repository.
 
 ```text
-python scripts/verify_snowflake.py --require-cloud
+python scripts/verify_snowflake.py --require-cloud --profile fixture
 ```
 
-With credentials this loads synthetic tables into the dedicated `REVENUE_METRICS_DEMO` database, runs dbt under `RMP_BUILD`, and exercises the `RMP_CONSUMER` role. **It replaces the demo RAW tables; never point this exercise at business data.** Without credentials it reports pending and exits nonzero when `--require-cloud` is used. [Current execution status](docs/evidence/snowflake-status.json).
+With credentials this loads synthetic tables into the dedicated `REVENUE_METRICS_DEMO` database, runs dbt under `RMP_BUILD`, and exercises the `RMP_CONSUMER` role. **It replaces the demo RAW tables; never point this exercise at business data.** Without credentials it reports pending and exits nonzero when `--require-cloud` is used.
+
+**[Native Snowflake fixture acceptance passed](docs/evidence/snowflake/fixture/README.md):** baseline, late-correction incremental and independent full-refresh builds each passed all 15 models and 30 dbt tests. All model multisets matched; consumer RBAC denials and publication safety checks executed successfully. Sanitized evidence retains 461 query IDs. This verifies the managed-warehouse fixture path; enterprise-scale Snowflake performance and final billed consumption are not claimed.
 
 ## Failures and tests
 
@@ -159,9 +161,10 @@ Tests cover fanout, SCD2 boundaries, amendments, credits, backdated corrections,
 - [Dataset manifest](docs/evidence/dataset-manifest.json), [scale summary](docs/evidence/scale-summary.json) and [measured local execution](docs/evidence/enterprise-verification.json)
 - [ARR definition-change impact](docs/evidence/fixture/definition-change.json)
 - [Executed dbt results](docs/evidence/dbt-results.json) and [lineage](docs/evidence/dbt-lineage.json)
-- [Local verification](docs/evidence/verification.json) and [Snowflake status](docs/evidence/snowflake-status.json)
+- [Local verification](docs/evidence/verification.json) and [credential-free Snowflake availability check](docs/evidence/snowflake-status.json)
+- [Executed native Snowflake fixture acceptance](docs/evidence/snowflake/fixture/README.md), [model comparisons](docs/evidence/snowflake/fixture/model-comparisons.json), [RBAC/publication results](docs/evidence/snowflake/fixture/verification.json) and [resource measurements](docs/evidence/snowflake/fixture/resource-consumption.json)
 
-[Hosted commercial analytics verification has passed on Windows and Ubuntu](https://github.com/rlbsem/revenue-metrics-platform/actions/runs/37162768203). Local verification and GitHub-hosted workflow results are separate evidence; Snowflake cloud execution remains pending credentials.
+[Hosted commercial analytics verification](https://github.com/rlbsem/revenue-metrics-platform/actions/workflows/verify.yml) runs on Windows and Ubuntu. It validates local behavior and the source binding of archived native evidence; it does not execute new Snowflake queries. The separately recorded cloud acceptance uses the exact fixture, while the approximately CAD754M ARR enterprise scenario remains locally verified.
 
 To create a clean upload ZIP after verification, run `python scripts/package.py`. The package manifest covers every delivered file except itself; the ZIP is reopened and every recorded hash is checked. Local databases, caches, virtual environments and credential files are excluded.
 

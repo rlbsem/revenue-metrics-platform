@@ -1,0 +1,46 @@
+{
+  "administrator_setup_repeated": false,
+  "attempts": [
+    {
+      "acceptance_completed": false,
+      "attempt": 1,
+      "issue": "Network-restricted runtime could not authenticate; OperationalError 250001",
+      "native_sql_established": false
+    },
+    {
+      "acceptance_completed": false,
+      "attempt": 2,
+      "issue": "Restricted-role SHOW metadata exposed no resource monitor, despite owner-confirmed administrator postflight",
+      "native_sql_established": true,
+      "resolution": "Explicit fixture-only owner confirmation is recorded separately from observed settings; no broader grants"
+    },
+    {
+      "acceptance_completed": false,
+      "attempt": 3,
+      "error_query_id": "01c7bc91-0209-00a8-0011-d6b60002327e",
+      "issue": "Query-history export requested a spill column not exposed by the live INFORMATION_SCHEMA table function",
+      "native_sql_established": true,
+      "resolution": "Use only exposed fields and label spill unmeasured; repeat native acceptance"
+    },
+    {
+      "acceptance_completed": true,
+      "attempt": 4,
+      "evidence": "verification.json",
+      "native_sql_established": true,
+      "query_ids": 461,
+      "query_tag": "rmp_acceptance_ba81d3885a35409d9ac262c4e3b5f55f"
+    }
+  ],
+  "broader_limitations": [
+    "Enterprise/stress cloud execution not performed",
+    "Billing unavailable to restricted role",
+    "Native contention and process-death experiments not performed"
+  ],
+  "credentials_rotated": false,
+  "new_warehouse_or_database_provisioned": false,
+  "oauth_changed": false,
+  "owner_setup": "Owner confirmed READY_FOR_FIXTURE before these attempts",
+  "runtime_created_build_schemas_and_synthetic_tables": true,
+  "scope": "Execution troubleshooting, not invented native results",
+  "warehouse_limits": "Existing standard XSMALL, 60-second auto-suspend, existing owner-confirmed one-credit fixture monitor; no quota or size increase"
+}
