@@ -26,9 +26,9 @@ This is a small release boundary supporting commercial consumption. It is not a 
 
 ## Warehouse boundary
 
-DuckDB runs the local model graph. Snowflake uses the same SQL with a small adapter-specific date-add macro. Its verifier prepares baseline, native incremental repair and an independent full-build schema, comparing all 15 complete-row multisets before promotion. A stable consumer view exposes the transactionally published payload. The reader requires a separate user/key with no stronger role grants; negative probes cover raw reads, release writes and role switching. Publication fault probes and a dedicated gate transaction are implemented but native behavior remains subject to the pending credentialed acceptance run. [Execution and approval boundaries](snowflake.md).
+DuckDB runs the local model graph. Snowflake uses the same SQL with a small adapter-specific date-add macro. Its verifier prepares baseline, native incremental repair and an independent full-build schema, comparing all 15 complete-row multisets before promotion. A stable consumer view exposes the transactionally published payload. The reader requires a separate user/key with no stronger role grants; negative probes cover raw reads, release writes and role switching. Publication fault probes and the source-coverage quality gate were executed against the native Snowflake fixture: rollback, preservation of the previous release after a failed gate, restored coverage and idempotent promotion passed. [Executed fixture evidence](evidence/snowflake/fixture/README.md) and [execution and approval boundaries](snowflake.md).
 
-Snowflake execution, RBAC enforcement, query behavior and performance remain pending until the configured verifier succeeds. The code is not presented as a measured cloud deployment.
+Native fixture execution, model equivalence and restricted-consumer RBAC checks were verified on October 14, 2026. The larger synthetic enterprise and stress workloads have **not** been cloud-benchmarked, exact billed credits are unavailable, and no production-capacity claim is made.
 
 ## Enterprise execution without a new architecture
 

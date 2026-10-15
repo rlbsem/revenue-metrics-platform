@@ -219,7 +219,7 @@ even on failure. Keep secrets out of pull-request workflows and logs.
 Start with fixture. Enterprise dispatch additionally requires `enterprise_approved=true`
 after explicit owner approval. Cloud CI uploads only allowlisted sanitized JSON,
 including failure metadata. Hosted local CI success is not Snowflake execution.
-Keep the PR draft until native acceptance and final-head CI pass; merging remains
+Review native acceptance evidence and final-head CI before merging; merging remains
 an explicit owner decision. A fixture acceptance does not claim an enterprise benchmark.
 
 Primary references: [Python authentication](https://docs.snowflake.com/en/developer-guide/python-connector/python-connector-connect),

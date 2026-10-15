@@ -4,7 +4,7 @@
 
 This governed commercial analytics platform explains the differences through dimensional models, six shared metrics and two consumer paths. Its default demonstration is a deterministic synthetic B2B SaaS enterprise with approximately **$755M period-end ARR**. A separate hand-authored fixture supplies exact, independently checkable edge cases.
 
-**All businesses, records and outcomes are synthetic.** The local DuckDB/dbt pipeline and Streamlit consumer execute. **Snowflake cloud execution is pending credentials:** the adapter, raw loader, role/grant SQL, isolated build schemas, consumer view and verification command are implemented, but local tests do not prove cloud behavior.
+**All businesses, records and outcomes are synthetic.** The local DuckDB/dbt pipeline and Streamlit consumer execute. **Native Snowflake fixture acceptance passed:** three real dbt-snowflake builds (baseline, corrected incremental and independent full refresh) each passed 15 models and 30 data tests, with exact model parity, restricted-consumer checks and publication safety verified. The [executed Snowflake fixture evidence](docs/evidence/snowflake/fixture/README.md) retains 461 genuine query IDs. The larger synthetic enterprise scenario remains **locally verified, not cloud-benchmarked**; final billed Snowflake credits were unavailable to the restricted runtime role.
 
 ![Actual enterprise commercial review: pipeline, bookings, invoices, cash, ARR and cohort win rate](docs/images/commercial-review.jpg)
 
