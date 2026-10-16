@@ -22,6 +22,12 @@ The established enterprise Q1 review produces **$197.46M in net bookings, $189.4
 
 **Installed ARR ≠ quarterly bookings ≠ quarterly invoicing ≠ quarterly cash.** Customers acquired over 2020–2025 continue to contribute ARR. Only signed Q1 new business, renewals, expansions, upgrades, contractions and cancellations enter Q1 bookings. Billing continues for existing contracts; some collections settle opening invoices.
 
+## Engineering decisions behind the numbers
+
+- **I rejected the tempting all-in-one financial join.** In the exact synthetic fixture, an invoice/payment join fanout produces **23,000 instead of 16,000** for the affected comparison. I modeled invoices, signed bookings and payment allocations at their own grains, then reconciled independently aggregated results. ARR is a period-end balance, not another quarterly flow. [Failure-to-test map](docs/testing.md) · [Model contracts](docs/architecture.md).
+- **I treated backdated corrections as historical rebuilds.** A late CRM revision restates February 4 pipeline from **12,000 to 21,000** while leaving quarter-end pipeline unchanged. Incremental processing replaces the affected opportunity history, including obsolete day keys, rather than appending a correction on top of wrong history. The native Snowflake fixture compared all 15 corrected model rowsets with an independent full build. [Design rationale](docs/architecture.md) · [Native acceptance](docs/evidence/snowflake/fixture/README.md).
+- **I required proof before publishing a metric version.** A real failing source-coverage test and an injected publication failure both retained the previous validated release. Separate Snowflake consumer credentials could read the authorized metrics but not raw tables or publication controls. The three fixture builds passed 15 models and 30 tests each; the much larger synthetic enterprise workload remains **locally verified, not cloud-benchmarked**. [Publication and access evidence](docs/evidence/snowflake/fixture/README.md).
+
 | Generated enterprise profile | Actual value |
 |---|---:|
 | Customer accounts | 60,000 |
