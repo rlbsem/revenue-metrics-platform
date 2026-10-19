@@ -2,13 +2,13 @@
 
 **Marketing sees pipeline. Sales sees bookings. Finance sees invoices and cash. Why don't the numbers agree?**
 
-This governed commercial analytics platform explains the differences through dimensional models, six shared metrics and two consumer paths. Its default demonstration is a deterministic synthetic B2B SaaS enterprise with approximately **$755M period-end ARR**. A separate hand-authored fixture supplies exact, independently checkable edge cases.
+The platform reconciles pipeline, bookings, invoicing, cash and ARR through dimensional models and six governed metrics. Its synthetic B2B SaaS scenario has approximately **$755M in period-end ARR**. A smaller hand-authored fixture supplies exact edge cases for independent testing.
 
-**All businesses, records and outcomes are synthetic.** The local DuckDB/dbt pipeline and Streamlit consumer execute. **Native Snowflake fixture acceptance passed:** three real dbt-snowflake builds (baseline, corrected incremental and independent full refresh) each passed 15 models and 30 data tests, with exact model parity, restricted-consumer checks and publication safety verified. The [executed Snowflake fixture evidence](docs/evidence/snowflake/fixture/README.md) retains 461 genuine query IDs. The larger synthetic enterprise scenario remains **locally verified, not cloud-benchmarked**; final billed Snowflake credits were unavailable to the restricted runtime role.
+Local DuckDB/dbt builds and the Streamlit application run on synthetic data. **Native Snowflake acceptance** passed three fixture builds, each with 15 models and 30 tests, including incremental/full-refresh parity, restricted reads and safe publication. The [Snowflake evidence](docs/evidence/snowflake/fixture/README.md) contains 461 query IDs. The larger enterprise scenario was measured locally; cloud-scale benchmarks and final billed credits were not available.
 
 ![Actual enterprise commercial review: pipeline, bookings, invoices, cash, ARR and cohort win rate](docs/images/commercial-review.jpg)
 
-*Actual Streamlit application, executed against the synthetic enterprise sources. Installed ARR and quarterly flows answer different commercial questions.*
+*Streamlit review of the executed synthetic enterprise model. Installed ARR is a period-end measure; bookings, invoices and cash are period flows.*
 
 ## See the commercial review
 
@@ -16,7 +16,7 @@ Read the [generated review and account-level discrepancy bridge](docs/evidence/c
 
 ![Actual account discrepancy bridge with signed commitments, invoice flows and cash allocations](docs/images/account-discrepancy-bridge.jpg)
 
-*The account bridge explains differences in commitments, billing and collection timing. These quarterly flow differences are not an accounts-receivable balance. The generated profile shows the first 20 account IDs, not a representative sample.*
+*Account-level commitments, invoices and cash allocations, shown for the first 20 account IDs. The flow differences are not an accounts-receivable balance or a representative sample.*
 
 The established enterprise Q1 review produces **$197.46M in net bookings, $189.42M net invoiced and $174.61M allocated cash**. Period-end installed ARR is $754.39M; open pipeline is $222.34M. The mature 30-day current-quarter cohort win rate is 18.67%.
 
@@ -24,9 +24,9 @@ The established enterprise Q1 review produces **$197.46M in net bookings, $189.4
 
 ## Engineering decisions behind the numbers
 
-- **I rejected the tempting all-in-one financial join.** In the exact synthetic fixture, an invoice/payment join fanout produces **23,000 instead of 16,000** for the affected comparison. I modeled invoices, signed bookings and payment allocations at their own grains, then reconciled independently aggregated results. ARR is a period-end balance, not another quarterly flow. [Failure-to-test map](docs/testing.md) · [Model contracts](docs/architecture.md).
-- **I treated backdated corrections as historical rebuilds.** A late CRM revision restates February 4 pipeline from **12,000 to 21,000** while leaving quarter-end pipeline unchanged. Incremental processing replaces the affected opportunity history, including obsolete day keys, rather than appending a correction on top of wrong history. The native Snowflake fixture compared all 15 corrected model rowsets with an independent full build. [Design rationale](docs/architecture.md) · [Native acceptance](docs/evidence/snowflake/fixture/README.md).
-- **I required proof before publishing a metric version.** A real failing source-coverage test and an injected publication failure both retained the previous validated release. Separate Snowflake consumer credentials could read the authorized metrics but not raw tables or publication controls. The three fixture builds passed 15 models and 30 tests each; the much larger synthetic enterprise workload remains **locally verified, not cloud-benchmarked**. [Publication and access evidence](docs/evidence/snowflake/fixture/README.md).
+- **Separate financial grains prevent fanout.** In the exact fixture, joining invoice and payment lines produces **23,000 instead of 16,000**. Bookings, invoices and payment allocations are modeled and aggregated separately. ARR remains a period-end balance. [Tests](docs/testing.md) · [Model contracts](docs/architecture.md).
+- **Backdated corrections rebuild affected history.** A late CRM revision changes February 4 pipeline from **12,000 to 21,000**, with no quarter-end change. Incremental processing replaces the affected opportunity history and obsolete day keys. Native Snowflake tests compared all 15 corrected models with an independent full build. [Design](docs/architecture.md) · [Native acceptance](docs/evidence/snowflake/fixture/README.md).
+- **Metric publication requires passing validation.** Source-coverage and injected publication failures preserved the previous release. The restricted Snowflake consumer could read approved metrics, not raw source tables or publication controls. [Publication and access evidence](docs/evidence/snowflake/fixture/README.md).
 
 | Generated enterprise profile | Actual value |
 |---|---:|
@@ -176,6 +176,6 @@ To create a clean upload ZIP after verification, run `python scripts/package.py`
 
 ## Scope and limitations
 
-This is a bounded commercial-modeling example, not an accounting system, CDP, ingestion framework or production benchmark. No GAAP/IFRS compliance, causal attribution or live CRM connector is claimed. Single currency, one reporting quarter, fixed customer identities and explicit source coverage keep the focus on model grains and business semantics.
+This implementation focuses on commercial metric definitions, modeling grains, source history and publication controls. It uses one currency, one reporting quarter and fixed synthetic customer identities. It does not implement accounting compliance, causal attribution, a live CRM connector or production-scale benchmarking.
 
 The Streamlit app reads a validated release; it is not a live warehouse session. The Snowflake verifier separately exercises a real warehouse consumer when configured. Source coverage is supplied evidence, not an independent completeness guarantee. Local file integrity hashes detect changes but do not defend against a filesystem administrator. See [operating boundaries](docs/architecture.md).
