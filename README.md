@@ -22,6 +22,14 @@ The established enterprise Q1 review produces **$197.46M in net bookings, $189.4
 
 **Installed ARR ≠ quarterly bookings ≠ quarterly invoicing ≠ quarterly cash.** Customers acquired over 2020–2025 continue to contribute ARR. Only signed Q1 new business, renewals, expansions, upgrades, contractions and cancellations enter Q1 bookings. Billing continues for existing contracts; some collections settle opening invoices.
 
+## Revenue definitions in operating systems
+
+In Groundbreakers engagements, I reconciled CRM, operational and finance records, defined source authority and explained why sold, delivered, invoiced and collected values disagreed. The work required explicit identities, economic dates and variance categories. A reporting layer should explain those differences before anyone treats a dashboard total as a financial fact.
+
+This public implementation applies that discipline to a synthetic SaaS business. SQL/dbt models keep commitments, invoice lines, payment allocations and installed ARR at separate grains. Effective-dated account history and affected-opportunity rebuilds preserve changing ownership and backdated corrections. Independent reconciliation and publication gates keep failed candidates away from consumers. Native Snowflake fixture acceptance compared all 15 models with an independent full build and tested restricted access. The larger enterprise scenario executes locally. These patterns transfer to any organization connecting commercial commitments, delivery and finance without forcing different measures to agree.
+
+[Model decisions](docs/architecture.md) · [Snowflake acceptance](docs/evidence/snowflake/fixture/README.md)
+
 ## Engineering decisions behind the numbers
 
 - **Separate financial grains prevent fanout.** In the exact fixture, joining invoice and payment lines produces **23,000 instead of 16,000**. Bookings, invoices and payment allocations are modeled and aggregated separately. ARR remains a period-end balance. [Tests](docs/testing.md) · [Model contracts](docs/architecture.md).
