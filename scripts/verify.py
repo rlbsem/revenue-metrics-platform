@@ -42,15 +42,20 @@ def recorded_snowflake_fixture():
         r["exact_multiset_equal"] and r["column_contract_equal"] for r in record["model_comparison"]
     )
     payload = review(folder / "published", record["release_id"])
-    assert payload["target"] == "snowflake" and payload["model_fingerprint"] == source_fingerprint()
+    # This immutable native acceptance predates the USD metric-unit revision.
+    # Never relabel its original published rows or claim that the new SQL ran in Snowflake.
+    assert payload["target"] == "snowflake"
     assert_expected(payload)
+    if payload["model_fingerprint"] == source_fingerprint():
+        raise AssertionError("Historical Snowflake evidence unexpectedly matches changed USD SQL")
     return {
-        "status": "passed",
-        "scope": "Offline validation of recorded native execution, not a new cloud run",
+        "status": "historical_native_prior_unit",
+        "scope": "Prior model verified in Snowflake; current USD metrics verified locally only",
         "evidence": "snowflake/fixture/verification.json",
         "finished_at": record["finished_at"],
         "implementation_hashes_match": True,
-        "model_fingerprint_matches": True,
+        "model_fingerprint_matches_current_usd": False,
+        "usd_native_execution": False,
     }
 
 
