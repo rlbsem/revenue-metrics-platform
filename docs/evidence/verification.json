@@ -21,7 +21,7 @@
     "status": "passed",
     "streamlit": "six cards, regional ARR, segment and offering selection passed AppTest",
     "stress": "configured; not executed, no measured performance claim",
-    "timing_caveat": "Single local execution on a shared Windows workstation; not a controlled benchmark or production capacity claim. Incremental command rebuilds all non-incremental models.",
+    "timing_caveat": "Single measured execution on a shared runner; not a controlled benchmark or production capacity claim. Incremental command rebuilds all non-incremental models.",
     "timings_seconds": {
       "bounded_snapshot_and_source_hashes": 14.877,
       "bulk_load": 3.801,

@@ -6,17 +6,15 @@ The platform reconciles pipeline, bookings, invoicing, cash and ARR through dime
 
 Local DuckDB/dbt builds and the Streamlit application run on synthetic data. **Historical native Snowflake acceptance** passed three fixture builds, each with 15 models and 30 tests, including incremental/full-refresh parity, restricted reads and safe publication. The [Snowflake evidence](docs/evidence/snowflake/fixture/README.md) contains 461 query IDs. The larger enterprise scenario was measured locally; cloud-scale benchmarks and final billed credits were not available.
 
-![Actual enterprise commercial review: pipeline, bookings, invoices, cash, ARR and cohort win rate](docs/images/commercial-review.jpg)
+![Enterprise-wide synthetic USD quarterly bookings, invoice and cash variance bridge](docs/images/enterprise-flow-bridge.svg)
 
-*Streamlit review of the executed synthetic enterprise model. Installed ARR is a period-end measure; bookings, invoices and cash are period flows.*
+*Validated synthetic Q1 2026 USD enterprise flow comparison. Installed ARR is a period-end measure; bookings, invoices and cash are period flows.*
 
 ## See the commercial review
 
 Read the [generated review and account-level discrepancy bridge](docs/evidence/commercial-review.md), inspect the [analyst export](docs/evidence/analyst-export.csv), or run the business app below. Both consumers use the same validated rows from `mart_metric_values`; the app contains no separate metric formulas.
 
-![Enterprise-wide synthetic USD quarterly bookings, invoice and cash variance bridge](docs/images/enterprise-flow-bridge.svg)
-
-*Company-wide Q1 2026 synthetic USD flows. The two differences are time-period flow comparisons, not accounts-receivable balances. For detailed examples, the application selects material discrepancies across Enterprise, Mid-market and SMB accounts instead of the first 20 SMB IDs.*
+[View the regenerated account discrepancy bridge](docs/images/account-discrepancy-bridge.jpg) for 12 high-variance synthetic USD examples from Enterprise, Mid-market and SMB. The published release retains a deterministic 20-account sample and the complete bridge remains available in the local warehouse. These quarterly flow gaps are not accounts-receivable balances.
 
 The established enterprise Q1 review produces **$197.46M in net bookings, $189.42M net invoiced and $174.61M allocated cash**. Period-end installed ARR is $754.39M; open pipeline is $222.34M. The mature 30-day current-quarter cohort win rate is 18.67%.
 
