@@ -171,8 +171,28 @@ def local_snapshot(database):
             ),
             "bridge": records(
                 conn.execute(
-                    "select * from analytics.mart_discrepancy_bridge order by account_id"
-                    + (" limit 20" if generated else "")
+                    (
+                        """WITH candidate AS (
+                          SELECT b.*, a.segment,
+                            row_number() OVER (
+                              PARTITION BY a.segment
+                              ORDER BY abs(b.bookings_less_invoices) + abs(b.invoices_less_cash) DESC,
+                                       b.account_id
+                            ) AS rank_within_segment
+                          FROM analytics.mart_discrepancy_bridge b
+                          JOIN raw.account_attributes a USING (account_id)
+                        )
+                        SELECT * EXCLUDE (rank_within_segment)
+                        FROM candidate
+                        WHERE (segment = 'Enterprise' AND rank_within_segment <= 8)
+                           OR (segment = 'Mid-market' AND rank_within_segment <= 7)
+                           OR (segment = 'SMB' AND rank_within_segment <= 5)
+                        ORDER BY CASE segment WHEN 'Enterprise' THEN 0 WHEN 'Mid-market' THEN 1 ELSE 2 END,
+                                 abs(bookings_less_invoices) + abs(invoices_less_cash) DESC,
+                                 account_id"""
+                        if generated
+                        else "select * from analytics.mart_discrepancy_bridge order by account_id"
+                    )
                 )
             ),
             "cohorts": records(
@@ -218,7 +238,7 @@ def dataset_summary(conn, schema, manifest):
         "active_subscriptions": conn.execute(
             "select count(*) from raw.subscription_contracts where start_date<='2026-03-31' and end_date>'2026-03-31' and contract_type='recurring' and is_trial=0"
         ).fetchone()[0],
-        "bridge_scope": "First 20 account IDs; company-wide full bridge remains in warehouse",
+        "bridge_scope": "20 reproducible high-variance account examples: 8 Enterprise, 7 Mid-market and 5 SMB; all 60,000 account results remain in the local warehouse",
         "timeline": {
             "acquisition_years": records(
                 conn.execute(
