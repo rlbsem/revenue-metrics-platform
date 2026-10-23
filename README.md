@@ -2,7 +2,7 @@
 
 **Marketing sees pipeline. Sales sees bookings. Finance sees invoices and cash. Why don't the numbers agree?**
 
-The platform reconciles pipeline, bookings, invoicing, cash and ARR through dimensional models and six governed metrics. Its synthetic B2B SaaS scenario has approximately **$755M in period-end ARR**. A smaller hand-authored fixture supplies exact edge cases for independent testing.
+The platform reconciles pipeline, bookings, invoicing, cash and ARR through dimensional models and six governed metrics. Its synthetic B2B SaaS scenario has approximately **USD $755M in period-end ARR**. All financial amounts are fictional US dollars, not currency conversions. A smaller hand-authored fixture supplies exact edge cases for independent testing.
 
 Local DuckDB/dbt builds and the Streamlit application run on synthetic data. **Native Snowflake acceptance** passed three fixture builds, each with 15 models and 30 tests, including incremental/full-refresh parity, restricted reads and safe publication. The [Snowflake evidence](docs/evidence/snowflake/fixture/README.md) contains 461 query IDs. The larger enterprise scenario was measured locally; cloud-scale benchmarks and final billed credits were not available.
 
@@ -14,9 +14,9 @@ Local DuckDB/dbt builds and the Streamlit application run on synthetic data. **N
 
 Read the [generated review and account-level discrepancy bridge](docs/evidence/commercial-review.md), inspect the [analyst export](docs/evidence/analyst-export.csv), or run the business app below. Both consumers use the same validated rows from `mart_metric_values`; the app contains no separate metric formulas.
 
-![Actual account discrepancy bridge with signed commitments, invoice flows and cash allocations](docs/images/account-discrepancy-bridge.jpg)
+![Enterprise-wide synthetic USD quarterly bookings, invoice and cash variance bridge](docs/images/enterprise-flow-bridge.svg)
 
-*Account-level commitments, invoices and cash allocations, shown for the first 20 account IDs. The flow differences are not an accounts-receivable balance or a representative sample.*
+*Company-wide Q1 2026 synthetic USD flows. The two differences are time-period flow comparisons, not accounts-receivable balances. For detailed examples, the application selects material discrepancies across Enterprise, Mid-market and SMB accounts instead of the first 20 SMB IDs.*
 
 The established enterprise Q1 review produces **$197.46M in net bookings, $189.42M net invoiced and $174.61M allocated cash**. Period-end installed ARR is $754.39M; open pipeline is $222.34M. The mature 30-day current-quarter cohort win rate is 18.67%.
 
