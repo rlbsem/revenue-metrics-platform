@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1260" height="500" viewBox="0 0 1260 500" role="img" aria-labelledby="t d">
+<title id="t">Q1 2026 synthetic USD commercial flow comparison</title>
+<desc id="d">Q1 net bookings 197.46 million US dollars, net invoiced 189.42 million, cash allocated 174.61 million. Bookings less invoices total 8.04 million; invoice less cash total 14.81 million. These are period flow differences, not accounts receivable balances.</desc>
+<rect width="1260" height="500" rx="20" fill="#0b101b"/>
+<rect x="1" y="1" width="1258" height="498" rx="19" fill="none" stroke="#293751"/>
+<text x="52" y="57" fill="#eaf2ff" font-family="Arial,sans-serif" font-size="29" font-weight="700">Revenue integrity | Why the numbers differ</text>
+<text x="52" y="88" fill="#aebed9" font-family="Arial,sans-serif" font-size="16">Synthetic USD • Q1 2026 • Enterprise-wide validated publication</text>
+<rect x="52" y="126" width="360" height="176" rx="13" fill="#121e35" stroke="#395986"/>
+<rect x="450" y="126" width="360" height="176" rx="13" fill="#121e35" stroke="#395986"/>
+<rect x="848" y="126" width="360" height="176" rx="13" fill="#121e35" stroke="#395986"/>
+<text x="76" y="167" fill="#aec1e4" font-family="Arial,sans-serif" font-size="17">NET BOOKINGS</text>
+<text x="76" y="233" fill="#ffffff" font-family="Arial,sans-serif" font-size="45" font-weight="700">$197.46M</text>
+<text x="76" y="267" fill="#aebed9" font-family="Arial,sans-serif" font-size="15">Signed quarterly commitments</text>
+<text x="474" y="167" fill="#aec1e4" font-family="Arial,sans-serif" font-size="17">NET INVOICED</text>
+<text x="474" y="233" fill="#ffffff" font-family="Arial,sans-serif" font-size="45" font-weight="700">$189.42M</text>
+<text x="474" y="267" fill="#aebed9" font-family="Arial,sans-serif" font-size="15">Charges and credits billed</text>
+<text x="872" y="167" fill="#aec1e4" font-family="Arial,sans-serif" font-size="17">ALLOCATED CASH</text>
+<text x="872" y="233" fill="#ffffff" font-family="Arial,sans-serif" font-size="45" font-weight="700">$174.61M</text>
+<text x="872" y="267" fill="#aebed9" font-family="Arial,sans-serif" font-size="15">Received payment allocations</text>
+<rect x="98" y="326" width="502" height="78" rx="12" fill="#162238" stroke="#466899"/>
+<rect x="660" y="326" width="502" height="78" rx="12" fill="#162238" stroke="#466899"/>
+<text x="123" y="355" fill="#b5c8e4" font-family="Arial,sans-serif" font-size="14">BOOKINGS MINUS INVOICES</text>
+<text x="123" y="387" fill="#ffffff" font-family="Arial,sans-serif" font-size="25" font-weight="700">$8.04M</text>
+<text x="684" y="355" fill="#b5c8e4" font-family="Arial,sans-serif" font-size="14">INVOICES MINUS CASH</text>
+<text x="684" y="387" fill="#ffffff" font-family="Arial,sans-serif" font-size="25" font-weight="700">$14.81M</text>
+<text x="52" y="444" fill="#c6d3e5" font-family="Arial,sans-serif" font-size="15">These gaps compare quarterly flows. Collections can settle opening invoices.</text>
+<text x="52" y="472" fill="#92a6c0" font-family="Arial,sans-serif" font-size="14">Not an AR balance, GAAP revenue claim or measured customer outcome. Values are from the synthetic enterprise publication.</text>
+</svg>

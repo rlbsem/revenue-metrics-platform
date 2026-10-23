@@ -19,7 +19,9 @@ st.markdown("### REVENUE METRICS / QUARTERLY BUSINESS REVIEW")
 
 st.title("One quarter. Six different questions.")
 
-st.caption("Synthetic B2B subscription business · Q1 2026 · No accounting compliance claim")
+st.caption(
+    "Synthetic B2B subscription business · Q1 2026 · All monetary values in USD · No accounting compliance claim"
+)
 
 publication = Path(os.environ.get("REVENUE_PUBLICATION", ".local/demo/published"))
 
@@ -114,7 +116,7 @@ if "dataset" in result:
 st.subheader("Why the numbers differ")
 
 st.caption(
-    "Company-wide account bridge (first 20 IDs for generated profiles); region filters affect the six cards only. Historical ownership differs across event dates."
+    "Company-wide account bridge: 20 high-variance, reproducible records across Enterprise, Mid-market and SMB. This is not a statistical sample. Region filters affect the six cards only. All monetary amounts in USD."
 )
 
 bridge = []
@@ -123,6 +125,7 @@ for item in result["bridge"]:
     bridge.append(
         {
             "Account": item.get("account_name", item["account_id"]),
+            **({"Segment": item["segment"]} if "segment" in item else {}),
             **{
                 label: f"${float(item[key]):,.0f}"
                 for key, label in [

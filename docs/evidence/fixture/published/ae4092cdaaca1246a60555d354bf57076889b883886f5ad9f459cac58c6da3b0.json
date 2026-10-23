@@ -237,7 +237,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "ALL",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "11000.00000000"
     },
     {
@@ -249,7 +249,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "East",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "8000.00000000"
     },
     {
@@ -261,7 +261,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "North",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "0.00000000"
     },
     {
@@ -273,7 +273,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "West",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "3000.00000000"
     },
     {
@@ -333,7 +333,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "ALL",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "18000.00000000"
     },
     {
@@ -345,7 +345,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "East",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "-2000.00000000"
     },
     {
@@ -357,7 +357,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "North",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "12000.00000000"
     },
     {
@@ -369,7 +369,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "West",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "8000.00000000"
     },
     {
@@ -381,7 +381,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "ALL",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "16000.00000000"
     },
     {
@@ -393,7 +393,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "East",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "4000.00000000"
     },
     {
@@ -405,7 +405,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "North",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "7000.00000000"
     },
     {
@@ -417,7 +417,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "West",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "5000.00000000"
     },
     {
@@ -429,7 +429,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "ALL",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "4000.00000000"
     },
     {
@@ -441,7 +441,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "East",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "4000.00000000"
     },
     {
@@ -453,7 +453,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "North",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "0.00000000"
     },
     {
@@ -465,7 +465,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "West",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "0.00000000"
     },
     {
@@ -477,7 +477,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "ALL",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "18000.00000000"
     },
     {
@@ -489,7 +489,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "East",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "12000.00000000"
     },
     {
@@ -501,7 +501,7 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "North",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "0.00000000"
     },
     {
@@ -513,11 +513,11 @@
       "period_end": "2026-03-31",
       "period_start": "2026-01-01",
       "region": "West",
-      "unit": "CAD",
+      "unit": "USD",
       "value": "6000.00000000"
     }
   ],
-  "model_fingerprint": "89fddd3264a8863bd3874baa5eec6ac460e7aad049c40c53e1a69598f052d0d7",
+  "model_fingerprint": "d43a9c0239e72185b8f39d7146315a192e9e695468612933481638e502eb3c40",
   "period_end": "2026-03-31",
   "period_start": "2026-01-01",
   "source_fingerprint": "cb38103573836e96dcfb73e39982675a4d7427310604b45e68bfea3b599914c5",

@@ -1,7 +1,7 @@
 {
   "accounts": 60000,
   "active_subscriptions": 60000,
-  "bridge_scope": "First 20 account IDs; company-wide full bridge remains in warehouse",
+  "bridge_scope": "20 reproducible high-variance account examples: 8 Enterprise, 7 Mid-market and 5 SMB; all 60,000 account results remain in the local warehouse",
   "config": {
     "accounts": 60000,
     "correction_every": 200,

@@ -2,39 +2,23 @@
 
 **Marketing sees pipeline. Sales sees bookings. Finance sees invoices and cash. Why don't the numbers agree?**
 
-The platform reconciles pipeline, bookings, invoicing, cash and ARR through dimensional models and six governed metrics. Its synthetic B2B SaaS scenario has approximately **$755M in period-end ARR**. A smaller hand-authored fixture supplies exact edge cases for independent testing.
+The platform reconciles pipeline, bookings, invoicing, cash and ARR through dimensional models and six governed metrics. Its synthetic B2B SaaS scenario has approximately **USD $755M in period-end ARR**. All financial amounts are fictional US dollars, not currency conversions. A smaller hand-authored fixture supplies exact edge cases for independent testing.
 
-Local DuckDB/dbt builds and the Streamlit application run on synthetic data. **Native Snowflake acceptance** passed three fixture builds, each with 15 models and 30 tests, including incremental/full-refresh parity, restricted reads and safe publication. The [Snowflake evidence](docs/evidence/snowflake/fixture/README.md) contains 461 query IDs. The larger enterprise scenario was measured locally; cloud-scale benchmarks and final billed credits were not available.
+Local DuckDB/dbt builds and the Streamlit application run on synthetic data. **Historical native Snowflake acceptance** passed three fixture builds, each with 15 models and 30 tests, including incremental/full-refresh parity, restricted reads and safe publication. The [Snowflake evidence](docs/evidence/snowflake/fixture/README.md) contains 461 query IDs. The larger enterprise scenario was measured locally; cloud-scale benchmarks and final billed credits were not available.
 
-![Actual enterprise commercial review: pipeline, bookings, invoices, cash, ARR and cohort win rate](docs/images/commercial-review.jpg)
+![Enterprise-wide synthetic USD quarterly bookings, invoice and cash variance bridge](docs/images/enterprise-flow-bridge.svg)
 
-*Streamlit review of the executed synthetic enterprise model. Installed ARR is a period-end measure; bookings, invoices and cash are period flows.*
+*Validated synthetic Q1 2026 USD enterprise flow comparison. Installed ARR is a period-end measure; bookings, invoices and cash are period flows.*
 
 ## See the commercial review
 
 Read the [generated review and account-level discrepancy bridge](docs/evidence/commercial-review.md), inspect the [analyst export](docs/evidence/analyst-export.csv), or run the business app below. Both consumers use the same validated rows from `mart_metric_values`; the app contains no separate metric formulas.
 
-![Actual account discrepancy bridge with signed commitments, invoice flows and cash allocations](docs/images/account-discrepancy-bridge.jpg)
-
-*Account-level commitments, invoices and cash allocations, shown for the first 20 account IDs. The flow differences are not an accounts-receivable balance or a representative sample.*
+[View the regenerated account discrepancy bridge](docs/images/account-discrepancy-bridge.jpg) for 12 high-variance synthetic USD examples from Enterprise, Mid-market and SMB. The published release retains a deterministic 20-account sample and the complete bridge remains available in the local warehouse. These quarterly flow gaps are not accounts-receivable balances.
 
 The established enterprise Q1 review produces **$197.46M in net bookings, $189.42M net invoiced and $174.61M allocated cash**. Period-end installed ARR is $754.39M; open pipeline is $222.34M. The mature 30-day current-quarter cohort win rate is 18.67%.
 
-**Installed ARR ≠ quarterly bookings ≠ quarterly invoicing ≠ quarterly cash.** Customers acquired from 2020 to 2025 continue to contribute ARR. Only signed Q1 new business, renewals, expansions, upgrades, contractions and cancellations enter Q1 bookings. Billing continues for existing contracts; some collections settle opening invoices.
-
-## Revenue definitions in operating systems
-
-In Groundbreakers engagements, I reconciled CRM, operational and finance records, defined source authority and explained why sold, delivered, invoiced and collected values disagreed. The work required explicit identities, economic dates and variance categories. A reporting layer should explain those differences before anyone treats a dashboard total as a financial fact.
-
-This public implementation applies that discipline to a synthetic SaaS business. SQL/dbt models keep commitments, invoice lines, payment allocations and installed ARR at separate grains. Effective-dated account history and affected-opportunity rebuilds preserve changing ownership and backdated corrections. Independent reconciliation and publication gates keep failed candidates away from consumers. Native Snowflake fixture acceptance compared all 15 models with an independent full build and tested restricted access. The larger enterprise scenario executes locally. These patterns transfer to any organization connecting commercial commitments, delivery and finance without forcing different measures to agree.
-
-[Model decisions](docs/architecture.md) · [Snowflake acceptance](docs/evidence/snowflake/fixture/README.md)
-
-## Engineering decisions behind the numbers
-
-- **Separate financial grains prevent fanout.** In the exact fixture, joining invoice and payment lines produces **23,000 instead of 16,000**. Bookings, invoices and payment allocations are modeled and aggregated separately. ARR remains a period-end balance. [Tests](docs/testing.md) · [Model contracts](docs/architecture.md).
-- **Backdated corrections rebuild affected history.** A late CRM revision changes February 4 pipeline from **12,000 to 21,000**, with no quarter-end change. Incremental processing replaces the affected opportunity history and obsolete day keys. Native Snowflake tests compared all 15 corrected models with an independent full build. [Design](docs/architecture.md) · [Native acceptance](docs/evidence/snowflake/fixture/README.md).
-- **Metric publication requires passing validation.** Source-coverage and injected publication failures preserved the previous release. The restricted Snowflake consumer could read approved metrics, not raw source tables or publication controls. [Publication and access evidence](docs/evidence/snowflake/fixture/README.md).
+**Installed ARR ≠ quarterly bookings ≠ quarterly invoicing ≠ quarterly cash.** Customers acquired over 2020–2025 continue to contribute ARR. Only signed Q1 new business, renewals, expansions, upgrades, contractions and cancellations enter Q1 bookings. Billing continues for existing contracts; some collections settle opening invoices.
 
 | Generated enterprise profile | Actual value |
 |---|---:|
@@ -153,7 +137,7 @@ python scripts/verify_snowflake.py --require-cloud --profile fixture
 
 With credentials this loads synthetic tables into the dedicated `REVENUE_METRICS_DEMO` database, runs dbt under `RMP_BUILD`, and exercises the `RMP_CONSUMER` role. **It replaces the demo RAW tables; never point this exercise at business data.** Without credentials it reports pending and exits nonzero when `--require-cloud` is used.
 
-**[Native Snowflake fixture acceptance passed](docs/evidence/snowflake/fixture/README.md):** baseline, late-correction incremental and independent full-refresh builds each passed all 15 models and 30 dbt tests. All model multisets matched; consumer RBAC denials and publication safety checks executed successfully. Sanitized evidence retains 461 query IDs. This verifies the managed-warehouse fixture path; enterprise-scale Snowflake performance and final billed consumption are not claimed.
+**[Native Snowflake fixture acceptance passed](docs/evidence/snowflake/fixture/README.md):** baseline, late-correction incremental and independent full-refresh builds each passed all 15 models and 30 dbt tests. All model multisets matched; consumer RBAC denials and publication safety checks executed successfully. Sanitized evidence retains 461 query IDs. This verifies the managed-warehouse fixture path on its original historical model version. The current USD metric-unit revision has not been rerun natively; enterprise-scale Snowflake performance and final billed consumption are not claimed.
 
 ## Failures and tests
 
@@ -178,7 +162,7 @@ Tests cover fanout, SCD2 boundaries, amendments, credits, backdated corrections,
 - [Local verification](docs/evidence/verification.json) and [credential-free Snowflake availability check](docs/evidence/snowflake-status.json)
 - [Executed native Snowflake fixture acceptance](docs/evidence/snowflake/fixture/README.md), [model comparisons](docs/evidence/snowflake/fixture/model-comparisons.json), [RBAC/publication results](docs/evidence/snowflake/fixture/verification.json) and [resource measurements](docs/evidence/snowflake/fixture/resource-consumption.json)
 
-[Hosted commercial analytics verification](https://github.com/rlbsem/revenue-metrics-platform/actions/workflows/verify.yml) runs on Windows and Ubuntu. It validates local behavior and the source binding of archived native evidence; it does not execute new Snowflake queries. The separately recorded cloud acceptance uses the exact fixture, while the approximately CAD754M ARR enterprise scenario remains locally verified.
+[Hosted commercial analytics verification](https://github.com/rlbsem/revenue-metrics-platform/actions/workflows/verify.yml) runs on Windows and Ubuntu. It validates local behavior and the source binding of archived native evidence; it does not execute new Snowflake queries. The separately recorded cloud acceptance uses the exact fixture, while the approximately USD $754M ARR synthetic enterprise scenario remains locally verified. The prior native Snowflake acceptance predates this USD unit correction and does not establish a new USD-specific warehouse run.
 
 To create a clean upload ZIP after verification, run `python scripts/package.py`. The package manifest covers every delivered file except itself; the ZIP is reopened and every recorded hash is checked. Local databases, caches, virtual environments and credential files are excluded.
 

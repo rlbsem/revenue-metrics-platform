@@ -5,8 +5,7 @@ import json
 import re
 import shutil
 
-from revenue_platform.consumer import review
-from revenue_platform.runtime import ROOT, MODELS, assert_expected, canonical, source_fingerprint
+from revenue_platform.runtime import ROOT, MODELS, canonical
 from verify_fixture import main as verify_fixture
 from verify_enterprise import verify as verify_enterprise
 
@@ -41,16 +40,18 @@ def recorded_snowflake_fixture():
     assert all(
         r["exact_multiset_equal"] and r["column_contract_equal"] for r in record["model_comparison"]
     )
-    payload = review(folder / "published", record["release_id"])
-    assert payload["target"] == "snowflake" and payload["model_fingerprint"] == source_fingerprint()
-    assert_expected(payload)
+    # The earlier native publication is intentionally withdrawn from this USD-only
+    # working tree. Native query IDs, comparisons and security evidence remain recorded,
+    # but we cannot claim the revised USD model was rerun against Snowflake.
+    assert len(record["query_ids"]) > 0
     return {
-        "status": "passed",
-        "scope": "Offline validation of recorded native execution, not a new cloud run",
+        "status": "historical_native_prior_unit",
+        "scope": "Prior model's Snowflake comparisons are historical; current USD metrics require separate native acceptance",
         "evidence": "snowflake/fixture/verification.json",
         "finished_at": record["finished_at"],
         "implementation_hashes_match": True,
-        "model_fingerprint_matches": True,
+        "exact_original_native_publication_retained": False,
+        "usd_native_execution": False,
     }
 
 
