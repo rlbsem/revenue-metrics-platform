@@ -1,6 +1,6 @@
 # Source profiles and local execution
 
-All records are synthetic. The enterprise profile is a commercial scenario around $750M ARR, not a production scale certification. The same fifteen dbt models and six metric definitions process each profile.
+All records and monetary amounts are synthetic and denominated in USD. The enterprise profile models approximately USD $750M ARR, not a production scale certification. The fictional amounts are not foreign-exchange conversions. The same fifteen dbt models and six metric definitions process each profile.
 
 | Profile | Source | Purpose |
 |---|---|---|
