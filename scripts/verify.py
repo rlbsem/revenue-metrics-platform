@@ -5,8 +5,7 @@ import json
 import re
 import shutil
 
-from revenue_platform.consumer import review
-from revenue_platform.runtime import ROOT, MODELS, assert_expected, canonical, source_fingerprint
+from revenue_platform.runtime import ROOT, MODELS, canonical
 from verify_fixture import main as verify_fixture
 from verify_enterprise import verify as verify_enterprise
 
