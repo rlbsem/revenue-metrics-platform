@@ -6,7 +6,7 @@ import duckdb
 import pytest
 
 from revenue_platform.generator import configuration, generate
-from revenue_platform.runtime import add_correction, load_local, run_dbt
+from revenue_platform.runtime import add_correction, load_local, local_snapshot, run_dbt
 
 
 @pytest.fixture(scope="module")
@@ -73,6 +73,14 @@ def test_source_economics_and_descriptive_references(generated):
 def test_generated_sources_execute_dbt_and_correction_is_not_a_noop(generated):
     root, db, _ = generated
     run_dbt(db, root / "base")
+    snapshot = local_snapshot(db)
+    # The published account bridge must not bias the review toward the first SMB IDs.
+    assert len(snapshot["bridge"]) == 20
+    assert {segment: sum(row["segment"] == segment for row in snapshot["bridge"])
+            for segment in ("Enterprise", "Mid-market", "SMB")} == {
+                "Enterprise": 8, "Mid-market": 7, "SMB": 5
+            }
+    assert {row["unit"] for row in snapshot["metrics"]} == {"USD", "ratio"}
     with duckdb.connect(str(db)) as con:
         before = con.execute("select count(*) from analytics.fct_opportunity_daily").fetchone()[0]
     add_correction(db, root / "sources")
