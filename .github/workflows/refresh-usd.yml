@@ -28,8 +28,8 @@ jobs:
           python -m pip install --no-deps --no-build-isolation -e .
       - name: Format and lint modified source before verification
         run: |
-          python -m ruff check --fix scripts/verify.py scripts/render_account_bridge.py tests/test_generation.py src/revenue_platform/runtime.py
-          python -m ruff format scripts/verify.py scripts/render_account_bridge.py tests/test_generation.py src/revenue_platform/runtime.py
+          python -m ruff check --fix scripts/verify.py scripts/render_account_bridge.py tests/test_generation.py src/revenue_platform/runtime.py app.py
+          python -m ruff format scripts/verify.py scripts/render_account_bridge.py tests/test_generation.py src/revenue_platform/runtime.py app.py
       - name: Regenerate USD data, dbt models, metrics, and evidence
         run: python scripts/verify.py
       - name: Rebuild original account bridge image from new local USD evidence
@@ -45,7 +45,7 @@ jobs:
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git add -A README.md docs/evidence docs/images/account-discrepancy-bridge.jpg scripts src tests
+          git add -A README.md app.py docs/evidence docs/images/account-discrepancy-bridge.jpg scripts src tests
           if ! git diff --cached --quiet; then
             git commit -m "evidence: regenerate synthetic USD releases and account bridge [skip ci]"
             git push origin HEAD:fix/usd-metrics-enterprise-bridge-20261022
