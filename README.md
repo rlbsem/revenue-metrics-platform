@@ -4,7 +4,7 @@
 
 The platform reconciles pipeline, bookings, invoicing, cash and ARR through dimensional models and six governed metrics. Its synthetic B2B SaaS scenario has approximately **USD $755M in period-end ARR**. All financial amounts are fictional US dollars, not currency conversions. A smaller hand-authored fixture supplies exact edge cases for independent testing.
 
-Local DuckDB/dbt builds and the Streamlit application run on synthetic data. **Native Snowflake acceptance** passed three fixture builds, each with 15 models and 30 tests, including incremental/full-refresh parity, restricted reads and safe publication. The [Snowflake evidence](docs/evidence/snowflake/fixture/README.md) contains 461 query IDs. The larger enterprise scenario was measured locally; cloud-scale benchmarks and final billed credits were not available.
+Local DuckDB/dbt builds and the Streamlit application run on synthetic data. **Historical native Snowflake acceptance** passed three fixture builds, each with 15 models and 30 tests, including incremental/full-refresh parity, restricted reads and safe publication. The [Snowflake evidence](docs/evidence/snowflake/fixture/README.md) contains 461 query IDs. The larger enterprise scenario was measured locally; cloud-scale benchmarks and final billed credits were not available.
 
 ![Actual enterprise commercial review: pipeline, bookings, invoices, cash, ARR and cohort win rate](docs/images/commercial-review.jpg)
 
@@ -153,7 +153,7 @@ python scripts/verify_snowflake.py --require-cloud --profile fixture
 
 With credentials this loads synthetic tables into the dedicated `REVENUE_METRICS_DEMO` database, runs dbt under `RMP_BUILD`, and exercises the `RMP_CONSUMER` role. **It replaces the demo RAW tables; never point this exercise at business data.** Without credentials it reports pending and exits nonzero when `--require-cloud` is used.
 
-**[Native Snowflake fixture acceptance passed](docs/evidence/snowflake/fixture/README.md):** baseline, late-correction incremental and independent full-refresh builds each passed all 15 models and 30 dbt tests. All model multisets matched; consumer RBAC denials and publication safety checks executed successfully. Sanitized evidence retains 461 query IDs. This verifies the managed-warehouse fixture path; enterprise-scale Snowflake performance and final billed consumption are not claimed.
+**[Native Snowflake fixture acceptance passed](docs/evidence/snowflake/fixture/README.md):** baseline, late-correction incremental and independent full-refresh builds each passed all 15 models and 30 dbt tests. All model multisets matched; consumer RBAC denials and publication safety checks executed successfully. Sanitized evidence retains 461 query IDs. This verifies the managed-warehouse fixture path on its original historical model version. The current USD metric-unit revision has not been rerun natively; enterprise-scale Snowflake performance and final billed consumption are not claimed.
 
 ## Failures and tests
 
@@ -178,7 +178,7 @@ Tests cover fanout, SCD2 boundaries, amendments, credits, backdated corrections,
 - [Local verification](docs/evidence/verification.json) and [credential-free Snowflake availability check](docs/evidence/snowflake-status.json)
 - [Executed native Snowflake fixture acceptance](docs/evidence/snowflake/fixture/README.md), [model comparisons](docs/evidence/snowflake/fixture/model-comparisons.json), [RBAC/publication results](docs/evidence/snowflake/fixture/verification.json) and [resource measurements](docs/evidence/snowflake/fixture/resource-consumption.json)
 
-[Hosted commercial analytics verification](https://github.com/rlbsem/revenue-metrics-platform/actions/workflows/verify.yml) runs on Windows and Ubuntu. It validates local behavior and the source binding of archived native evidence; it does not execute new Snowflake queries. The separately recorded cloud acceptance uses the exact fixture, while the approximately CAD754M ARR enterprise scenario remains locally verified.
+[Hosted commercial analytics verification](https://github.com/rlbsem/revenue-metrics-platform/actions/workflows/verify.yml) runs on Windows and Ubuntu. It validates local behavior and the source binding of archived native evidence; it does not execute new Snowflake queries. The separately recorded cloud acceptance uses the exact fixture, while the approximately USD $754M ARR synthetic enterprise scenario remains locally verified. The prior native Snowflake acceptance predates this USD unit correction and does not establish a new USD-specific warehouse run.
 
 To create a clean upload ZIP after verification, run `python scripts/package.py`. The package manifest covers every delivered file except itself; the ZIP is reopened and every recorded hash is checked. Local databases, caches, virtual environments and credential files are excluded.
 
