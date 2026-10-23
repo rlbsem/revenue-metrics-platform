@@ -1,6 +1,6 @@
 # Q1 2026 commercial review
 
-All values and source systems are synthetic.
+All values and source systems are synthetic; monetary values are denominated in USD.
 
 | Metric | Value | Definition |
 |---|---:|---|
@@ -29,4 +29,4 @@ The backdated CRM correction changes February 4 pipeline from $12,000 to $21,000
 
 ARR policy 2 excludes past-due contracts and changes quarter-end ARR from $18,000 to $12,000. That is a definition change, not a change to source facts.
 
-Release: `6771841bd850e4ae5edd535c9f6ed033128e0b2161ada57b112834dc110ea718`. Read the [analyst export](analyst-export.csv), [modeling cases](modeling-cases.json), [definition change](definition-change.json) and [dbt results](dbt-results.json).
+Release: `ae4092cdaaca1246a60555d354bf57076889b883886f5ad9f459cac58c6da3b0`. Read the [analyst export](analyst-export.csv), [modeling cases](modeling-cases.json), [definition change](definition-change.json) and [dbt results](dbt-results.json).

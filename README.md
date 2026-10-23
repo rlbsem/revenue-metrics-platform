@@ -20,21 +20,7 @@ Read the [generated review and account-level discrepancy bridge](docs/evidence/c
 
 The established enterprise Q1 review produces **$197.46M in net bookings, $189.42M net invoiced and $174.61M allocated cash**. Period-end installed ARR is $754.39M; open pipeline is $222.34M. The mature 30-day current-quarter cohort win rate is 18.67%.
 
-**Installed ARR ≠ quarterly bookings ≠ quarterly invoicing ≠ quarterly cash.** Customers acquired from 2020 to 2025 continue to contribute ARR. Only signed Q1 new business, renewals, expansions, upgrades, contractions and cancellations enter Q1 bookings. Billing continues for existing contracts; some collections settle opening invoices.
-
-## Revenue definitions in operating systems
-
-In Groundbreakers engagements, I reconciled CRM, operational and finance records, defined source authority and explained why sold, delivered, invoiced and collected values disagreed. The work required explicit identities, economic dates and variance categories. A reporting layer should explain those differences before anyone treats a dashboard total as a financial fact.
-
-This public implementation applies that discipline to a synthetic SaaS business. SQL/dbt models keep commitments, invoice lines, payment allocations and installed ARR at separate grains. Effective-dated account history and affected-opportunity rebuilds preserve changing ownership and backdated corrections. Independent reconciliation and publication gates keep failed candidates away from consumers. Native Snowflake fixture acceptance compared all 15 models with an independent full build and tested restricted access. The larger enterprise scenario executes locally. These patterns transfer to any organization connecting commercial commitments, delivery and finance without forcing different measures to agree.
-
-[Model decisions](docs/architecture.md) · [Snowflake acceptance](docs/evidence/snowflake/fixture/README.md)
-
-## Engineering decisions behind the numbers
-
-- **Separate financial grains prevent fanout.** In the exact fixture, joining invoice and payment lines produces **23,000 instead of 16,000**. Bookings, invoices and payment allocations are modeled and aggregated separately. ARR remains a period-end balance. [Tests](docs/testing.md) · [Model contracts](docs/architecture.md).
-- **Backdated corrections rebuild affected history.** A late CRM revision changes February 4 pipeline from **12,000 to 21,000**, with no quarter-end change. Incremental processing replaces the affected opportunity history and obsolete day keys. Native Snowflake tests compared all 15 corrected models with an independent full build. [Design](docs/architecture.md) · [Native acceptance](docs/evidence/snowflake/fixture/README.md).
-- **Metric publication requires passing validation.** Source-coverage and injected publication failures preserved the previous release. The restricted Snowflake consumer could read approved metrics, not raw source tables or publication controls. [Publication and access evidence](docs/evidence/snowflake/fixture/README.md).
+**Installed ARR ≠ quarterly bookings ≠ quarterly invoicing ≠ quarterly cash.** Customers acquired over 2020–2025 continue to contribute ARR. Only signed Q1 new business, renewals, expansions, upgrades, contractions and cancellations enter Q1 bookings. Billing continues for existing contracts; some collections settle opening invoices.
 
 | Generated enterprise profile | Actual value |
 |---|---:|

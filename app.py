@@ -19,7 +19,9 @@ st.markdown("### REVENUE METRICS / QUARTERLY BUSINESS REVIEW")
 
 st.title("One quarter. Six different questions.")
 
-st.caption("Synthetic B2B subscription business · Q1 2026 · All monetary values in USD · No accounting compliance claim")
+st.caption(
+    "Synthetic B2B subscription business · Q1 2026 · All monetary values in USD · No accounting compliance claim"
+)
 
 publication = Path(os.environ.get("REVENUE_PUBLICATION", ".local/demo/published"))
 

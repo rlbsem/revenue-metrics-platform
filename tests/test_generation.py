@@ -76,10 +76,10 @@ def test_generated_sources_execute_dbt_and_correction_is_not_a_noop(generated):
     snapshot = local_snapshot(db)
     # The published account bridge must not bias the review toward the first SMB IDs.
     assert len(snapshot["bridge"]) == 20
-    assert {segment: sum(row["segment"] == segment for row in snapshot["bridge"])
-            for segment in ("Enterprise", "Mid-market", "SMB")} == {
-                "Enterprise": 8, "Mid-market": 7, "SMB": 5
-            }
+    assert {
+        segment: sum(row["segment"] == segment for row in snapshot["bridge"])
+        for segment in ("Enterprise", "Mid-market", "SMB")
+    } == {"Enterprise": 8, "Mid-market": 7, "SMB": 5}
     assert {row["unit"] for row in snapshot["metrics"]} == {"USD", "ratio"}
     with duckdb.connect(str(db)) as con:
         before = con.execute("select count(*) from analytics.fct_opportunity_daily").fetchone()[0]

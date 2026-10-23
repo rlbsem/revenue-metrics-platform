@@ -8,13 +8,13 @@
     "threads": 1
   },
   "incremental_full_model_signatures_equal": true,
-  "logical_cpus": 32,
-  "os": "Windows-11-10.0.26200-SP0",
-  "processor": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+  "logical_cpus": 4,
+  "os": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "processor": "x86_64",
   "profile": "enterprise",
   "published_release_equal": true,
-  "python": "3.12.14",
-  "release_id": "c1228f85d5e2e8fa4793d6f8386812c76e53873e08c1df696065d392b5546938",
+  "python": "3.12.15",
+  "release_id": "8c84dea3109e36c68dadb9173417a0a2994d5f916006a2e4e582dc971f0efeb5",
   "source_economics": "passed; all source-level economic and booking-authority checks",
   "source_repeat_byte_hashes_equal": true,
   "status": "passed",
@@ -22,13 +22,13 @@
   "stress": "configured; not executed, no measured performance claim",
   "timing_caveat": "Single local execution on a shared Windows workstation; not a controlled benchmark or production capacity claim. Incremental command rebuilds all non-incremental models.",
   "timings_seconds": {
-    "bounded_snapshot_and_source_hashes": 7.136,
-    "bulk_load": 3.041,
-    "corrected_full_refresh_dbt_build": 23.574,
-    "corrected_incremental_dbt_build": 15.859,
-    "dbt_docs": 5.048,
-    "initial_dbt_build": 23.779,
-    "repeat_source_generation": 4.013,
-    "source_generation": 3.932
+    "bounded_snapshot_and_source_hashes": 14.877,
+    "bulk_load": 3.801,
+    "corrected_full_refresh_dbt_build": 33.689,
+    "corrected_incremental_dbt_build": 20.933,
+    "dbt_docs": 4.378,
+    "initial_dbt_build": 32.77,
+    "repeat_source_generation": 8.021,
+    "source_generation": 8.054
   }
 }
