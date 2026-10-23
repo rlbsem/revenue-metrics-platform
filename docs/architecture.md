@@ -36,7 +36,7 @@ The same fifteen dbt models serve all profiles. The daily opportunity model deri
 
 Generated sources include one account descriptor per account (segment and initial sales team) and one offering/opportunity descriptor per contract. These descriptive sidecars support a bounded subscription-portfolio breakdown; historical ownership remains exclusively in the SCD2 dimension. They are not a new metric layer. The six governed commercial cards retain the catalog's region dimension.
 
-The enterprise publication contains all metric/cohort rows, coverage, portfolio aggregates and the first 20 account bridges. It hashes sorted source rows in bounded batches instead of embedding the raw dataset. Complete facts and account bridges remain in the local warehouse. Dataset manifests contain source file hashes, configuration and row counts, with no absolute paths. See [profile economics](profiles.md).
+The enterprise publication contains all metric/cohort rows, coverage, portfolio aggregates and a deterministic 20-account high-variance sample across three customer segments. It hashes sorted source rows in bounded batches instead of embedding the raw dataset. Complete facts and account bridges remain in the local warehouse. Dataset manifests contain source file hashes, configuration and row counts, with no absolute paths. See [profile economics](profiles.md).
 
 ## Established-company source timeline
 
