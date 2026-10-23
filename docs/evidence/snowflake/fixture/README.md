@@ -1,8 +1,8 @@
-# Executed Snowflake fixture acceptance
+# Historical Snowflake fixture acceptance
 
 Executed on October 14, 2026 (America/Toronto); exact UTC timestamps are retained in [verification.json](verification.json). This is actual dbt-snowflake execution against a managed warehouse, using the original synthetic fixture. It is not enterprise-scale cloud performance evidence.
 
-**Passed:** three native builds, all 15 model comparisons, the exact fixture oracle, restricted consumer access and publication safety. The run retained 461 query IDs. The final warehouse state was SUSPENDED.
+**Historical run passed:** three native builds, all 15 model comparisons, the exact fixture oracle, restricted consumer access and publication safety. The run retained 461 query IDs. The final warehouse state was SUSPENDED.
 
 | Native build | Models | Passing dbt tests | Elapsed seconds |
 |---|---:|---:|---:|
@@ -36,7 +36,7 @@ Consumer checks used a separate service identity and RSA key. Raw-table reads, p
 
 Publication checks executed a deliberate pre-commit failure and verified rollback, executed a genuinely failing source-coverage dbt test while retaining the previous release, restored coverage and passed the gate, then repeated promotion with exactly one history row. [Rejected gate](rejected-coverage-results.json); [restored gate](restored-coverage-results.json).
 
-[Offline CSV/Streamlit checks of the native publication](consumer-results.json) passed all six cards, regional selection and CSV parity. [Native analyst export](analyst-export.csv); [immutable publication pointer](published/current.json). The Streamlit app reads the validated artifact; it is not a live warehouse connection.
+At the time of the original run, offline CSV and Streamlit checks passed all six cards, regional selection and publication parity. The old financial publication is no longer distributed as current USD evidence. Native query IDs and model-comparison records remain available, but this archived test is not a claim that the revised USD unit contract executed in Snowflake.
 
 The live runtime observed standard X-Small, 60-second auto-suspend and one cluster. Resource-monitor metadata was not visible to the restricted role. Its one-credit NEVER-reset monitor and 90/100 suspension thresholds were confirmed by the owner after successful administrator postflight. That authority is recorded separately from observed metadata. No credential rotation, repeated setup, quota increase or warehouse resizing occurred.
 
