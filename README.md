@@ -124,7 +124,7 @@ revenue demo --profile enterprise --workspace .local/demo
 python -m streamlit run app.py
 ```
 
-Open the local URL printed by Streamlit. The demo loads sources, runs actual `dbt build`, checks dbt quality gates and enterprise scale/economic invariants, publishes a review and generates dbt docs. It refuses to overwrite an existing workspace: use a different workspace name for another run. To view another publication, set `REVENUE_PUBLICATION` to its `published` directory.
+Once Streamlit starts, open the local URL it prints in a browser on the **same computer**. That URL runs on your machine; it is not a publicly hosted app. For a no-install review, use the [recorded commercial report](docs/evidence/commercial-review.md) and [screenshots](docs/images/commercial-review.jpg) above. The demo loads sources, runs actual `dbt build`, checks dbt quality gates and enterprise scale/economic invariants, publishes a review and generates dbt docs. It refuses to overwrite an existing workspace: use a different workspace name for another run. To view another publication, set `REVENUE_PUBLICATION` to its `published` directory.
 
 Use the exact fixture or generate the optional larger sources separately:
 
