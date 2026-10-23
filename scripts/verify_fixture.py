@@ -164,7 +164,7 @@ def main():
     report = [
         "# Q1 2026 commercial review",
         "",
-        "All values and source systems are synthetic.",
+        "All values and source systems are synthetic; monetary values are denominated in USD.",
         "",
         "| Metric | Value | Definition |",
         "|---|---:|---|",
