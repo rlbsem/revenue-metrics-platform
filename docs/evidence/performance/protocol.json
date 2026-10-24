@@ -22,7 +22,7 @@
     "corrections": "unchanged generated late batch, no-op, plus separately labeled adversarial cases"
   },
   "success": {
-    "correctness": "all 15 model schemas and complete multisets equal via bidirectional EXCEPT ALL; exact cents invariants; fixture oracle unchanged; failed builds cannot publish",
+    "correctness": "All 15 schemas and complete row content equal via lossless typed Parquet exports ordered by verified grains, compared bytewise or with complete typed Arrow batches; no signatures. Fixture oracle and cents invariants unchanged.",
     "performance": "at least 15% median corrected transformation improvement; show all repetitions and overheads; otherwise preserve negative result",
     "no_op": "measure including source/change detection and all dbt gates, no implied free replay"
   },
@@ -43,5 +43,6 @@
     "ram_bytes": 33457201152,
     "available_ram_bytes": 7743037440,
     "disk_free_bytes": 1503351898112
-  }
+  },
+  "verification_method_revision": "Before renewed qualifying runs: preserve the stopped full-column/bucketed comparisons; verified unique grains bound sort-key width, HUGEINT uses exact text in Parquet."
 }

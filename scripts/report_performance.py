@@ -106,7 +106,7 @@ def report():
             "source generation/loading, full rowset comparison and consumer hashing are separately timed in the raw records.",
             "",
             "All 15 model column contracts and complete multisets matched both original incremental and an independent "
-            "clean full rebuild in every repetition. All rows are sorted and losslessly exported with forced non-null quoting; every export byte is compared. "
+            "clean full rebuild in every repetition. All rows are ordered by verified model grains and losslessly exported as typed Parquet (HUGEINT uses exact integer text); exact bytes or every Arrow value are compared. "
             "Independent connections preserve each view’s own source binding. Unsupported complex export types fail closed. No probabilistic signatures establish this result. "
             "Validated consumer payloads were identical. All amounts retain the existing synthetic USD contract.",
             "",

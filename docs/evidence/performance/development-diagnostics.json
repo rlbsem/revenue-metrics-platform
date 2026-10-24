@@ -41,5 +41,22 @@
       "1-optimized-load-result.json": "4ab0d1484d5065275ff047b7f9fc32645a491f53f14a1d1293712a9fa90c1b16",
       "generation-result.json": "74c0a57a1dd43da91dbbbdbe28087b29a9396d2e83f1d66e5c37ba598c8bbbd2"
     }
+  },
+  "full_column_export_attempt": {
+    "source_commit": "38e8c42",
+    "status": "stopped_before_qualification",
+    "reason": "Full-column sorting of the 12.47M-row fact spilled under 2GB and dominated comparison; replacing sort keys with verified declared unique grains, still comparing all fields",
+    "private_workspace": ".local/qualified-enterprise-02",
+    "raw_worker_result_hashes": {
+      "1-baseline-correction-load-result.json": "d859fef9d6b268e5e031292fb5d3c44bae1b9cb3831b9b46905c12aaceba693a",
+      "1-baseline-incremental-result.json": "371bcc2203ebb7e4c0c9b95fe077522d6e67d0ad79cb9f49973f6f9714abb3af",
+      "1-baseline-initial-result.json": "1a8bacb449ad16a586298b12b338e9490cfd2d0ebede86f8d076ad73bdd2586f",
+      "1-baseline-load-result.json": "539dba1cf662bc7b498172f05896b8922042ad9499593187e51e1dd1853aac3c",
+      "1-optimized-correction-load-result.json": "d859fef9d6b268e5e031292fb5d3c44bae1b9cb3831b9b46905c12aaceba693a",
+      "1-optimized-incremental-result.json": "e9e0ba6b977a15eb7113a6e144262b93e0731d3825acd04526e452af393e9284",
+      "1-optimized-initial-result.json": "522dbd362281492e49d320170a9f16554a0c367577f28825049940f02e2c1f28",
+      "1-optimized-load-result.json": "539dba1cf662bc7b498172f05896b8922042ad9499593187e51e1dd1853aac3c",
+      "generation-result.json": "74c0a57a1dd43da91dbbbdbe28087b29a9396d2e83f1d66e5c37ba598c8bbbd2"
+    }
   }
 }
