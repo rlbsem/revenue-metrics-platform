@@ -22,5 +22,24 @@
     "passed": 1,
     "failed": 0,
     "private_log_sha256": "1fe8a974fbdb4bdeb6c22e82a4b4c868a40a749111829fb002cd283d81ed3525"
+  },
+  "first_enterprise_attempt": {
+    "source_commit": "0f22012a167f0c957053e1e2ca726e66f1662a45",
+    "status": "intentionally_stopped_before_qualifying_completion",
+    "reason": "Repeated bucketed EXCEPT ALL scans dominated full rowset verification; first baseline/optimized comparison completed, no complete three-pair result claimed",
+    "retained_private_workspace": ".local/qualified-enterprise-01",
+    "raw_worker_result_hashes": {
+      "1-baseline-correction-load-result.json": "d859fef9d6b268e5e031292fb5d3c44bae1b9cb3831b9b46905c12aaceba693a",
+      "1-baseline-incremental-result.json": "915923521309e5a341e674e8abb0bc511b7320f3ff17e3ede40c7098ce646f48",
+      "1-baseline-initial-result.json": "35924d4f1a7dc67e9e66156755536436e91900a5ed66db5b8dd17cc6816e227b",
+      "1-baseline-load-result.json": "4ab0d1484d5065275ff047b7f9fc32645a491f53f14a1d1293712a9fa90c1b16",
+      "1-independent-full-result.json": "8511f19b192015001181a231c96a5a1d5175af66bea5d2d18af4b8daf4c165be",
+      "1-independent-load-result.json": "4ab0d1484d5065275ff047b7f9fc32645a491f53f14a1d1293712a9fa90c1b16",
+      "1-optimized-correction-load-result.json": "d859fef9d6b268e5e031292fb5d3c44bae1b9cb3831b9b46905c12aaceba693a",
+      "1-optimized-incremental-result.json": "5a6d4368e877de3aeac18c363c9fd6b4bacf1b33559c88776e6e47cf617a2018",
+      "1-optimized-initial-result.json": "5aafb7b66f4b194671c85476373a750ecdafce4a44cdfdfe076dfc51e05c1827",
+      "1-optimized-load-result.json": "4ab0d1484d5065275ff047b7f9fc32645a491f53f14a1d1293712a9fa90c1b16",
+      "generation-result.json": "74c0a57a1dd43da91dbbbdbe28087b29a9396d2e83f1d66e5c37ba598c8bbbd2"
+    }
   }
 }

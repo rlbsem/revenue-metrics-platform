@@ -98,7 +98,7 @@ def report():
         ]
         rows += [
             "",
-            f"Median corrected rebuild: **{medians['baseline_incremental']:.3f}s → {medians['optimized_incremental']:.3f}s ({improvement:.1f}% reduction)**. "
+            f"Median corrected rebuild: **{medians['baseline_incremental']:.3f}s â†’ {medians['optimized_incremental']:.3f}s ({improvement:.1f}% reduction)**. "
             f"The predeclared 15% threshold was {'met' if improvement >= 15 else 'not met'}. "
             f"Median initial builds: original {medians['baseline_initial']:.3f}s, selective {medians['optimized_initial']:.3f}s. "
             f"Independent corrected full refresh: {medians['independent_full']:.3f}s. "
@@ -106,12 +106,12 @@ def report():
             "source generation/loading, full rowset comparison and consumer hashing are separately timed in the raw records.",
             "",
             "All 15 model column contracts and complete multisets matched both original incremental and an independent "
-            "clean full rebuild in every repetition. Hash buckets only partition the exact bidirectional `EXCEPT ALL`; "
-            "views use independently bound, sorted row streams. No probabilistic signatures establish this result. "
+            "clean full rebuild in every repetition. All rows are sorted and losslessly exported with forced non-null quoting; every export byte is compared. "
+            "Independent connections preserve each view’s own source binding. Unsupported complex export types fail closed. No probabilistic signatures establish this result. "
             "Validated consumer payloads were identical. All amounts retain the existing synthetic USD contract.",
             "",
-            f"[Raw repetitions]({profile}/pair-1.json) · [Protocol/source hashes]({profile}/execution-protocol.json) · "
-            f"[Generation/load evidence]({profile}/generation.json) · [Full plan]({profile}/baseline-plan.txt) · "
+            f"[Raw repetitions]({profile}/pair-1.json) Â· [Protocol/source hashes]({profile}/execution-protocol.json) Â· "
+            f"[Generation/load evidence]({profile}/generation.json) Â· [Full plan]({profile}/baseline-plan.txt) Â· "
             f"[Affected-account plan]({profile}/optimized-plan.txt)",
             "",
         ]
@@ -135,7 +135,7 @@ def report():
         "authorize skipping corrections. Re-run after repair or rebuild fully. Publication remains the existing validated "
         "immutable payload and atomic pointer mechanism.",
         "",
-        "[Reproduction and contracts](../../performance.md) · [Predeclared conditions](protocol.json) · "
+        "[Reproduction and contracts](../../performance.md) Â· [Predeclared conditions](protocol.json) Â· "
         "[Historical preservation hashes](preserved-files.json). Original fixture, scenario, metrics and Snowflake "
         "evidence are preserved; no new vendor or cloud run was performed.",
         "",

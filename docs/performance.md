@@ -2,7 +2,7 @@
 
 An opportunity correction need not reaggregate every account-day or rebuild unrelated invoice, cash and subscription facts. This opt-in DuckDB lane retains the existing affected-opportunity fact replacement and narrows its downstream pipeline rebuild to complete affected **account histories**. Owner/region attribution is still evaluated at each business date; obsolete rows are deleted before replacement.
 
-[Executed report](evidence/performance/report.md) · [Predeclared protocol](evidence/performance/protocol.json) · [Original exact-head verification](evidence/performance/exact-main-verification.json).
+[Executed report](evidence/performance/report.md) Â· [Predeclared protocol](evidence/performance/protocol.json) Â· [Original exact-head verification](evidence/performance/exact-main-verification.json).
 
 ```mermaid
 flowchart LR
@@ -40,7 +40,7 @@ python scripts/benchmark_performance.py --profile stress --workspace .local/perf
 python scripts/check_performance.py
 ```
 
-Each benchmark uses three fresh paired workspaces by default. Baseline transformations execute the exact archived main source at `a39d603`; optimized runs execute the recorded feature revision. A third warehouse loads the same corrected CSVs independently for clean full-refresh comparison. Every row of all 15 models is compared: physical tables use complete bidirectional `EXCEPT ALL` in deterministic memory-bounding buckets, and views use exact sorted streams on independent connections so catalog binding cannot mask differences. Bucket hashes are not equality signatures.
+Each benchmark uses three fresh paired workspaces by default. Baseline transformations execute the exact archived main source at `a39d603`; optimized runs execute the recorded feature revision. A third warehouse loads the same corrected CSVs independently for clean full-refresh comparison. Every row of all 15 models is compared: every model uses sorted, typed CSV exports on independently bound connections, followed by a complete byte comparison. Every non-null value is quoted and the null token is unquoted, preserving null versus empty text, Unicode, duplicate rows and round-trip numeric text. Schemas must agree and unsupported complex types are refused. This compares all content, not probabilistic signatures; temporary exports remain private and are removed after comparison.
 
 The harness measures generation, loading, transformations, no-op replay, resource samples and correctness checks separately. It stops a child stage after 20 minutes, above 6GiB sampled process-tree RSS or below 1GiB available host memory. Preflight requires 4GiB available memory and 50GiB free disk. These are conservative local guards, not DuckDB capacity guarantees. Failed runs and logs remain private under `.local`; sanitized outcomes belong in a new evidence directory, never over historical records.
 

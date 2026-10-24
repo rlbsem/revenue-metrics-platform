@@ -218,3 +218,26 @@ s.rebuild(Path(sys.argv[1]),Path(sys.argv[2]),publication=Path(sys.argv[4]))
         if process.poll() is None:
             process.kill()
             process.wait(timeout=10)
+
+
+def test_export_equality_preserves_null_text_unicode_duplicates_and_precise_numbers(
+    tmp_path, monkeypatch
+):
+    import revenue_platform.performance_checks as checks
+
+    monkeypatch.setattr(checks, "MODELS", ["probe"])
+    a, b = tmp_path / "a.duckdb", tmp_path / "b.duckdb"
+    for db in (a, b):
+        with duckdb.connect(str(db)) as con:
+            con.execute(
+                "create schema analytics; create table analytics.probe(s varchar,n decimal(18,8),d double)"
+            )
+            con.executemany(
+                "insert into analytics.probe values (?,123456789.12345678,1.2345678901234567)",
+                [(None,), ("",), ("__NULL__",), ('Unicode é,"\n',), ("duplicate",), ("duplicate",)],
+            )
+    assert compare(a, b)["models"][0]["rows"] == 6
+    with duckdb.connect(str(b)) as con:
+        con.execute("update analytics.probe set s='' where s is null")
+    with pytest.raises(AssertionError, match="multiset differs"):
+        compare(a, b)
