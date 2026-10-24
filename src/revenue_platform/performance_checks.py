@@ -40,13 +40,13 @@ def equal_files(left, right):
                 return True
 
 
-def exact_export(con, name, path):
+def exact_export(con, name, path, where=""):
     escaped = str(path.resolve()).replace("'", "''")
     grain = GRAINS.get(name)
     if (
         grain
         and con.execute(
-            f"select exists(select {grain} from analytics.{name} group by {grain} having count(*)>1)"
+            f"select exists(select {grain} from analytics.{name}{where} group by {grain} having count(*)>1)"
         ).fetchone()[0]
     ):
         raise AssertionError("Declared grain not unique: " + name)
@@ -62,7 +62,7 @@ def exact_export(con, name, path):
         for c in columns
     )
     con.execute(
-        f"copy (select {selected} from analytics.{name} order by {grain or 'all'}) to '{escaped}' (format parquet, compression snappy, row_group_size 10000)"
+        f"copy (select {selected} from analytics.{name}{where} order by {grain or 'all'}) to '{escaped}' (format parquet, compression snappy, row_group_size 10000)"
     )
 
 
@@ -116,22 +116,51 @@ def compare(left, right):
                 if counts[0] != counts[1]:
                     raise AssertionError("Row count differs: " + name)
                 a, b = folder / "left.parquet", folder / "right.parquet"
-                exact_export(con, name, a)
-                exact_export(independent, name, b)
-                if not equal_exports(a, b):
-                    raise AssertionError("Complete multiset differs: " + name)
+                predicates = [""]
+                if counts[0] > 1000000 and "date_day" in [r[0] for r in description]:
+                    dates = con.execute(
+                        f"select distinct date_day from {table} order by date_day"
+                    ).fetchall()
+                    if (
+                        dates
+                        != independent.execute(
+                            f"select distinct date_day from {table} order by date_day"
+                        ).fetchall()
+                    ):
+                        raise AssertionError("Business-date inventory differs: " + name)
+                    predicates = [
+                        (
+                            " where date_day is null"
+                            if d is None
+                            else f" where date_day=DATE '{d.isoformat()}'"
+                        )
+                        for (d,) in dates
+                    ]
+                export_bytes, exported_rows = 0, 0
+                for predicate in predicates:
+                    exact_export(con, name, a, predicate)
+                    exact_export(independent, name, b, predicate)
+                    if not equal_exports(a, b):
+                        raise AssertionError("Complete multiset differs: " + name)
+                    import pyarrow.parquet as pq
+
+                    exported_rows += pq.ParquetFile(a).metadata.num_rows
+                    export_bytes += a.stat().st_size
+                    a.unlink()
+                    b.unlink()
+                if exported_rows != counts[0]:
+                    raise AssertionError("Comparison did not cover every row: " + name)
                 rows.append(
                     {
                         "model": name,
                         "rows": counts[0],
                         "exact_multiset_equal": True,
                         "differences": 0,
-                        "compared_export_bytes": a.stat().st_size,
+                        "compared_export_bytes": export_bytes,
+                        "business_date_partitions": len(predicates),
                         "verified_sort_grain": GRAINS.get(name, "all columns"),
                     }
                 )
-                a.unlink()
-                b.unlink()
     return {
         "method": "Complete grain-ordered typed Parquet exports; exact bytes or every Arrow value; HUGEINT text preserves precision; not signatures",
         "seconds": time.perf_counter() - started,

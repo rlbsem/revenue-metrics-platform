@@ -2,7 +2,7 @@
 
 An opportunity correction need not reaggregate every account-day or rebuild unrelated invoice, cash and subscription facts. This opt-in DuckDB lane retains the existing affected-opportunity fact replacement and narrows its downstream pipeline rebuild to complete affected **account histories**. Owner/region attribution is still evaluated at each business date; obsolete rows are deleted before replacement.
 
-[Executed report](evidence/performance/report.md) Â· [Predeclared protocol](evidence/performance/protocol.json) Â· [Original exact-head verification](evidence/performance/exact-main-verification.json).
+[Executed report](evidence/performance/report.md) Ã‚Â· [Predeclared protocol](evidence/performance/protocol.json) Ã‚Â· [Original exact-head verification](evidence/performance/exact-main-verification.json).
 
 ```mermaid
 flowchart LR
@@ -40,7 +40,7 @@ python scripts/benchmark_performance.py --profile stress --workspace .local/perf
 python scripts/check_performance.py
 ```
 
-Each benchmark uses three fresh paired workspaces by default. Baseline transformations execute the exact archived main source at `a39d603`; optimized runs execute the recorded feature revision. A third warehouse loads the same corrected CSVs independently for clean full-refresh comparison. Every row of all 15 models is compared: every model uses grain-ordered typed Parquet exports on independently bound connections, followed by a complete byte comparison. Native typed values preserve nulls, Unicode and floating/decimal values. HUGEINT is exported as exact integer text to avoid a lossy Parquet cast. Unique model grains are checked before ordering; all fields are compared, through exact bytes or complete Arrow batches when file encodings differ. Schemas must agree and unsupported complex types are refused. This compares all content, not probabilistic signatures; temporary exports remain private and are removed after comparison.
+Each benchmark uses three fresh paired workspaces by default. Baseline transformations execute the exact archived main source at `a39d603`; optimized runs execute the recorded feature revision. A third warehouse loads the same corrected CSVs independently for clean full-refresh comparison. Every row of all 15 models is compared: every model uses grain-ordered typed Parquet exports on independently bound connections, followed by a complete byte comparison. Native typed values preserve nulls, Unicode and floating/decimal values. HUGEINT is exported as exact integer text to avoid a lossy Parquet cast. Unique model grains are checked before ordering; all fields are compared, through exact bytes or complete Arrow batches when file encodings differ. Large daily models are compared across every distinct business date, including a null-date partition if present; matching date inventories and exported-row totals enforce full coverage. Schemas must agree and unsupported complex types are refused. This compares all content, not probabilistic signatures; temporary exports remain private and are removed after comparison.
 
 The harness measures generation, loading, transformations, no-op replay, resource samples and correctness checks separately. It stops a child stage after 20 minutes, above 6GiB sampled process-tree RSS or below 1GiB available host memory. Preflight requires 4GiB available memory and 50GiB free disk. These are conservative local guards, not DuckDB capacity guarantees. Failed runs and logs remain private under `.local`; sanitized outcomes belong in a new evidence directory, never over historical records.
 

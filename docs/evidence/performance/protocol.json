@@ -44,5 +44,5 @@
     "available_ram_bytes": 7743037440,
     "disk_free_bytes": 1503351898112
   },
-  "verification_method_revision": "Before renewed qualifying runs: preserve the stopped full-column/bucketed comparisons; verified unique grains bound sort-key width, HUGEINT uses exact text in Parquet."
+  "verification_method_revision": "Before renewed qualifying runs: preserved stopped whole-sort trials; complete natural business-date chunks bound exact comparison sorts at the same 2GB memory limit. Date inventories and exported-row totals establish full coverage."
 }

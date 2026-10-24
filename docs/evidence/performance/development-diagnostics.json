@@ -58,5 +58,11 @@
       "1-optimized-load-result.json": "539dba1cf662bc7b498172f05896b8922042ad9499593187e51e1dd1853aac3c",
       "generation-result.json": "74c0a57a1dd43da91dbbbdbe28087b29a9396d2e83f1d66e5c37ba598c8bbbd2"
     }
+  },
+  "grain_export_attempt": {
+    "source_commit": "6d62b3a",
+    "status": "stopped_before_qualification",
+    "reason": "Whole wide-fact ordering spilled 1.82GB under the fixed 2GB verification memory limit; switching only comparison into complete business-date chunks, without signatures or increased model memory",
+    "private_workspace": ".local/qualified-enterprise-03"
   }
 }
