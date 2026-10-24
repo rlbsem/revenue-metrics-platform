@@ -35,6 +35,9 @@ jobs:
       - name: Install project
         shell: bash
         run: ${{ matrix.venv_python }} -m pip install --no-deps --no-build-isolation -e .
+      - name: Verify preserved performance evidence before regenerating examples
+        shell: bash
+        run: ${{ matrix.venv_python }} scripts/check_performance.py
       - name: Verify
         shell: bash
         run: ${{ matrix.venv_python }} scripts/verify.py

@@ -1,0 +1,26 @@
+{
+  "pilot_selector": {
+    "outcome": "No-op qualification refused because Windows dbt launcher expanded wildcard into filesystem arguments",
+    "correction": "resource_type:test selector; all 30 test IDs required before accepting state",
+    "private_log_sha256": "b2602e3e11045ddcce70c1bed61a67bb21fc5e66526fc16ea98bda0c94b8e618"
+  },
+  "regression_01": {
+    "passed": 2,
+    "failed": 12,
+    "causes": [
+      "Renamed copies retained catalog-qualified views; preserve catalog in fixtures and invalidate selective state on catalog identity change",
+      "Adversarial fixture date/identity values corrected to the documented source contract"
+    ],
+    "private_log_sha256": "f861a03e961aa87719a8f61d0ca12471dd7b62f8c920b182d7c559e96fdeedb1"
+  },
+  "regression_02": {
+    "passed": 14,
+    "failed": 0,
+    "private_log_sha256": "a8571e8faf01508307c2047f02bd400fd47d7c1ba1d19c470cc3ba2deb812942"
+  },
+  "actual_process_interruption": {
+    "passed": 1,
+    "failed": 0,
+    "private_log_sha256": "1fe8a974fbdb4bdeb6c22e82a4b4c868a40a749111829fb002cd283d81ed3525"
+  }
+}

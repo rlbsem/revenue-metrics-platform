@@ -127,6 +127,10 @@ revenue export --publication .local/demo/published --region ALL --output .local/
 
 Supply `--expected-release <identifier>` to reject a stale consumer request. Enterprise regions are `ALL`, `East`, `North`, `West`, `EMEA` and `APAC`. The app also provides segment/offering selectors for the subscription-portfolio table; those selectors do not change the six region-filtered cards. The report window is intentionally Q1 2026; changing it requires compatible source/calendar coverage and a full rebuild, not editing the dashboard.
 
+## Controlled selective rebuilds
+
+The optional local DuckDB lane measures and reduces downstream recomputation after opportunity corrections. It retains the existing opportunity replacement, replaces complete affected-account pipeline histories, and runs every quality gate. Broader changes fall back to a full rebuild. [Measured results and exact rowset checks](docs/evidence/performance/report.md) · [Contracts and reproduction](docs/performance.md). These are local synthetic measurements, separate from historical native Snowflake acceptance.
+
 ## Configure Snowflake
 
 Follow [the Snowflake runbook and one-time owner handoff](docs/snowflake.md), review [bootstrap grants and the fixture resource guard](snowflake/bootstrap.sql), and configure the separate runner/reader identities documented in [.env.example](.env.example). Key files stay outside this repository.
