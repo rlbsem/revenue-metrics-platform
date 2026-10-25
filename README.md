@@ -2,6 +2,8 @@
 
 **Marketing sees pipeline. Sales sees bookings. Finance sees invoices and cash. Why don't the numbers agree?**
 
+**Professional application:** My private equity and enterprise systems work includes building consolidated revenue intelligence and reconciliation infrastructure across operating companies. These systems connect commercial, operational and financial records so investors and executive teams can trace what was sold, fulfilled, invoiced and collected, investigate variances and establish reliable portfolio-level reporting. The public models use synthetic financial data to demonstrate the underlying controls.
+
 The platform reconciles pipeline, bookings, invoicing, cash and ARR through dimensional models and six governed metrics. Its synthetic B2B SaaS scenario has approximately **USD $755M in period-end ARR**. All financial amounts are fictional US dollars, not currency conversions. A smaller hand-authored fixture supplies exact edge cases for independent testing.
 
 Local DuckDB/dbt builds and the Streamlit application run on synthetic data. **Historical native Snowflake acceptance** passed three fixture builds, each with 15 models and 30 tests, including incremental/full-refresh parity, restricted reads and safe publication. The [Snowflake evidence](docs/evidence/snowflake/fixture/README.md) contains 461 query IDs. The larger enterprise scenario was measured locally; cloud-scale benchmarks and final billed credits were not available.
