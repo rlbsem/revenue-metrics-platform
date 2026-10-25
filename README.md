@@ -129,7 +129,7 @@ Supply `--expected-release <identifier>` to reject a stale consumer request. Ent
 
 ## Controlled selective rebuilds
 
-Three controlled enterprise repetitions compare the original build with an opt-in affected-account candidate, with exact content checks across all 15 models. The candidate reduced aggregation work but regressed total build time; the original default is retained. [Measured results, resource costs and failure acceptance](docs/evidence/performance/report.md) · [Contracts and reproduction](docs/performance.md). These are local synthetic measurements, separate from historical native Snowflake acceptance.
+Three paired repetitions at both the 60,000-account enterprise profile and 180,000-account stress profile compare the original build with an opt-in affected-account candidate, with exact content checks across all 15 models. The candidate reduced aggregation work but regressed total build time; the original default is retained. [Measured results, resource costs and failure acceptance](docs/evidence/performance/report.md) · [Contracts and reproduction](docs/performance.md). These are local synthetic measurements, separate from historical native Snowflake acceptance.
 
 ## Configure Snowflake
 

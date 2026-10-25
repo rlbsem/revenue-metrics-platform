@@ -38,6 +38,9 @@ jobs:
       - name: Verify preserved performance evidence before regenerating examples
         shell: bash
         run: ${{ matrix.venv_python }} scripts/check_performance.py
+      - name: Verify public package file set and hashes
+        shell: bash
+        run: ${{ matrix.venv_python }} scripts/check_package.py
       - name: Verify
         shell: bash
         run: ${{ matrix.venv_python }} scripts/verify.py

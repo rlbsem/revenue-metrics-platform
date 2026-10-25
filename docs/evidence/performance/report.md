@@ -31,7 +31,7 @@ Executed source `d26b4300338aa0b78f5434b3fca5ae45ab62033a`. {'dbt-core': '1.9.8'
 | fct_invoice_lines | 0.550 | 0.000 |
 | mart_flows | 0.438 | 0.000 |
 
-Median corrected rebuild: **12.447s â†’ 19.205s (-54.3% reduction)**. The predeclared 15% threshold was not met. Median initial builds: original 20.742s, selective 26.997s. Independent corrected full refresh: 20.864s. Selective totals include exact change detection, source snapshot copying, quality gates and checkpointing; source generation/loading, full rowset comparison and consumer hashing are separately timed in the raw records.
+Median corrected rebuild: **12.447s â†’ 19.205s (54.3% increase)**. The predeclared 15% threshold was not met. Median initial builds: original 20.742s, selective 26.997s. Independent corrected full refresh: 20.864s. Selective totals include exact change detection, source snapshot copying, quality gates and checkpointing; source generation/loading, full rowset comparison and consumer hashing are separately timed in the raw records.
 
 All 15 model column contracts and complete multisets matched both original incremental and an independent clean full rebuild in every repetition. All rows are ordered by verified model grains and losslessly exported as typed Parquet (HUGEINT uses exact integer text); exact bytes or every Arrow value are compared. Independent connections preserve each view’s own source binding. Unsupported complex export types fail closed. No probabilistic signatures establish this result. Validated consumer payloads were identical. All amounts retain the existing synthetic USD contract.
 
@@ -39,7 +39,26 @@ All 15 model column contracts and complete multisets matched both original incre
 
 ## Stress
 
-Not completed. See retained blocker or failed-run diagnostics; no performance claim.
+Executed source `b13a011ae08dd11abb05cdea03b956ce6bac83ca`. {'dbt-core': '1.9.8', 'dbt-duckdb': '1.9.6', 'duckdb': '1.3.2', 'psutil': '7.0.0'}; 3.12.14; Windows-11-10.0.26200-SP0. One DuckDB thread, one dbt thread and 2GB engine memory limit in both arms. Fresh databases, alternating pair order, no concurrent local test load. OS caches were not flushed; these are filesystem-warm paired observations, not cold-cache benchmarks.
+
+| Pair | Original incremental s | Selective total s | Original no-op s | Selective no-op s |
+|---|---:|---:|---:|---:|
+| 1 | 48.864 | 57.634 | 41.277 | 46.977 |
+| 2 | 42.323 | 56.005 | 44.386 | 47.784 |
+| 3 | 43.923 | 58.806 | 41.868 | 47.647 |
+
+| Model | Original median s | Selective median s (zero = not rebuilt) |
+|---|---:|---:|
+| fct_opportunity_daily | 2.747 | 2.592 |
+| mart_pipeline | 16.960 | 1.284 |
+| fct_invoice_lines | 1.704 | 0.000 |
+| mart_flows | 1.235 | 0.000 |
+
+Median corrected rebuild: **43.923s â†’ 57.634s (31.2% increase)**. The predeclared 15% threshold was not met. Median initial builds: original 68.690s, selective 87.578s. Independent corrected full refresh: 68.156s. Selective totals include exact change detection, source snapshot copying, quality gates and checkpointing; source generation/loading, full rowset comparison and consumer hashing are separately timed in the raw records.
+
+All 15 model column contracts and complete multisets matched both original incremental and an independent clean full rebuild in every repetition. All rows are ordered by verified model grains and losslessly exported as typed Parquet (HUGEINT uses exact integer text); exact bytes or every Arrow value are compared. Independent connections preserve each view’s own source binding. Unsupported complex export types fail closed. No probabilistic signatures establish this result. Validated consumer payloads were identical. All amounts retain the existing synthetic USD contract.
+
+[Raw repetitions](stress/pair-1.json) Â· [Protocol/source hashes](stress/execution-protocol.json) Â· [Generation/load evidence](stress/generation.json) Â· [Full plan](stress/baseline-plan.txt) Â· [Affected-account plan](stress/optimized-plan.txt)
 
 ## Cost and safety tradeoffs
 
@@ -66,3 +85,12 @@ Source correction: 600 / 195,927 opportunities; 300 affected accounts; 89,423 fa
 
 Larger batch: **10,000 open-prospect opportunity revisions**. Original incremental 13.412s; candidate 21.301s; independent full 22.347s. All 15 complete model rowsets matched both comparisons. These appended amount corrections are a separate adversarial case, not a replacement for canonical published enterprise economics.
 
+### Stress
+
+| Pair | Original CPU s | Candidate CPU s | Original sampled RSS MB | Candidate sampled RSS MB | Original file MB | Candidate file MB | Exact checks s | Consumer check s |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 47.453 | 55.656 | 2979.8 | 3041.7 | 1134.8 | 1515.5 | 792.071 | 40.066 |
+| 2 | 41.703 | 54.703 | 2978.2 | 3045.9 | 1138.5 | 1408.5 | 818.697 | 40.779 |
+| 3 | 43.266 | 57.578 | 2983.4 | 3043.1 | 1302.6 | 1518.1 | 867.016 | 41.349 |
+
+Source correction: 1,800 / 587,461 opportunities; 900 affected accounts; 270,638 fact rows belong to those account histories. Plans are diagnostic executions separate from timing. Sampled temporary storage can miss brief files; warehouse size is allocated file size, including fragmentation and retained state, not logical bytes or cloud cost.

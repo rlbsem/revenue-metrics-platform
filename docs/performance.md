@@ -53,3 +53,9 @@ Existing `scripts/verify.py` also regenerates current example evidence. Run it i
 - [dbt descendant selection](https://docs.getdbt.com/reference/node-selection/graph-operators)
 
 These are local synthetic performance and reliability observations, not managed Snowflake benchmarks, production capacity or commercial savings.
+
+## Executed resource boundary
+
+The 180,000-account stress profile completed three pairs and complete comparison of the 37,375,442-row daily fact. The [aggregate supervisor record](evidence/performance/stress/supervisor.json) observed 3,685,621,760 bytes of sampled process-tree RSS and a minimum 1,147,424,768 bytes of available host memory, narrowly above the 1GiB stop threshold. This shared-host run is not a capacity guarantee. Loading retained the original engine defaults; paired transformations and comparisons used one thread and the configured 2GB engine limit.
+
+For aggregate guarding of the parent comparison process as well as workers, use `python scripts/supervise_performance.py` with the same benchmark arguments. The wrapper does not change source data, transformations or correctness checks.

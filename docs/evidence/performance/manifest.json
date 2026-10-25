@@ -20,8 +20,17 @@
     "preserved-files.json": "dc11b1022d3ea006c305eca6ab0c92c53fd486cb1ed1a007cbf31b22e0beebb8",
     "process-interruption.json": "d40bbad95bef9245ac41da87831c570d173d32a597d6849bfe82eb0991c5b685",
     "protocol.json": "00903ff6cc0e1dddc8e4f9129d99766977d953f940141509ffd66846b306c94f",
-    "report.md": "c4dca40234735885e17cd71d8a6b15c4abfbd5cc1283fa7267afa1a412b5d876",
+    "report.md": "2354e948686e36ca79f2c7866c86f035e59a0faafaa9737e8e15fd1807445103",
     "software.json": "78d4580723e976fd0e7523435cfcb139fb10cc30cd0e26040ef7777186b039aa",
-    "summary.json": "f31ec4136b710b18638213be0ebb59610f7b65ac3234cf166b11798d0c9cf2c4"
+    "stress/baseline-plan.txt": "df78484339cf84ba0fe2bbe823a00cb56027b2521e62ddd288e3d68dcf34127f",
+    "stress/completed.json": "b705ab71d91c52133a589da9975bac9c93190bd84d67aa325ea2d945ed54e435",
+    "stress/execution-protocol.json": "93952d9fd2cdc09add7e7f6e8056dab666d210b62d6eac192841b2b8efcd5746",
+    "stress/generation.json": "91c4790b2b1eecc5f1b598631f01a6b40fa76f26fd4f0a5d4084b0c4c5a61a53",
+    "stress/optimized-plan.txt": "2891a9d5b78218bc6cec10ac60733b69e1ccc507e259b0c3b4f4422a97f371e3",
+    "stress/pair-1.json": "75116c4d68bc6e49a092312170e42923c776afa9648fdc567bc21b19cdfaa6f8",
+    "stress/pair-2.json": "82e39fd5faaa8d743c1760e947d35be8f2e1fccd6bf2013b80c306964a361cbb",
+    "stress/pair-3.json": "f68d788363082625cfcea1edbb27b3ac8bd0ed2e96d76fb9362c9c1be8da1f42",
+    "stress/supervisor.json": "ef0ab4e887e998a72da3498ae75307175bd2b95527866cfcb1bb11d7c485196b",
+    "summary.json": "2fdba8df3848903d18a62c4fddc6d5fecb8d39fdb1527369d9be89bd4bc4ea7f"
   }
 }

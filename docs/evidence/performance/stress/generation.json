@@ -1,0 +1,65 @@
+{
+  "available_memory_min_bytes": 7476441088,
+  "result": {
+    "config": {
+      "accounts": 180000,
+      "correction_every": 200,
+      "ended_contract_every": 50,
+      "new_customer_probability": 0.02,
+      "product_percent": {
+        "Core": 85,
+        "Growth": 100,
+        "Suite": 120
+      },
+      "profile": "stress",
+      "prospect_outcome_weights": [
+        30,
+        32,
+        38
+      ],
+      "seed": 20261003,
+      "segment_monthly_cents": {
+        "Enterprise": 400000,
+        "Mid-market": 150000,
+        "SMB": 30000
+      }
+    },
+    "files": {
+      "account_attributes.csv": "2fbd87696ac6b832e6d0221b1a2aa03d3da4c13b7d69eb708ace0b244b4ec5b0",
+      "account_history.csv": "dd236a70d305a995bb5435a800920a5b4b66a34c3f51e1a85726a96818e6c84f",
+      "booking_attributes.csv": "28b1832cf049461bfc65bddcba27ceee47cd0edbd3901fe103fc3fe2da34cafd",
+      "booking_events.csv": "f0100736af2072036001293939420e10697c2b4b800524a1e0a95468e85128ca",
+      "calendar.csv": "c95f5bb25803d26c6177a1116162c05269e03906878d373abaf65e784e9205cc",
+      "commercial_events.csv": "45d7e6663e3fde958e581422a447a7b429a3aced604acc489493d3053a7d7fbc",
+      "contract_attributes.csv": "bc6e4bfb7e08cc9bdfd6ac9b50ca5e3110c6e4af2914b25954e6ce67d1f5e9a0",
+      "coverage.csv": "de1abba91968213e743a5e8d7bf50a47fe0c6c4190fc27080545c54a93894df9",
+      "invoice_lines.csv": "c70b1131c5e8060ff9d3b3e9e2d91d6abf72acee7b7143ab08e31cb0d6b22528",
+      "late_opportunity_events.csv": "396a6eb6483eb3d66bb0abbe2062ed68a14d988678be5af647f57d8bb7d8a158",
+      "opportunity_events.csv": "01a4bf00cc831e6d17ab547b59805b7b6912a5c005a0c945fec8d81a1ab20b48",
+      "payment_allocations.csv": "a6a5ea9d2aa6262a87b63440189ed1941301a28cf73297b69144bf0b640afa1c",
+      "subscription_contracts.csv": "3284df7dc60d4fae87a87bb0b6c9520dbb90d3a41a3f570d16527aee92af9aee"
+    },
+    "generator_version": 2,
+    "row_counts": {
+      "account_attributes": 180000,
+      "account_history": 205714,
+      "booking_attributes": 1030836,
+      "booking_events": 1030836,
+      "calendar": 90,
+      "commercial_events": 85903,
+      "contract_attributes": 221413,
+      "coverage": 6,
+      "invoice_lines": 2325124,
+      "late_opportunity_events": 2713,
+      "opportunity_events": 998789,
+      "payment_allocations": 986897,
+      "subscription_contracts": 221413
+    },
+    "source_fingerprint": "c5ef782b1e8990478872ff4d1f25c25d04834baf5425b59a06dc27f979482dad"
+  },
+  "sampled_process_cpu_seconds": 11.40625,
+  "sampled_temp_peak_bytes": 0,
+  "sampled_tree_rss_max_bytes": 33841152,
+  "samples": 54,
+  "seconds": 11.671256400004495
+}

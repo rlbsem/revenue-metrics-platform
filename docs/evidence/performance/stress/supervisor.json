@@ -1,0 +1,10 @@
+{
+  "scope": "Sampled aggregate benchmark tree including parent comparisons",
+  "peak_sampled_rss_bytes": 3685621760,
+  "minimum_host_available_bytes": 1147424768,
+  "rss_limit_bytes": 6442450944,
+  "minimum_available_bytes": 1073741824,
+  "returncode": 0,
+  "reason": "benchmark_exit",
+  "sample_seconds": 0.2
+}
