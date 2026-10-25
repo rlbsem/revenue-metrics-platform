@@ -1,0 +1,1 @@
+{"actual_killed_pid": 82852, "exit": 1, "boundary": "after real dbt transform, before source checkpoint and publication", "previous_publication_preserved": true, "restart_exact_parity": true}

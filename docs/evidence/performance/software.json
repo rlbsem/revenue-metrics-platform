@@ -1,0 +1,68 @@
+{
+  "source_commit": "d26b4300338aa0b78f5434b3fca5ae45ab62033a",
+  "observed_at": "2026-10-24T23:59:28.891984+00:00",
+  "scope": "Complete established verifier; no fresh Snowflake execution",
+  "result": {
+    "enterprise": {
+      "dbt_models": 15,
+      "dbt_tests": 30,
+      "duckdb_settings": {
+        "dbt_threads": 1,
+        "memory_limit": "2GB",
+        "scope": "configured dbt profile settings",
+        "threads": 1
+      },
+      "incremental_full_model_signatures_equal": true,
+      "logical_cpus": 32,
+      "os": "Windows-11-10.0.26200-SP0",
+      "processor": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+      "profile": "enterprise",
+      "published_release_equal": true,
+      "python": "3.12.14",
+      "release_id": "4e1f8322aecf656f8d5f1dbf8672b9d704ba7ea1282bfa5f639e52730e2350d5",
+      "source_economics": "passed; all source-level economic and booking-authority checks",
+      "source_repeat_byte_hashes_equal": true,
+      "status": "passed",
+      "streamlit": "six cards, regional ARR, segment and offering selection passed AppTest",
+      "stress": "configured; not executed, no measured performance claim",
+      "timing_caveat": "Single measured execution on a shared runner; not a controlled benchmark or production capacity claim. Incremental command rebuilds all non-incremental models.",
+      "timings_seconds": {
+        "bounded_snapshot_and_source_hashes": 8.283,
+        "bulk_load": 3.676,
+        "corrected_full_refresh_dbt_build": 21.122,
+        "corrected_incremental_dbt_build": 16.326,
+        "dbt_docs": 3.422,
+        "initial_dbt_build": 26.894,
+        "repeat_source_generation": 4.636,
+        "source_generation": 3.986
+      }
+    },
+    "fixture": {
+      "dbt_data_tests": 30,
+      "dbt_models": 15,
+      "deterministic_replay": true,
+      "github_actions": "configured, not executed by this local verification",
+      "local_execution": "passed",
+      "markdown_links": "passed",
+      "platform": "Windows",
+      "pytest_summary": "87 passed in 187.99s (0:03:07)",
+      "python": "3.12.14",
+      "release_id": "64fe92180afe05e3c2a0f324cf5221b505cc1b08a0e1f0586969518964657a8f",
+      "snowflake": "pending_credentials",
+      "streamlit": "AppTest exercised all six cards and region selection"
+    },
+    "github_actions": "configured; not executed in GitHub during this local verification",
+    "local_execution": "passed",
+    "markdown_links": "passed",
+    "recorded_snowflake_fixture": {
+      "evidence": "snowflake/fixture/verification.json",
+      "exact_original_native_publication_retained": false,
+      "finished_at": "2026-10-15T01:58:57.397575+00:00",
+      "implementation_hashes_match": true,
+      "scope": "Prior model's Snowflake comparisons are historical; current USD metrics require separate native acceptance",
+      "status": "historical_native_prior_unit",
+      "usd_native_execution": false
+    },
+    "snowflake": "pending_credentials"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "candidate_promoted": false,
+  "default_changed": false,
+  "profiles": {
+    "enterprise": {
+      "baseline_incremental_median_seconds": 12.447005899972282,
+      "candidate_incremental_median_seconds": 19.20493130001705,
+      "candidate_wall_change_percent": 54.293582363127335,
+      "pairs": 3,
+      "predeclared_threshold_met": false
+    }
+  }
+}

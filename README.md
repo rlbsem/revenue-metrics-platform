@@ -129,7 +129,7 @@ Supply `--expected-release <identifier>` to reject a stale consumer request. Ent
 
 ## Controlled selective rebuilds
 
-The optional local DuckDB lane measures and reduces downstream recomputation after opportunity corrections. It retains the existing opportunity replacement, replaces complete affected-account pipeline histories, and runs every quality gate. Broader changes fall back to a full rebuild. [Measured results and exact rowset checks](docs/evidence/performance/report.md) · [Contracts and reproduction](docs/performance.md). These are local synthetic measurements, separate from historical native Snowflake acceptance.
+Three controlled enterprise repetitions compare the original build with an opt-in affected-account candidate, with exact content checks across all 15 models. The candidate reduced aggregation work but regressed total build time; the original default is retained. [Measured results, resource costs and failure acceptance](docs/evidence/performance/report.md) · [Contracts and reproduction](docs/performance.md). These are local synthetic measurements, separate from historical native Snowflake acceptance.
 
 ## Configure Snowflake
 

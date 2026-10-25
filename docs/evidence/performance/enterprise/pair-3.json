@@ -1,0 +1,3564 @@
+{
+  "affected_fact_rows": 89423,
+  "affected_opportunities": 600,
+  "baseline_optimized_parity": {
+    "method": "Complete grain-ordered typed Parquet exports; exact bytes or every Arrow value; HUGEINT text preserves precision; not signatures",
+    "models": [
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 932620,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "dim_account",
+        "rows": 68571,
+        "verified_sort_grain": "account_version_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1257,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "dim_date",
+        "rows": 90,
+        "verified_sort_grain": "date_day"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2499511,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_booking_events",
+        "rows": 345504,
+        "verified_sort_grain": "booking_event_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 9026838,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_invoice_lines",
+        "rows": 775133,
+        "verified_sort_grain": "line_id"
+      },
+      {
+        "business_date_partitions": 90,
+        "compared_export_bytes": 224310822,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_opportunity_daily",
+        "rows": 12470664,
+        "verified_sort_grain": "opportunity_day_key"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 7018282,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_payment_allocations",
+        "rows": 329053,
+        "verified_sort_grain": "allocation_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2435977,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_subscription_period",
+        "rows": 221781,
+        "verified_sort_grain": "contract_period_key"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 943962,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_arr",
+        "rows": 180000,
+        "verified_sort_grain": "account_id,date_day,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1721,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_cohorts",
+        "rows": 15,
+        "verified_sort_grain": "cohort_month,region"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1407894,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_discrepancy_bridge",
+        "rows": 48020,
+        "verified_sort_grain": "account_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 4151402,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_flows",
+        "rows": 546059,
+        "verified_sort_grain": "account_id,event_date,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2650,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_metric_values",
+        "rows": 36,
+        "verified_sort_grain": "metric_id,region,period_start,period_end"
+      },
+      {
+        "business_date_partitions": 90,
+        "compared_export_bytes": 50045092,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_pipeline",
+        "rows": 5395893,
+        "verified_sort_grain": "account_id,date_day,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 5943620,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "stg_opportunities",
+        "rows": 333146,
+        "verified_sort_grain": "event_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1369866,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "stg_subscriptions",
+        "rows": 73927,
+        "verified_sort_grain": "contract_id"
+      }
+    ],
+    "seconds": 38.72707919997629
+  },
+  "canonical_usd_metrics_unchanged": true,
+  "canonical_warehouse_bytes": {
+    "baseline": 375926784,
+    "independent": 347353088,
+    "optimized": 513814528
+  },
+  "consumer_check_seconds": 13.766839799995068,
+  "consumer_payload_equal": true,
+  "large_batch_baseline_parity": {
+    "method": "Complete grain-ordered typed Parquet exports; exact bytes or every Arrow value; HUGEINT text preserves precision; not signatures",
+    "models": [
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 932620,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "dim_account",
+        "rows": 68571,
+        "verified_sort_grain": "account_version_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1257,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "dim_date",
+        "rows": 90,
+        "verified_sort_grain": "date_day"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2499511,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_booking_events",
+        "rows": 345504,
+        "verified_sort_grain": "booking_event_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 9026838,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_invoice_lines",
+        "rows": 775133,
+        "verified_sort_grain": "line_id"
+      },
+      {
+        "business_date_partitions": 90,
+        "compared_export_bytes": 224899096,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_opportunity_daily",
+        "rows": 12470664,
+        "verified_sort_grain": "opportunity_day_key"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 7018282,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_payment_allocations",
+        "rows": 329053,
+        "verified_sort_grain": "allocation_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2435977,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_subscription_period",
+        "rows": 221781,
+        "verified_sort_grain": "contract_period_key"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 943962,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_arr",
+        "rows": 180000,
+        "verified_sort_grain": "account_id,date_day,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1721,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_cohorts",
+        "rows": 15,
+        "verified_sort_grain": "cohort_month,region"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1407894,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_discrepancy_bridge",
+        "rows": 48020,
+        "verified_sort_grain": "account_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 4151402,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_flows",
+        "rows": 546059,
+        "verified_sort_grain": "account_id,event_date,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2650,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_metric_values",
+        "rows": 36,
+        "verified_sort_grain": "metric_id,region,period_start,period_end"
+      },
+      {
+        "business_date_partitions": 90,
+        "compared_export_bytes": 50122405,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_pipeline",
+        "rows": 5395893,
+        "verified_sort_grain": "account_id,date_day,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 5956216,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "stg_opportunities",
+        "rows": 333146,
+        "verified_sort_grain": "event_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1369866,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "stg_subscriptions",
+        "rows": 73927,
+        "verified_sort_grain": "contract_id"
+      }
+    ],
+    "seconds": 39.876247800013516
+  },
+  "large_batch_full_parity": {
+    "method": "Complete grain-ordered typed Parquet exports; exact bytes or every Arrow value; HUGEINT text preserves precision; not signatures",
+    "models": [
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 932620,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "dim_account",
+        "rows": 68571,
+        "verified_sort_grain": "account_version_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1257,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "dim_date",
+        "rows": 90,
+        "verified_sort_grain": "date_day"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2499511,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_booking_events",
+        "rows": 345504,
+        "verified_sort_grain": "booking_event_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 9026838,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_invoice_lines",
+        "rows": 775133,
+        "verified_sort_grain": "line_id"
+      },
+      {
+        "business_date_partitions": 90,
+        "compared_export_bytes": 224899096,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_opportunity_daily",
+        "rows": 12470664,
+        "verified_sort_grain": "opportunity_day_key"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 7018282,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_payment_allocations",
+        "rows": 329053,
+        "verified_sort_grain": "allocation_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2435977,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_subscription_period",
+        "rows": 221781,
+        "verified_sort_grain": "contract_period_key"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 943962,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_arr",
+        "rows": 180000,
+        "verified_sort_grain": "account_id,date_day,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1721,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_cohorts",
+        "rows": 15,
+        "verified_sort_grain": "cohort_month,region"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1407894,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_discrepancy_bridge",
+        "rows": 48020,
+        "verified_sort_grain": "account_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 4151402,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_flows",
+        "rows": 546059,
+        "verified_sort_grain": "account_id,event_date,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2650,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_metric_values",
+        "rows": 36,
+        "verified_sort_grain": "metric_id,region,period_start,period_end"
+      },
+      {
+        "business_date_partitions": 90,
+        "compared_export_bytes": 50122405,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_pipeline",
+        "rows": 5395893,
+        "verified_sort_grain": "account_id,date_day,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 5956216,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "stg_opportunities",
+        "rows": 333146,
+        "verified_sort_grain": "event_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1369866,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "stg_subscriptions",
+        "rows": 73927,
+        "verified_sort_grain": "contract_id"
+      }
+    ],
+    "seconds": 34.08365709998179
+  },
+  "metrics": [
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "cash_received",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "ALL",
+      "unit": "USD",
+      "value": "174611954.38000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "cash_received",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "APAC",
+      "unit": "USD",
+      "value": "35896882.87000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "cash_received",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "EMEA",
+      "unit": "USD",
+      "value": "35998755.56000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "cash_received",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "East",
+      "unit": "USD",
+      "value": "34042842.24000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "cash_received",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "North",
+      "unit": "USD",
+      "value": "34420325.99000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "cash_received",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "West",
+      "unit": "USD",
+      "value": "34253147.72000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": "84093.00",
+      "excluded": 36227,
+      "metric_id": "cohort_win_rate",
+      "numerator": "15700.00",
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "ALL",
+      "unit": "ratio",
+      "value": "0.18669806"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": "16776.00",
+      "excluded": 7297,
+      "metric_id": "cohort_win_rate",
+      "numerator": "3075.00",
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "APAC",
+      "unit": "ratio",
+      "value": "0.18329757"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": "16860.00",
+      "excluded": 7214,
+      "metric_id": "cohort_win_rate",
+      "numerator": "3147.00",
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "EMEA",
+      "unit": "ratio",
+      "value": "0.18665480"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": "16746.00",
+      "excluded": 7255,
+      "metric_id": "cohort_win_rate",
+      "numerator": "3162.00",
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "East",
+      "unit": "ratio",
+      "value": "0.18882121"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": "16761.00",
+      "excluded": 7338,
+      "metric_id": "cohort_win_rate",
+      "numerator": "3169.00",
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "North",
+      "unit": "ratio",
+      "value": "0.18906986"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": "16950.00",
+      "excluded": 7123,
+      "metric_id": "cohort_win_rate",
+      "numerator": "3147.00",
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "West",
+      "unit": "ratio",
+      "value": "0.18566372"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_bookings",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "ALL",
+      "unit": "USD",
+      "value": "197458588.59000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_bookings",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "APAC",
+      "unit": "USD",
+      "value": "39710931.71000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_bookings",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "EMEA",
+      "unit": "USD",
+      "value": "39359248.98000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_bookings",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "East",
+      "unit": "USD",
+      "value": "39574058.41000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_bookings",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "North",
+      "unit": "USD",
+      "value": "38473626.56000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_bookings",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "West",
+      "unit": "USD",
+      "value": "40340722.93000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_invoiced",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "ALL",
+      "unit": "USD",
+      "value": "189422794.55000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_invoiced",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "APAC",
+      "unit": "USD",
+      "value": "39421367.62000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_invoiced",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "EMEA",
+      "unit": "USD",
+      "value": "38094354.82000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_invoiced",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "East",
+      "unit": "USD",
+      "value": "37251567.10000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_invoiced",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "North",
+      "unit": "USD",
+      "value": "36097412.78000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "net_invoiced",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "West",
+      "unit": "USD",
+      "value": "38558092.23000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "open_pipeline",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "ALL",
+      "unit": "USD",
+      "value": "222336753.02000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "open_pipeline",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "APAC",
+      "unit": "USD",
+      "value": "44151660.69000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "open_pipeline",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "EMEA",
+      "unit": "USD",
+      "value": "44572136.94000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "open_pipeline",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "East",
+      "unit": "USD",
+      "value": "44699835.48000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "open_pipeline",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "North",
+      "unit": "USD",
+      "value": "44614177.76000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "open_pipeline",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "West",
+      "unit": "USD",
+      "value": "44298942.15000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "period_end_arr",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "ALL",
+      "unit": "USD",
+      "value": "754389953.40000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "period_end_arr",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "APAC",
+      "unit": "USD",
+      "value": "150734080.80000002"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "period_end_arr",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "EMEA",
+      "unit": "USD",
+      "value": "151152666.00000000"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "period_end_arr",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "East",
+      "unit": "USD",
+      "value": "150677137.80000002"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "period_end_arr",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "North",
+      "unit": "USD",
+      "value": "150907993.80000002"
+    },
+    {
+      "definition_version": "1.0",
+      "denominator": null,
+      "excluded": 0,
+      "metric_id": "period_end_arr",
+      "numerator": null,
+      "period_end": "2026-03-31",
+      "period_start": "2026-01-01",
+      "region": "West",
+      "unit": "USD",
+      "value": "150918075.00000000"
+    }
+  ],
+  "noop_parity": {
+    "method": "Complete grain-ordered typed Parquet exports; exact bytes or every Arrow value; HUGEINT text preserves precision; not signatures",
+    "models": [
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 932620,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "dim_account",
+        "rows": 68571,
+        "verified_sort_grain": "account_version_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1257,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "dim_date",
+        "rows": 90,
+        "verified_sort_grain": "date_day"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2499511,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_booking_events",
+        "rows": 345504,
+        "verified_sort_grain": "booking_event_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 9026838,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_invoice_lines",
+        "rows": 775133,
+        "verified_sort_grain": "line_id"
+      },
+      {
+        "business_date_partitions": 90,
+        "compared_export_bytes": 224310822,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_opportunity_daily",
+        "rows": 12470664,
+        "verified_sort_grain": "opportunity_day_key"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 7018282,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_payment_allocations",
+        "rows": 329053,
+        "verified_sort_grain": "allocation_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2435977,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_subscription_period",
+        "rows": 221781,
+        "verified_sort_grain": "contract_period_key"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 943962,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_arr",
+        "rows": 180000,
+        "verified_sort_grain": "account_id,date_day,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1721,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_cohorts",
+        "rows": 15,
+        "verified_sort_grain": "cohort_month,region"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1407894,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_discrepancy_bridge",
+        "rows": 48020,
+        "verified_sort_grain": "account_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 4151402,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_flows",
+        "rows": 546059,
+        "verified_sort_grain": "account_id,event_date,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2650,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_metric_values",
+        "rows": 36,
+        "verified_sort_grain": "metric_id,region,period_start,period_end"
+      },
+      {
+        "business_date_partitions": 90,
+        "compared_export_bytes": 50045092,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_pipeline",
+        "rows": 5395893,
+        "verified_sort_grain": "account_id,date_day,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 5943620,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "stg_opportunities",
+        "rows": 333146,
+        "verified_sort_grain": "event_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1369866,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "stg_subscriptions",
+        "rows": 73927,
+        "verified_sort_grain": "contract_id"
+      }
+    ],
+    "seconds": 38.6958279000246
+  },
+  "optimized_full_parity": {
+    "method": "Complete grain-ordered typed Parquet exports; exact bytes or every Arrow value; HUGEINT text preserves precision; not signatures",
+    "models": [
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 932620,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "dim_account",
+        "rows": 68571,
+        "verified_sort_grain": "account_version_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1257,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "dim_date",
+        "rows": 90,
+        "verified_sort_grain": "date_day"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2499511,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_booking_events",
+        "rows": 345504,
+        "verified_sort_grain": "booking_event_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 9026838,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_invoice_lines",
+        "rows": 775133,
+        "verified_sort_grain": "line_id"
+      },
+      {
+        "business_date_partitions": 90,
+        "compared_export_bytes": 224310822,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_opportunity_daily",
+        "rows": 12470664,
+        "verified_sort_grain": "opportunity_day_key"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 7018282,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_payment_allocations",
+        "rows": 329053,
+        "verified_sort_grain": "allocation_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2435977,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "fct_subscription_period",
+        "rows": 221781,
+        "verified_sort_grain": "contract_period_key"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 943962,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_arr",
+        "rows": 180000,
+        "verified_sort_grain": "account_id,date_day,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1721,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_cohorts",
+        "rows": 15,
+        "verified_sort_grain": "cohort_month,region"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1407894,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_discrepancy_bridge",
+        "rows": 48020,
+        "verified_sort_grain": "account_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 4151402,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_flows",
+        "rows": 546059,
+        "verified_sort_grain": "account_id,event_date,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 2650,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_metric_values",
+        "rows": 36,
+        "verified_sort_grain": "metric_id,region,period_start,period_end"
+      },
+      {
+        "business_date_partitions": 90,
+        "compared_export_bytes": 50045092,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "mart_pipeline",
+        "rows": 5395893,
+        "verified_sort_grain": "account_id,date_day,region,owner"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 5943620,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "stg_opportunities",
+        "rows": 333146,
+        "verified_sort_grain": "event_id"
+      },
+      {
+        "business_date_partitions": 1,
+        "compared_export_bytes": 1369866,
+        "differences": 0,
+        "exact_multiset_equal": true,
+        "model": "stg_subscriptions",
+        "rows": 73927,
+        "verified_sort_grain": "contract_id"
+      }
+    ],
+    "seconds": 35.85218629997689
+  },
+  "profile": "enterprise",
+  "repetition": 3,
+  "source_counts": {
+    "account_attributes": 60000,
+    "account_history": 68571,
+    "booking_attributes": 345504,
+    "booking_events": 345504,
+    "calendar": 90,
+    "commercial_events": 28792,
+    "contract_attributes": 73927,
+    "coverage": 6,
+    "invoice_lines": 775133,
+    "opportunity_events": 334047,
+    "payment_allocations": 329053,
+    "subscription_contracts": 73927
+  },
+  "stages": {
+    "baseline_correction_load": {
+      "available_memory_min_bytes": 10425028608,
+      "result": {
+        "correction_loaded": true
+      },
+      "sampled_process_cpu_seconds": 0,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 13910016,
+      "samples": 1,
+      "seconds": 0.24995389999821782
+    },
+    "baseline_incremental": {
+      "available_memory_min_bytes": 9094139904,
+      "result": {
+        "mode": "incremental",
+        "nodes": [
+          {
+            "node": "model.revenue_metrics.dim_account",
+            "seconds": 0.08278775215148926,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.dim_date",
+            "seconds": 0.02254629135131836,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_booking_events",
+            "seconds": 0.26172399520874023,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_invoice_lines",
+            "seconds": 0.5434403419494629,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_payment_allocations",
+            "seconds": 0.31389904022216797,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.stg_subscriptions",
+            "seconds": 0.05900311470031738,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_raw_revision_unique",
+            "seconds": 0.03600001335144043,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_source_coverage",
+            "seconds": 0.008000612258911133,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_scd_intervals",
+            "seconds": 0.014073848724365234,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_account_account_version_id.956f97e023",
+            "seconds": 0.009999752044677734,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_account_account_version_id.081635f4f9",
+            "seconds": 0.01100015640258789,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_date_date_day.e3f312efb2",
+            "seconds": 0.008000373840332031,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_date_date_day.d56fd19199",
+            "seconds": 0.006999015808105469,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_booking_events_booking_event_id.bb5998017c",
+            "seconds": 0.008002519607543945,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_booking_events_booking_event_id.33c401e9c1",
+            "seconds": 0.026000022888183594,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_invoice_lines_line_id.6f58cdee9b",
+            "seconds": 0.007004737854003906,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_invoice_lines_line_id.56e7ba6f2a",
+            "seconds": 0.059507131576538086,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_invoice_settlement",
+            "seconds": 0.11008071899414062,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_payment_invoice_reference",
+            "seconds": 0.06512856483459473,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_payment_allocations_allocation_id.d3a9f1f778",
+            "seconds": 0.009001493453979492,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_payment_allocations_allocation_id.902a1988a7",
+            "seconds": 0.03409099578857422,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_references",
+            "seconds": 0.06608390808105469,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_validity",
+            "seconds": 0.010999917984008789,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_subscriptions_contract_id.2c9d4c503f",
+            "seconds": 0.01100301742553711,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_subscriptions_contract_id.5e620e2c61",
+            "seconds": 0.014000177383422852,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.stg_opportunities",
+            "seconds": 0.02620410919189453,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_flows",
+            "seconds": 0.4572784900665283,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_subscription_period",
+            "seconds": 0.13481545448303223,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_opportunity_contract",
+            "seconds": 0.16521024703979492,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_required_fact_fields",
+            "seconds": 0.008999824523925781,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_opportunities_event_id.a1ef70569b",
+            "seconds": 0.006000995635986328,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_opportunities_event_id.2e2c7d09fe",
+            "seconds": 0.06928491592407227,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_flow_conservation",
+            "seconds": 0.06237220764160156,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_subscription_period_contract_period_key.0c9046cc23",
+            "seconds": 0.0069997310638427734,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_subscription_period_contract_period_key.aa9e8aefeb",
+            "seconds": 0.019999980926513672,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.fct_opportunity_daily",
+            "seconds": 0.8949933052062988,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_cohorts",
+            "seconds": 0.143996000289917,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_discrepancy_bridge",
+            "seconds": 0.10123419761657715,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_arr",
+            "seconds": 0.24472713470458984,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_account_references",
+            "seconds": 1.233119010925293,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_opportunity_daily_opportunity_day_key.d488988ebf",
+            "seconds": 0.009084463119506836,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_opportunity_daily_opportunity_day_key.fba23a1aed",
+            "seconds": 1.1450049877166748,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.mart_pipeline",
+            "seconds": 3.4284842014312744,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_metric_values",
+            "seconds": 0.2212662696838379,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_metric_shape",
+            "seconds": 0.008000850677490234,
+            "status": "pass"
+          }
+        ]
+      },
+      "sampled_process_cpu_seconds": 12.34375,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 1424367616,
+      "samples": 51,
+      "seconds": 12.769950999994762
+    },
+    "baseline_initial": {
+      "available_memory_min_bytes": 8423628800,
+      "result": {
+        "mode": "full",
+        "nodes": [
+          {
+            "node": "model.revenue_metrics.dim_account",
+            "seconds": 0.07121419906616211,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.dim_date",
+            "seconds": 0.018230676651000977,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_booking_events",
+            "seconds": 0.2420797348022461,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_invoice_lines",
+            "seconds": 0.5578727722167969,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_payment_allocations",
+            "seconds": 0.34751057624816895,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.stg_subscriptions",
+            "seconds": 0.026999950408935547,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_raw_revision_unique",
+            "seconds": 0.04799985885620117,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_source_coverage",
+            "seconds": 0.009998798370361328,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_scd_intervals",
+            "seconds": 0.06311607360839844,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_account_account_version_id.956f97e023",
+            "seconds": 0.012000799179077148,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_account_account_version_id.081635f4f9",
+            "seconds": 0.013000726699829102,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_date_date_day.e3f312efb2",
+            "seconds": 0.010999679565429688,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_date_date_day.d56fd19199",
+            "seconds": 0.00999903678894043,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_booking_events_booking_event_id.bb5998017c",
+            "seconds": 0.009999275207519531,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_booking_events_booking_event_id.33c401e9c1",
+            "seconds": 0.03600001335144043,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_invoice_lines_line_id.6f58cdee9b",
+            "seconds": 0.007999897003173828,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_invoice_lines_line_id.56e7ba6f2a",
+            "seconds": 0.051999568939208984,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_invoice_settlement",
+            "seconds": 0.11151409149169922,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_payment_invoice_reference",
+            "seconds": 0.06000065803527832,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_payment_allocations_allocation_id.d3a9f1f778",
+            "seconds": 0.0070002079010009766,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_payment_allocations_allocation_id.902a1988a7",
+            "seconds": 0.026999711990356445,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_references",
+            "seconds": 0.044999122619628906,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_validity",
+            "seconds": 0.007999658584594727,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_subscriptions_contract_id.2c9d4c503f",
+            "seconds": 0.0070002079010009766,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_subscriptions_contract_id.5e620e2c61",
+            "seconds": 0.009999513626098633,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.stg_opportunities",
+            "seconds": 0.01800370216369629,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_flows",
+            "seconds": 0.4106118679046631,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_subscription_period",
+            "seconds": 0.1435103416442871,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_opportunity_contract",
+            "seconds": 0.1639997959136963,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_required_fact_fields",
+            "seconds": 0.010999202728271484,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_opportunities_event_id.a1ef70569b",
+            "seconds": 0.008999824523925781,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_opportunities_event_id.2e2c7d09fe",
+            "seconds": 0.07950806617736816,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_flow_conservation",
+            "seconds": 0.06400084495544434,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_subscription_period_contract_period_key.0c9046cc23",
+            "seconds": 0.011000394821166992,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_subscription_period_contract_period_key.aa9e8aefeb",
+            "seconds": 0.02300095558166504,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.fct_opportunity_daily",
+            "seconds": 9.271552562713623,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_cohorts",
+            "seconds": 0.11400747299194336,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_discrepancy_bridge",
+            "seconds": 0.09350728988647461,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_arr",
+            "seconds": 0.1552586555480957,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_account_references",
+            "seconds": 1.098114252090454,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_opportunity_daily_opportunity_day_key.d488988ebf",
+            "seconds": 0.009004592895507812,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_opportunity_daily_opportunity_day_key.fba23a1aed",
+            "seconds": 0.9820473194122314,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.mart_pipeline",
+            "seconds": 3.4653725624084473,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_metric_values",
+            "seconds": 0.2255098819732666,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_metric_shape",
+            "seconds": 0.008996725082397461,
+            "status": "pass"
+          }
+        ]
+      },
+      "sampled_process_cpu_seconds": 20.328125,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 1295450112,
+      "samples": 84,
+      "seconds": 20.741814100008924
+    },
+    "baseline_load": {
+      "available_memory_min_bytes": 9984933888,
+      "result": {
+        "loaded": true,
+        "loader_default_memory_limit": "25.0 GiB",
+        "loader_default_threads": 32
+      },
+      "sampled_process_cpu_seconds": 3.5625,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 191307776,
+      "samples": 12,
+      "seconds": 2.8801102000288665
+    },
+    "baseline_noop": {
+      "available_memory_min_bytes": 7344902144,
+      "result": {
+        "mode": "incremental",
+        "nodes": [
+          {
+            "node": "model.revenue_metrics.dim_account",
+            "seconds": 0.08372783660888672,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.dim_date",
+            "seconds": 0.025020360946655273,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_booking_events",
+            "seconds": 0.3150207996368408,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_invoice_lines",
+            "seconds": 0.5701394081115723,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_payment_allocations",
+            "seconds": 0.29924559593200684,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.stg_subscriptions",
+            "seconds": 0.06211233139038086,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_raw_revision_unique",
+            "seconds": 0.0452113151550293,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_source_coverage",
+            "seconds": 0.011144161224365234,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_scd_intervals",
+            "seconds": 0.01967477798461914,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_account_account_version_id.956f97e023",
+            "seconds": 0.010179996490478516,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_account_account_version_id.081635f4f9",
+            "seconds": 0.010767459869384766,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_date_date_day.e3f312efb2",
+            "seconds": 0.0055084228515625,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_date_date_day.d56fd19199",
+            "seconds": 0.007297515869140625,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_booking_events_booking_event_id.bb5998017c",
+            "seconds": 0.004048824310302734,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_booking_events_booking_event_id.33c401e9c1",
+            "seconds": 0.025968074798583984,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_invoice_lines_line_id.6f58cdee9b",
+            "seconds": 0.007442951202392578,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_invoice_lines_line_id.56e7ba6f2a",
+            "seconds": 0.05206632614135742,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_invoice_settlement",
+            "seconds": 0.12441802024841309,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_payment_invoice_reference",
+            "seconds": 0.060399770736694336,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_payment_allocations_allocation_id.d3a9f1f778",
+            "seconds": 0.0074574947357177734,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_payment_allocations_allocation_id.902a1988a7",
+            "seconds": 0.024359941482543945,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_references",
+            "seconds": 0.04513740539550781,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_validity",
+            "seconds": 0.007742881774902344,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_subscriptions_contract_id.2c9d4c503f",
+            "seconds": 0.007899045944213867,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_subscriptions_contract_id.5e620e2c61",
+            "seconds": 0.010128021240234375,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.stg_opportunities",
+            "seconds": 0.022110700607299805,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_flows",
+            "seconds": 0.4517829418182373,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_subscription_period",
+            "seconds": 0.1819753646850586,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_opportunity_contract",
+            "seconds": 0.18572497367858887,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_required_fact_fields",
+            "seconds": 0.01108098030090332,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_opportunities_event_id.a1ef70569b",
+            "seconds": 0.01004481315612793,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_opportunities_event_id.2e2c7d09fe",
+            "seconds": 0.07274127006530762,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_flow_conservation",
+            "seconds": 0.07483530044555664,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_subscription_period_contract_period_key.0c9046cc23",
+            "seconds": 0.007361173629760742,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_subscription_period_contract_period_key.aa9e8aefeb",
+            "seconds": 0.02081465721130371,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.fct_opportunity_daily",
+            "seconds": 0.29366493225097656,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_cohorts",
+            "seconds": 0.15160751342773438,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_discrepancy_bridge",
+            "seconds": 0.11588430404663086,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_arr",
+            "seconds": 0.19297099113464355,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_account_references",
+            "seconds": 1.1216914653778076,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_opportunity_daily_opportunity_day_key.d488988ebf",
+            "seconds": 0.007444143295288086,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_opportunity_daily_opportunity_day_key.fba23a1aed",
+            "seconds": 1.0586581230163574,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.mart_pipeline",
+            "seconds": 3.6298787593841553,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_metric_values",
+            "seconds": 0.2697408199310303,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_metric_shape",
+            "seconds": 0.006504535675048828,
+            "status": "pass"
+          }
+        ]
+      },
+      "sampled_process_cpu_seconds": 11.921875,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 1375526912,
+      "samples": 48,
+      "seconds": 12.427097000007052
+    },
+    "independent_full": {
+      "available_memory_min_bytes": 8730378240,
+      "result": {
+        "mode": "full",
+        "nodes": [
+          {
+            "node": "model.revenue_metrics.dim_account",
+            "seconds": 0.07181310653686523,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.dim_date",
+            "seconds": 0.017905235290527344,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_booking_events",
+            "seconds": 0.23427367210388184,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_invoice_lines",
+            "seconds": 0.5509271621704102,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_payment_allocations",
+            "seconds": 0.38184475898742676,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.stg_subscriptions",
+            "seconds": 0.026218414306640625,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_raw_revision_unique",
+            "seconds": 0.03654623031616211,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_source_coverage",
+            "seconds": 0.007594585418701172,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_scd_intervals",
+            "seconds": 0.01536250114440918,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_account_account_version_id.956f97e023",
+            "seconds": 0.010340213775634766,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_account_account_version_id.081635f4f9",
+            "seconds": 0.012664794921875,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_date_date_day.e3f312efb2",
+            "seconds": 0.008055925369262695,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_date_date_day.d56fd19199",
+            "seconds": 0.031036376953125,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_booking_events_booking_event_id.bb5998017c",
+            "seconds": 0.007009744644165039,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_booking_events_booking_event_id.33c401e9c1",
+            "seconds": 0.032776594161987305,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_invoice_lines_line_id.6f58cdee9b",
+            "seconds": 0.009259462356567383,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_invoice_lines_line_id.56e7ba6f2a",
+            "seconds": 0.06880307197570801,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_invoice_settlement",
+            "seconds": 0.12692880630493164,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_payment_invoice_reference",
+            "seconds": 0.0743553638458252,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_payment_allocations_allocation_id.d3a9f1f778",
+            "seconds": 0.007737636566162109,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_payment_allocations_allocation_id.902a1988a7",
+            "seconds": 0.03238701820373535,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_references",
+            "seconds": 0.053231000900268555,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_validity",
+            "seconds": 0.00800013542175293,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_subscriptions_contract_id.2c9d4c503f",
+            "seconds": 0.008006095886230469,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_subscriptions_contract_id.5e620e2c61",
+            "seconds": 0.01151728630065918,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.stg_opportunities",
+            "seconds": 0.018024682998657227,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_flows",
+            "seconds": 0.45279908180236816,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_subscription_period",
+            "seconds": 0.15291786193847656,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_opportunity_contract",
+            "seconds": 0.19794654846191406,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_required_fact_fields",
+            "seconds": 0.010365486145019531,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_opportunities_event_id.a1ef70569b",
+            "seconds": 0.009519100189208984,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_opportunities_event_id.2e2c7d09fe",
+            "seconds": 0.09281015396118164,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_flow_conservation",
+            "seconds": 0.0808570384979248,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_subscription_period_contract_period_key.0c9046cc23",
+            "seconds": 0.008031845092773438,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_subscription_period_contract_period_key.aa9e8aefeb",
+            "seconds": 0.019529104232788086,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.fct_opportunity_daily",
+            "seconds": 9.534566402435303,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_cohorts",
+            "seconds": 0.1460282802581787,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_discrepancy_bridge",
+            "seconds": 0.14202332496643066,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_arr",
+            "seconds": 0.15534281730651855,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_account_references",
+            "seconds": 1.1261184215545654,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_opportunity_daily_opportunity_day_key.d488988ebf",
+            "seconds": 0.009005069732666016,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_opportunity_daily_opportunity_day_key.fba23a1aed",
+            "seconds": 0.9946637153625488,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.mart_pipeline",
+            "seconds": 3.629544973373413,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_metric_values",
+            "seconds": 0.29202771186828613,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_metric_shape",
+            "seconds": 0.011000633239746094,
+            "status": "pass"
+          }
+        ]
+      },
+      "sampled_process_cpu_seconds": 21.234375,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 1354940416,
+      "samples": 86,
+      "seconds": 21.742673000029754
+    },
+    "independent_load": {
+      "available_memory_min_bytes": 9886367744,
+      "result": {
+        "loaded": true,
+        "loader_default_memory_limit": "25.0 GiB",
+        "loader_default_threads": 32
+      },
+      "sampled_process_cpu_seconds": 3.625,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 181698560,
+      "samples": 12,
+      "seconds": 2.900064699992072
+    },
+    "large_baseline": {
+      "available_memory_min_bytes": 5193281536,
+      "result": {
+        "mode": "incremental",
+        "nodes": [
+          {
+            "node": "model.revenue_metrics.dim_account",
+            "seconds": 0.08897829055786133,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.dim_date",
+            "seconds": 0.025820016860961914,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_booking_events",
+            "seconds": 0.3137791156768799,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_invoice_lines",
+            "seconds": 0.5863604545593262,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_payment_allocations",
+            "seconds": 0.30095577239990234,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.stg_subscriptions",
+            "seconds": 0.06073927879333496,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_raw_revision_unique",
+            "seconds": 0.04886746406555176,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_source_coverage",
+            "seconds": 0.00816035270690918,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_scd_intervals",
+            "seconds": 0.015341520309448242,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_account_account_version_id.956f97e023",
+            "seconds": 0.009994029998779297,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_account_account_version_id.081635f4f9",
+            "seconds": 0.010184288024902344,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_date_date_day.e3f312efb2",
+            "seconds": 0.007999658584594727,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_date_date_day.d56fd19199",
+            "seconds": 0.00800013542175293,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_booking_events_booking_event_id.bb5998017c",
+            "seconds": 0.007142782211303711,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_booking_events_booking_event_id.33c401e9c1",
+            "seconds": 0.023365259170532227,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_invoice_lines_line_id.6f58cdee9b",
+            "seconds": 0.0070002079010009766,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_invoice_lines_line_id.56e7ba6f2a",
+            "seconds": 0.05128359794616699,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_invoice_settlement",
+            "seconds": 0.12746739387512207,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_payment_invoice_reference",
+            "seconds": 0.057698965072631836,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_payment_allocations_allocation_id.d3a9f1f778",
+            "seconds": 0.006999015808105469,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_payment_allocations_allocation_id.902a1988a7",
+            "seconds": 0.025147438049316406,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_references",
+            "seconds": 0.04555535316467285,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_validity",
+            "seconds": 0.007002115249633789,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_subscriptions_contract_id.2c9d4c503f",
+            "seconds": 0.007997274398803711,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_subscriptions_contract_id.5e620e2c61",
+            "seconds": 0.00999593734741211,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.stg_opportunities",
+            "seconds": 0.023260116577148438,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_flows",
+            "seconds": 0.46166419982910156,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_subscription_period",
+            "seconds": 0.160170316696167,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_opportunity_contract",
+            "seconds": 0.1750495433807373,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_required_fact_fields",
+            "seconds": 0.012256622314453125,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_opportunities_event_id.a1ef70569b",
+            "seconds": 0.009186744689941406,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_opportunities_event_id.2e2c7d09fe",
+            "seconds": 0.07441830635070801,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_flow_conservation",
+            "seconds": 0.07428240776062012,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_subscription_period_contract_period_key.0c9046cc23",
+            "seconds": 0.009092092514038086,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_subscription_period_contract_period_key.aa9e8aefeb",
+            "seconds": 0.019304990768432617,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.fct_opportunity_daily",
+            "seconds": 0.8128383159637451,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_cohorts",
+            "seconds": 0.15605902671813965,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_discrepancy_bridge",
+            "seconds": 0.11648225784301758,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_arr",
+            "seconds": 0.18529868125915527,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_account_references",
+            "seconds": 1.3435876369476318,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_opportunity_daily_opportunity_day_key.d488988ebf",
+            "seconds": 0.008001089096069336,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_opportunity_daily_opportunity_day_key.fba23a1aed",
+            "seconds": 1.0754542350769043,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.mart_pipeline",
+            "seconds": 3.770296812057495,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_metric_values",
+            "seconds": 0.2617061138153076,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_metric_shape",
+            "seconds": 0.006999492645263672,
+            "status": "pass"
+          }
+        ]
+      },
+      "sampled_process_cpu_seconds": 12.9375,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 1496416256,
+      "samples": 51,
+      "seconds": 13.41162849997636
+    },
+    "large_baseline_source": {
+      "available_memory_min_bytes": 6406762496,
+      "result": {
+        "opportunities": 10000,
+        "scope": "Adversarial appended amount corrections to open prospects; separate from canonical economics"
+      },
+      "sampled_process_cpu_seconds": 0.921875,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 189181952,
+      "samples": 2,
+      "seconds": 0.5100014999625273
+    },
+    "large_independent": {
+      "available_memory_min_bytes": 5015355392,
+      "result": {
+        "mode": "full",
+        "nodes": [
+          {
+            "node": "model.revenue_metrics.dim_account",
+            "seconds": 0.07594060897827148,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.dim_date",
+            "seconds": 0.02131199836730957,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_booking_events",
+            "seconds": 0.24179315567016602,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_invoice_lines",
+            "seconds": 0.5742318630218506,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_payment_allocations",
+            "seconds": 0.28134894371032715,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.stg_subscriptions",
+            "seconds": 0.03654050827026367,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_raw_revision_unique",
+            "seconds": 0.04065275192260742,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_source_coverage",
+            "seconds": 0.006997108459472656,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_scd_intervals",
+            "seconds": 0.014317512512207031,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_account_account_version_id.956f97e023",
+            "seconds": 0.010159969329833984,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_account_account_version_id.081635f4f9",
+            "seconds": 0.01015162467956543,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_date_date_day.e3f312efb2",
+            "seconds": 0.0070002079010009766,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_date_date_day.d56fd19199",
+            "seconds": 0.033489227294921875,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_booking_events_booking_event_id.bb5998017c",
+            "seconds": 0.007166147232055664,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_booking_events_booking_event_id.33c401e9c1",
+            "seconds": 0.025481462478637695,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_invoice_lines_line_id.6f58cdee9b",
+            "seconds": 0.00599980354309082,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_invoice_lines_line_id.56e7ba6f2a",
+            "seconds": 0.055928945541381836,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_invoice_settlement",
+            "seconds": 0.12839913368225098,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_payment_invoice_reference",
+            "seconds": 0.07282638549804688,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_payment_allocations_allocation_id.d3a9f1f778",
+            "seconds": 0.007163524627685547,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_payment_allocations_allocation_id.902a1988a7",
+            "seconds": 0.02746295928955078,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_references",
+            "seconds": 0.059003591537475586,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_validity",
+            "seconds": 0.011149406433105469,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_subscriptions_contract_id.2c9d4c503f",
+            "seconds": 0.010169744491577148,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_subscriptions_contract_id.5e620e2c61",
+            "seconds": 0.01614975929260254,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.stg_opportunities",
+            "seconds": 0.02031874656677246,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_flows",
+            "seconds": 0.40903496742248535,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_subscription_period",
+            "seconds": 0.1626126766204834,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_opportunity_contract",
+            "seconds": 0.180983304977417,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_required_fact_fields",
+            "seconds": 0.008156776428222656,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_opportunities_event_id.a1ef70569b",
+            "seconds": 0.007062673568725586,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_opportunities_event_id.2e2c7d09fe",
+            "seconds": 0.07499074935913086,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_flow_conservation",
+            "seconds": 0.07603240013122559,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_subscription_period_contract_period_key.0c9046cc23",
+            "seconds": 0.009158134460449219,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_subscription_period_contract_period_key.aa9e8aefeb",
+            "seconds": 0.027469635009765625,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.fct_opportunity_daily",
+            "seconds": 9.93454885482788,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_cohorts",
+            "seconds": 0.1431446075439453,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_discrepancy_bridge",
+            "seconds": 0.11439728736877441,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_arr",
+            "seconds": 0.16809296607971191,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_account_references",
+            "seconds": 1.1459214687347412,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_opportunity_daily_opportunity_day_key.d488988ebf",
+            "seconds": 0.008148670196533203,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_opportunity_daily_opportunity_day_key.fba23a1aed",
+            "seconds": 1.1252555847167969,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.mart_pipeline",
+            "seconds": 3.861220121383667,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_metric_values",
+            "seconds": 0.2573990821838379,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_metric_shape",
+            "seconds": 0.007999181747436523,
+            "status": "pass"
+          }
+        ]
+      },
+      "sampled_process_cpu_seconds": 21.78125,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 1175482368,
+      "samples": 83,
+      "seconds": 22.34746149997227
+    },
+    "large_independent_load": {
+      "available_memory_min_bytes": 6426599424,
+      "result": {
+        "loaded": true,
+        "loader_default_memory_limit": "25.0 GiB",
+        "loader_default_threads": 32
+      },
+      "sampled_process_cpu_seconds": 3.96875,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 189235200,
+      "samples": 12,
+      "seconds": 2.987229800026398
+    },
+    "large_independent_source": {
+      "available_memory_min_bytes": 6509977600,
+      "result": {
+        "opportunities": 10000,
+        "scope": "Adversarial appended amount corrections to open prospects; separate from canonical economics"
+      },
+      "sampled_process_cpu_seconds": 1.046875,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 75075584,
+      "samples": 2,
+      "seconds": 0.5240591000183485
+    },
+    "large_optimized": {
+      "available_memory_min_bytes": 5283528704,
+      "result": {
+        "affected_accounts": 7485,
+        "changed_sources": [
+          "opportunity_events"
+        ],
+        "detection_and_snapshot_seconds": 7.301476599997841,
+        "mode": "opportunity_accounts",
+        "models_executed": [
+          "stg_opportunities",
+          "fct_opportunity_daily",
+          "mart_cohorts",
+          "mart_pipeline",
+          "mart_metric_values"
+        ],
+        "nodes": [
+          {
+            "node": "test.revenue_metrics.assert_contract_references",
+            "seconds": 0.06881284713745117,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_validity",
+            "seconds": 0.009147167205810547,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_invoice_settlement",
+            "seconds": 0.12102651596069336,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_payment_invoice_reference",
+            "seconds": 0.0639798641204834,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_raw_revision_unique",
+            "seconds": 0.029149770736694336,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_scd_intervals",
+            "seconds": 0.018338918685913086,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_source_coverage",
+            "seconds": 0.009160041809082031,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_account_account_version_id.956f97e023",
+            "seconds": 0.012174844741821289,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_date_date_day.e3f312efb2",
+            "seconds": 0.008146047592163086,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_booking_events_booking_event_id.bb5998017c",
+            "seconds": 0.009153127670288086,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_invoice_lines_line_id.6f58cdee9b",
+            "seconds": 0.0076749324798583984,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_payment_allocations_allocation_id.d3a9f1f778",
+            "seconds": 0.00915980339050293,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_subscriptions_contract_id.2c9d4c503f",
+            "seconds": 0.010178327560424805,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_account_account_version_id.081635f4f9",
+            "seconds": 0.014000177383422852,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_date_date_day.d56fd19199",
+            "seconds": 0.008156061172485352,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_booking_events_booking_event_id.33c401e9c1",
+            "seconds": 0.028577566146850586,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_invoice_lines_line_id.56e7ba6f2a",
+            "seconds": 0.05983161926269531,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_payment_allocations_allocation_id.902a1988a7",
+            "seconds": 0.03033161163330078,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_subscriptions_contract_id.5e620e2c61",
+            "seconds": 0.013164758682250977,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.stg_opportunities",
+            "seconds": 0.056143760681152344,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_flow_conservation",
+            "seconds": 0.07782459259033203,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_subscription_period_contract_period_key.0c9046cc23",
+            "seconds": 0.06388211250305176,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_subscription_period_contract_period_key.aa9e8aefeb",
+            "seconds": 0.026315689086914062,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_opportunity_contract",
+            "seconds": 0.2239382266998291,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_required_fact_fields",
+            "seconds": 0.009164094924926758,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_opportunities_event_id.a1ef70569b",
+            "seconds": 0.011157512664794922,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_opportunities_event_id.2e2c7d09fe",
+            "seconds": 0.08380413055419922,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.fct_opportunity_daily",
+            "seconds": 1.0001397132873535,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_cohorts",
+            "seconds": 0.15115833282470703,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_account_references",
+            "seconds": 1.1673097610473633,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_opportunity_daily_opportunity_day_key.d488988ebf",
+            "seconds": 0.00799870491027832,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_opportunity_daily_opportunity_day_key.fba23a1aed",
+            "seconds": 1.095104694366455,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.mart_pipeline",
+            "seconds": 0.917557954788208,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_metric_values",
+            "seconds": 0.40189528465270996,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_metric_shape",
+            "seconds": 0.008003711700439453,
+            "status": "pass"
+          }
+        ],
+        "quality_gates": 30,
+        "reason": "append-only monotonic revisions with stable canonical identity",
+        "total_seconds": 20.920539700018708
+      },
+      "sampled_process_cpu_seconds": 20.71875,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 1377239040,
+      "samples": 81,
+      "seconds": 21.301407799997833
+    },
+    "large_optimized_source": {
+      "available_memory_min_bytes": 6466371584,
+      "result": {
+        "opportunities": 10000,
+        "scope": "Adversarial appended amount corrections to open prospects; separate from canonical economics"
+      },
+      "sampled_process_cpu_seconds": 0.953125,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 187523072,
+      "samples": 2,
+      "seconds": 0.519700999953784
+    },
+    "optimized_correction_load": {
+      "available_memory_min_bytes": 10437238784,
+      "result": {
+        "correction_loaded": true
+      },
+      "sampled_process_cpu_seconds": 0.28125,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 23523328,
+      "samples": 2,
+      "seconds": 0.4833610999630764
+    },
+    "optimized_incremental": {
+      "available_memory_min_bytes": 8797061120,
+      "result": {
+        "affected_accounts": 300,
+        "changed_sources": [
+          "opportunity_events"
+        ],
+        "detection_and_snapshot_seconds": 6.881339899962768,
+        "mode": "opportunity_accounts",
+        "models_executed": [
+          "stg_opportunities",
+          "fct_opportunity_daily",
+          "mart_cohorts",
+          "mart_pipeline",
+          "mart_metric_values"
+        ],
+        "nodes": [
+          {
+            "node": "test.revenue_metrics.assert_contract_references",
+            "seconds": 0.06407451629638672,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_validity",
+            "seconds": 0.007999897003173828,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_invoice_settlement",
+            "seconds": 0.11699938774108887,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_payment_invoice_reference",
+            "seconds": 0.06699800491333008,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_raw_revision_unique",
+            "seconds": 0.030008554458618164,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_scd_intervals",
+            "seconds": 0.016507863998413086,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_source_coverage",
+            "seconds": 0.009002208709716797,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_account_account_version_id.956f97e023",
+            "seconds": 0.010999441146850586,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_date_date_day.e3f312efb2",
+            "seconds": 0.008000373840332031,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_booking_events_booking_event_id.bb5998017c",
+            "seconds": 0.0070018768310546875,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_invoice_lines_line_id.6f58cdee9b",
+            "seconds": 0.006999969482421875,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_payment_allocations_allocation_id.d3a9f1f778",
+            "seconds": 0.007002115249633789,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_subscriptions_contract_id.2c9d4c503f",
+            "seconds": 0.007999181747436523,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_account_account_version_id.081635f4f9",
+            "seconds": 0.01200103759765625,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_date_date_day.d56fd19199",
+            "seconds": 0.007999420166015625,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_booking_events_booking_event_id.33c401e9c1",
+            "seconds": 0.02800273895263672,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_invoice_lines_line_id.56e7ba6f2a",
+            "seconds": 0.05499863624572754,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_payment_allocations_allocation_id.902a1988a7",
+            "seconds": 0.0280001163482666,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_subscriptions_contract_id.5e620e2c61",
+            "seconds": 0.012001514434814453,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.stg_opportunities",
+            "seconds": 0.051549673080444336,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_flow_conservation",
+            "seconds": 0.07700252532958984,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_subscription_period_contract_period_key.0c9046cc23",
+            "seconds": 0.05300140380859375,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_subscription_period_contract_period_key.aa9e8aefeb",
+            "seconds": 0.021001100540161133,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_opportunity_contract",
+            "seconds": 0.1731112003326416,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_required_fact_fields",
+            "seconds": 0.007998943328857422,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_opportunities_event_id.a1ef70569b",
+            "seconds": 0.007999420166015625,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_opportunities_event_id.2e2c7d09fe",
+            "seconds": 0.0840003490447998,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.fct_opportunity_daily",
+            "seconds": 0.9914042949676514,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_cohorts",
+            "seconds": 0.15958166122436523,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_account_references",
+            "seconds": 1.2401173114776611,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_opportunity_daily_opportunity_day_key.d488988ebf",
+            "seconds": 0.013099908828735352,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_opportunity_daily_opportunity_day_key.fba23a1aed",
+            "seconds": 1.1171128749847412,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.mart_pipeline",
+            "seconds": 0.36106300354003906,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_metric_values",
+            "seconds": 0.3557090759277344,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_metric_shape",
+            "seconds": 0.011999130249023438,
+            "status": "pass"
+          }
+        ],
+        "quality_gates": 30,
+        "reason": "append-only monotonic revisions with stable canonical identity",
+        "total_seconds": 19.78128429997014
+      },
+      "sampled_process_cpu_seconds": 19.390625,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 1347346432,
+      "samples": 79,
+      "seconds": 20.033537100011017
+    },
+    "optimized_initial": {
+      "available_memory_min_bytes": 9233862656,
+      "result": {
+        "affected_accounts": 0,
+        "changed_sources": [
+          "account_attributes",
+          "account_history",
+          "booking_attributes",
+          "booking_events",
+          "calendar",
+          "commercial_events",
+          "contract_attributes",
+          "coverage",
+          "dataset_metadata",
+          "invoice_lines",
+          "opportunity_events",
+          "payment_allocations",
+          "subscription_contracts"
+        ],
+        "detection_and_snapshot_seconds": 1.5529275999870151,
+        "mode": "full",
+        "models_executed": [
+          "dim_account",
+          "dim_date",
+          "fct_booking_events",
+          "fct_invoice_lines",
+          "fct_payment_allocations",
+          "stg_subscriptions",
+          "stg_opportunities",
+          "mart_flows",
+          "fct_subscription_period",
+          "fct_opportunity_daily",
+          "mart_cohorts",
+          "mart_discrepancy_bridge",
+          "mart_arr",
+          "mart_pipeline",
+          "mart_metric_values"
+        ],
+        "nodes": [
+          {
+            "node": "model.revenue_metrics.dim_account",
+            "seconds": 0.0760951042175293,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.dim_date",
+            "seconds": 0.018000125885009766,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_booking_events",
+            "seconds": 0.23864459991455078,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_invoice_lines",
+            "seconds": 0.5486009120941162,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_payment_allocations",
+            "seconds": 0.27756571769714355,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.stg_subscriptions",
+            "seconds": 0.024738788604736328,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_raw_revision_unique",
+            "seconds": 0.0349888801574707,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_source_coverage",
+            "seconds": 0.008000373840332031,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_scd_intervals",
+            "seconds": 0.014396429061889648,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_account_account_version_id.956f97e023",
+            "seconds": 0.010004043579101562,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_account_account_version_id.081635f4f9",
+            "seconds": 0.012512683868408203,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_date_date_day.e3f312efb2",
+            "seconds": 0.009000301361083984,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_date_date_day.d56fd19199",
+            "seconds": 0.040000200271606445,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_booking_events_booking_event_id.bb5998017c",
+            "seconds": 0.008999824523925781,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_booking_events_booking_event_id.33c401e9c1",
+            "seconds": 0.03100109100341797,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_invoice_lines_line_id.6f58cdee9b",
+            "seconds": 0.006997108459472656,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_invoice_lines_line_id.56e7ba6f2a",
+            "seconds": 0.05300307273864746,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_invoice_settlement",
+            "seconds": 0.14051294326782227,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_payment_invoice_reference",
+            "seconds": 0.07107400894165039,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_payment_allocations_allocation_id.d3a9f1f778",
+            "seconds": 0.010000944137573242,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_payment_allocations_allocation_id.902a1988a7",
+            "seconds": 0.033000946044921875,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_references",
+            "seconds": 0.06399965286254883,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_validity",
+            "seconds": 0.008008241653442383,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_subscriptions_contract_id.2c9d4c503f",
+            "seconds": 0.007000446319580078,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_subscriptions_contract_id.5e620e2c61",
+            "seconds": 0.015507221221923828,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.stg_opportunities",
+            "seconds": 0.030650615692138672,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_flows",
+            "seconds": 0.48148584365844727,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.fct_subscription_period",
+            "seconds": 0.13601207733154297,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_opportunity_contract",
+            "seconds": 0.16606760025024414,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_required_fact_fields",
+            "seconds": 0.008001327514648438,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_opportunities_event_id.a1ef70569b",
+            "seconds": 0.007063388824462891,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_opportunities_event_id.2e2c7d09fe",
+            "seconds": 0.06517982482910156,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_flow_conservation",
+            "seconds": 0.07931375503540039,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_subscription_period_contract_period_key.0c9046cc23",
+            "seconds": 0.009000778198242188,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_subscription_period_contract_period_key.aa9e8aefeb",
+            "seconds": 0.0290982723236084,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.fct_opportunity_daily",
+            "seconds": 9.148469686508179,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_cohorts",
+            "seconds": 0.11223602294921875,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_discrepancy_bridge",
+            "seconds": 0.1199498176574707,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_arr",
+            "seconds": 0.1502377986907959,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_account_references",
+            "seconds": 1.0609827041625977,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_opportunity_daily_opportunity_day_key.d488988ebf",
+            "seconds": 0.00800013542175293,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_opportunity_daily_opportunity_day_key.fba23a1aed",
+            "seconds": 0.9945716857910156,
+            "status": "pass"
+          },
+          {
+            "node": "model.revenue_metrics.mart_pipeline",
+            "seconds": 3.530374526977539,
+            "status": "success"
+          },
+          {
+            "node": "model.revenue_metrics.mart_metric_values",
+            "seconds": 0.2687203884124756,
+            "status": "success"
+          },
+          {
+            "node": "test.revenue_metrics.assert_metric_shape",
+            "seconds": 0.009000062942504883,
+            "status": "pass"
+          }
+        ],
+        "quality_gates": 30,
+        "reason": "initialization, broader change or invalidated state",
+        "total_seconds": 27.48568189999787
+      },
+      "sampled_process_cpu_seconds": 26.6875,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 1312514048,
+      "samples": 112,
+      "seconds": 27.776701599999797
+    },
+    "optimized_load": {
+      "available_memory_min_bytes": 9116950528,
+      "result": {
+        "loaded": true,
+        "loader_default_memory_limit": "25.0 GiB",
+        "loader_default_threads": 32
+      },
+      "sampled_process_cpu_seconds": 3.609375,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 215719936,
+      "samples": 12,
+      "seconds": 2.8199234000057913
+    },
+    "optimized_noop": {
+      "available_memory_min_bytes": 6997028864,
+      "result": {
+        "affected_accounts": 0,
+        "changed_sources": [],
+        "detection_and_snapshot_seconds": 5.976287400000729,
+        "mode": "noop",
+        "models_executed": [],
+        "nodes": [
+          {
+            "node": "test.revenue_metrics.assert_account_references",
+            "seconds": 1.1862480640411377,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_references",
+            "seconds": 0.05059313774108887,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_contract_validity",
+            "seconds": 0.006726980209350586,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_flow_conservation",
+            "seconds": 0.07465052604675293,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_invoice_settlement",
+            "seconds": 0.12389111518859863,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_metric_shape",
+            "seconds": 0.007875204086303711,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_opportunity_contract",
+            "seconds": 0.16833972930908203,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_payment_invoice_reference",
+            "seconds": 0.06881141662597656,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_raw_revision_unique",
+            "seconds": 0.027000904083251953,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_required_fact_fields",
+            "seconds": 0.008000850677490234,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_scd_intervals",
+            "seconds": 0.015001058578491211,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.assert_source_coverage",
+            "seconds": 0.007001161575317383,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_account_account_version_id.956f97e023",
+            "seconds": 0.01100015640258789,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_dim_date_date_day.e3f312efb2",
+            "seconds": 0.008000612258911133,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_booking_events_booking_event_id.bb5998017c",
+            "seconds": 0.008118391036987305,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_invoice_lines_line_id.6f58cdee9b",
+            "seconds": 0.007000923156738281,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_opportunity_daily_opportunity_day_key.d488988ebf",
+            "seconds": 0.00899958610534668,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_payment_allocations_allocation_id.d3a9f1f778",
+            "seconds": 0.007001161575317383,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_fct_subscription_period_contract_period_key.0c9046cc23",
+            "seconds": 0.008176326751708984,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_opportunities_event_id.a1ef70569b",
+            "seconds": 0.008000373840332031,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.not_null_stg_subscriptions_contract_id.2c9d4c503f",
+            "seconds": 0.008000373840332031,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_account_account_version_id.081635f4f9",
+            "seconds": 0.01100015640258789,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_dim_date_date_day.d56fd19199",
+            "seconds": 0.007004499435424805,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_booking_events_booking_event_id.33c401e9c1",
+            "seconds": 0.027509450912475586,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_invoice_lines_line_id.56e7ba6f2a",
+            "seconds": 0.05799984931945801,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_opportunity_daily_opportunity_day_key.fba23a1aed",
+            "seconds": 1.1932258605957031,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_payment_allocations_allocation_id.902a1988a7",
+            "seconds": 0.027328014373779297,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_fct_subscription_period_contract_period_key.aa9e8aefeb",
+            "seconds": 0.019003868103027344,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_opportunities_event_id.2e2c7d09fe",
+            "seconds": 0.07309293746948242,
+            "status": "pass"
+          },
+          {
+            "node": "test.revenue_metrics.unique_stg_subscriptions_contract_id.5e620e2c61",
+            "seconds": 0.012000083923339844,
+            "status": "pass"
+          }
+        ],
+        "quality_gates": 30,
+        "reason": "no source change",
+        "total_seconds": 17.249003399978392
+      },
+      "sampled_process_cpu_seconds": 16.6875,
+      "sampled_temp_peak_bytes": 0,
+      "sampled_tree_rss_max_bytes": 1435672576,
+      "samples": 68,
+      "seconds": 17.501055100001395
+    }
+  },
+  "total_opportunities": 195927,
+  "warehouse_bytes": {
+    "baseline": 394539008,
+    "independent": 347353088,
+    "optimized": 527183872
+  }
+}
