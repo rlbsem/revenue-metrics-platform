@@ -2,7 +2,7 @@
 
 **Marketing sees pipeline. Sales sees bookings. Finance sees invoices and cash. Why don't the numbers agree?**
 
-**Professional application:** My private equity and enterprise systems work includes building consolidated revenue intelligence and reconciliation infrastructure across operating companies. These systems connect commercial, operational and financial records so investors and executive teams can trace what was sold, fulfilled, invoiced and collected, investigate variances and establish reliable portfolio-level reporting. The public models use synthetic financial data to demonstrate the underlying controls.
+**Business impact and professional application:** I've delivered consolidated revenue intelligence and reconciliation infrastructure for **private equity sponsors and enterprise operating teams**. Instead of manually stitching together separate CRM, operating and accounting reports, executives can trace what was sold, fulfilled, invoiced and collected, identify variance drivers and investigate discrepancies against authoritative source records. That strengthens portfolio reporting, acquisition integration and financial decision-making. This public Python/SQL/dbt implementation demonstrates the governed metrics and reconciliation controls with synthetic data.
 
 The platform reconciles pipeline, bookings, invoicing, cash and ARR through dimensional models and six governed metrics. Its synthetic B2B SaaS scenario has approximately **USD $755M in period-end ARR**. All financial amounts are fictional US dollars, not currency conversions. A smaller hand-authored fixture supplies exact edge cases for independent testing.
 
