@@ -31,7 +31,7 @@ Executed source `d26b4300338aa0b78f5434b3fca5ae45ab62033a`. {'dbt-core': '1.9.8'
 | fct_invoice_lines | 0.550 | 0.000 |
 | mart_flows | 0.438 | 0.000 |
 
-Median corrected rebuild: **12.447s â†’ 19.205s (54.3% increase)**. The predeclared 15% threshold was not met. Median initial builds: original 20.742s, selective 26.997s. Independent corrected full refresh: 20.864s. Selective totals include exact change detection, source snapshot copying, quality gates and checkpointing; source generation/loading, full rowset comparison and consumer hashing are separately timed in the raw records.
+Median corrected rebuild: **12.447s to 19.205s (54.3% increase)**. The predeclared 15% threshold was not met. Median initial builds: original 20.742s, selective 26.997s. Independent corrected full refresh: 20.864s. Selective totals include exact change detection, source snapshot copying, quality gates and checkpointing; source generation/loading, full rowset comparison and consumer hashing are separately timed in the raw records.
 
 All 15 model column contracts and complete multisets matched both original incremental and an independent clean full rebuild in every repetition. All rows are ordered by verified model grains and losslessly exported as typed Parquet (HUGEINT uses exact integer text); exact bytes or every Arrow value are compared. Independent connections preserve each view’s own source binding. Unsupported complex export types fail closed. No probabilistic signatures establish this result. Validated consumer payloads were identical. All amounts retain the existing synthetic USD contract.
 
@@ -54,7 +54,7 @@ Executed source `b13a011ae08dd11abb05cdea03b956ce6bac83ca`. {'dbt-core': '1.9.8'
 | fct_invoice_lines | 1.704 | 0.000 |
 | mart_flows | 1.235 | 0.000 |
 
-Median corrected rebuild: **43.923s â†’ 57.634s (31.2% increase)**. The predeclared 15% threshold was not met. Median initial builds: original 68.690s, selective 87.578s. Independent corrected full refresh: 68.156s. Selective totals include exact change detection, source snapshot copying, quality gates and checkpointing; source generation/loading, full rowset comparison and consumer hashing are separately timed in the raw records.
+Median corrected rebuild: **43.923s to 57.634s (31.2% increase)**. The predeclared 15% threshold was not met. Median initial builds: original 68.690s, selective 87.578s. Independent corrected full refresh: 68.156s. Selective totals include exact change detection, source snapshot copying, quality gates and checkpointing; source generation/loading, full rowset comparison and consumer hashing are separately timed in the raw records.
 
 All 15 model column contracts and complete multisets matched both original incremental and an independent clean full rebuild in every repetition. All rows are ordered by verified model grains and losslessly exported as typed Parquet (HUGEINT uses exact integer text); exact bytes or every Arrow value are compared. Independent connections preserve each view’s own source binding. Unsupported complex export types fail closed. No probabilistic signatures establish this result. Validated consumer payloads were identical. All amounts retain the existing synthetic USD contract.
 
