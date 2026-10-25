@@ -127,6 +127,10 @@ revenue export --publication .local/demo/published --region ALL --output .local/
 
 Supply `--expected-release <identifier>` to reject a stale consumer request. Enterprise regions are `ALL`, `East`, `North`, `West`, `EMEA` and `APAC`. The app also provides segment/offering selectors for the subscription-portfolio table; those selectors do not change the six region-filtered cards. The report window is intentionally Q1 2026; changing it requires compatible source/calendar coverage and a full rebuild, not editing the dashboard.
 
+## Controlled selective rebuilds
+
+Three paired repetitions at both the 60,000-account enterprise profile and 180,000-account stress profile compare the original build with an opt-in affected-account candidate, with exact content checks across all 15 models. The candidate reduced aggregation work but regressed total build time; the original default is retained. [Measured results, resource costs and failure acceptance](docs/evidence/performance/report.md) · [Contracts and reproduction](docs/performance.md). These are local synthetic measurements, separate from historical native Snowflake acceptance.
+
 ## Configure Snowflake
 
 Follow [the Snowflake runbook and one-time owner handoff](docs/snowflake.md), review [bootstrap grants and the fixture resource guard](snowflake/bootstrap.sql), and configure the separate runner/reader identities documented in [.env.example](.env.example). Key files stay outside this repository.

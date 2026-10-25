@@ -1,0 +1,107 @@
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+explain analyze select f.date_day,f.account_id,a.region,a.owner,sum(case when f.stage='open' then f.amount_cents else 0 end) as pipeline_cents from analytics.fct_opportunity_daily f join analytics.dim_account a on f.account_id=a.account_id and f.date_day>=a.valid_from and f.date_day<a.valid_to  group by f.date_day,f.account_id,a.region,a.owner
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││               Total Time: 8.42s              ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│           0 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│             #0            │
+│__internal_decompress_strin│
+│           g(#1)           │
+│__internal_decompress_strin│
+│           g(#2)           │
+│             #3            │
+│             #4            │
+│                           │
+│       16188545 Rows       │
+│          (0.12s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│       HASH_GROUP_BY       │
+│    ────────────────────   │
+│          Groups:          │
+│             #0            │
+│             #1            │
+│             #2            │
+│             #3            │
+│                           │
+│    Aggregates: sum(#4)    │
+│                           │
+│       16188545 Rows       │
+│          (6.62s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│          date_day         │
+│         account_id        │
+│           region          │
+│           owner           │
+│ CASE  WHEN ((stage = 'open│
+│  ')) THEN (amount_cents)  │
+│         ELSE 0 END        │
+│                           │
+│       37375442 Rows       │
+│          (0.11s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_string_│
+│        ubigint(#0)        │
+│             #1            │
+│             #2            │
+│             #3            │
+│__internal_compress_string_│
+│        ubigint(#4)        │
+│             #5            │
+│                           │
+│       37375442 Rows       │
+│          (0.29s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│    ────────────────────   │
+│      Join Type: INNER     │
+│                           │
+│        Conditions:        │
+│  account_id = account_id  ├──────────────┐
+│   date_day >= valid_from  │              │
+│    date_day < valid_to    │              │
+│                           │              │
+│       37375442 Rows       │              │
+│          (0.67s)          │              │
+└─────────────┬─────────────┘              │
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   ││    ────────────────────   │
+│           Table:          ││     Table: dim_account    │
+│   fct_opportunity_daily   ││   Type: Sequential Scan   │
+│                           ││                           │
+│   Type: Sequential Scan   ││        Projections:       │
+│                           ││         account_id        │
+│        Projections:       ││         valid_from        │
+│         account_id        ││          valid_to         │
+│          date_day         ││           region          │
+│           stage           ││           owner           │
+│        amount_cents       ││                           │
+│                           ││                           │
+│       37375442 Rows       ││        205714 Rows        │
+│          (0.56s)          ││          (0.00s)          │
+└───────────────────────────┘└───────────────────────────┘

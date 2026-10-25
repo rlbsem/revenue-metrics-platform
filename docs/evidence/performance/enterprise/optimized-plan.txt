@@ -1,0 +1,123 @@
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+explain analyze select f.date_day,f.account_id,a.region,a.owner,sum(case when f.stage='open' then f.amount_cents else 0 end) as pipeline_cents from analytics.fct_opportunity_daily f join analytics.dim_account a on f.account_id=a.account_id and f.date_day>=a.valid_from and f.date_day<a.valid_to where f.account_id in (select account_id from assurance_control.affected_accounts) group by f.date_day,f.account_id,a.region,a.owner
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.218s              ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│           0 Rows          │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│             #0            │
+│__internal_decompress_strin│
+│           g(#1)           │
+│__internal_decompress_strin│
+│           g(#2)           │
+│             #3            │
+│             #4            │
+│                           │
+│         26986 Rows        │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│       HASH_GROUP_BY       │
+│    ────────────────────   │
+│          Groups:          │
+│             #0            │
+│             #1            │
+│             #2            │
+│             #3            │
+│                           │
+│    Aggregates: sum(#4)    │
+│                           │
+│         26986 Rows        │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│          date_day         │
+│         account_id        │
+│           region          │
+│           owner           │
+│ CASE  WHEN ((stage = 'open│
+│  ')) THEN (amount_cents)  │
+│         ELSE 0 END        │
+│                           │
+│         89423 Rows        │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_string_│
+│        ubigint(#0)        │
+│             #1            │
+│             #2            │
+│             #3            │
+│__internal_compress_string_│
+│        ubigint(#4)        │
+│             #5            │
+│                           │
+│         89423 Rows        │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│    ────────────────────   │
+│      Join Type: INNER     │
+│                           │
+│        Conditions:        │
+│  account_id = account_id  ├───────────────────────────────────────────┐
+│   date_day >= valid_from  │                                           │
+│    date_day < valid_to    │                                           │
+│                           │                                           │
+│         89423 Rows        │                                           │
+│          (0.00s)          │                                           │
+└─────────────┬─────────────┘                                           │
+┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐
+│         HASH_JOIN         │                             │         TABLE_SCAN        │
+│    ────────────────────   │                             │    ────────────────────   │
+│      Join Type: SEMI      │                             │     Table: dim_account    │
+│                           │                             │   Type: Sequential Scan   │
+│        Conditions:        │                             │                           │
+│      account_id = #0      │                             │        Projections:       │
+│                           │                             │         account_id        │
+│                           ├──────────────┐              │         valid_from        │
+│                           │              │              │          valid_to         │
+│                           │              │              │           region          │
+│                           │              │              │           owner           │
+│                           │              │              │                           │
+│         89423 Rows        │              │              │         68571 Rows        │
+│          (0.06s)          │              │              │          (0.00s)          │
+└─────────────┬─────────────┘              │              └───────────────────────────┘
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   ││    ────────────────────   │
+│           Table:          ││           Table:          │
+│   fct_opportunity_daily   ││     affected_accounts     │
+│                           ││                           │
+│   Type: Sequential Scan   ││   Type: Sequential Scan   │
+│                           ││                           │
+│        Projections:       ││        Projections:       │
+│         account_id        ││         account_id        │
+│          date_day         ││                           │
+│           stage           ││                           │
+│        amount_cents       ││                           │
+│                           ││                           │
+│       12429322 Rows       ││          300 Rows         │
+│          (0.14s)          ││          (0.00s)          │
+└───────────────────────────┘└───────────────────────────┘

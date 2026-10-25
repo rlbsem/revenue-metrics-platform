@@ -1,0 +1,48 @@
+{
+  "declared_at": "2026-10-24T23:05:48.297872+00:00",
+  "baseline_commit": "a39d603cc6d16de8f1d8430abf97ad3db4aa2cbe",
+  "profiles": [
+    "enterprise",
+    "stress"
+  ],
+  "repetitions": 3,
+  "conditions": {
+    "duckdb_threads": 1,
+    "dbt_threads": 1,
+    "memory_limit": "2GB",
+    "fresh_databases": true,
+    "os_cache": "not flushed; filesystem/cache warm-up effects possible; not cold-cache benchmarks",
+    "one_benchmark_at_a_time": true,
+    "pair_order": [
+      "baseline-first",
+      "optimized-first",
+      "baseline-first"
+    ],
+    "sources": "unchanged profile seed and generated CSV byte hashes",
+    "corrections": "unchanged generated late batch, no-op, plus separately labeled adversarial cases"
+  },
+  "success": {
+    "correctness": "All 15 schemas and complete row content equal via lossless typed Parquet exports ordered by verified grains, compared bytewise or with complete typed Arrow batches; no signatures. Fixture oracle and cents invariants unchanged.",
+    "performance": "at least 15% median corrected transformation improvement; show all repetitions and overheads; otherwise preserve negative result",
+    "no_op": "measure including source/change detection and all dbt gates, no implied free replay"
+  },
+  "limits": {
+    "min_available_memory_bytes": 4294967296,
+    "min_disk_bytes": 53687091200,
+    "per_stage_timeout_seconds": 1200,
+    "sample_interval_seconds": 0.2,
+    "scope": "sampled process-tree RSS, CPU and database/temp file sizes; not exact peak or exclusive machine load",
+    "max_process_tree_rss_bytes": 6442450944,
+    "min_runtime_available_memory_bytes": 1073741824,
+    "revision_note": "Before qualifying runs: pilot showed bounded 2GB engine on 32GB host; stress attempted only with >=4GB available and runtime resource stop rules."
+  },
+  "machine": {
+    "python": "3.12.14",
+    "os": "Windows-11-10.0.26200-SP0",
+    "logical_cpus": 32,
+    "ram_bytes": 33457201152,
+    "available_ram_bytes": 7743037440,
+    "disk_free_bytes": 1503351898112
+  },
+  "verification_method_revision": "Before renewed qualifying runs: preserved stopped whole-sort trials; complete natural business-date chunks bound exact comparison sorts at the same 2GB memory limit. Date inventories and exported-row totals establish full coverage."
+}

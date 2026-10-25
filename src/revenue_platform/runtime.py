@@ -113,6 +113,8 @@ def run_dbt(
     target="local",
     docs=False,
     test_only=None,
+    select=None,
+    extra_vars=None,
 ):
     if policy not in ("1.0", "2.0"):
         raise ValueError("Unsupported ARR policy")
@@ -143,12 +145,14 @@ def run_dbt(
         "--log-path",
         str((workspace / "dbt-logs").resolve()),
         "--vars",
-        json.dumps({"arr_policy": policy}),
+        json.dumps({"arr_policy": policy, **(extra_vars or {})}),
     ]
     if full_refresh and not docs:
         command += ["--full-refresh"]
     if test_only:
         command += ["--select", test_only]
+    elif select:
+        command += ["--select", *select]
     completed = subprocess.run(command, env=env, capture_output=True, text=True, encoding="utf-8")
     log = workspace / ("dbt-docs.log" if docs else "dbt-build.log")
     log.write_text(completed.stdout + completed.stderr, encoding="utf-8")

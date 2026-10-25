@@ -1,0 +1,63 @@
+{
+  "source_commit": "a39d603cc6d16de8f1d8430abf97ad3db4aa2cbe",
+  "dispatch": {
+    "conclusion": "success",
+    "headSha": "a39d603cc6d16de8f1d8430abf97ad3db4aa2cbe",
+    "status": "completed",
+    "url": "https://github.com/rlbsem/revenue-metrics-platform/actions/runs/40141230095"
+  },
+  "local_execution": "passed",
+  "fixture": {
+    "dbt_data_tests": 30,
+    "dbt_models": 15,
+    "deterministic_replay": true,
+    "github_actions": "configured, not executed by this local verification",
+    "local_execution": "passed",
+    "markdown_links": "passed",
+    "platform": "Windows",
+    "pytest_summary": "71 passed in 76.86s (0:01:16)",
+    "python": "3.12.14",
+    "release_id": "ae4092cdaaca1246a60555d354bf57076889b883886f5ad9f459cac58c6da3b0",
+    "snowflake": "pending_credentials",
+    "streamlit": "AppTest exercised all six cards and region selection"
+  },
+  "enterprise": {
+    "dbt_models": 15,
+    "dbt_tests": 30,
+    "duckdb_settings": {
+      "dbt_threads": 1,
+      "memory_limit": "2GB",
+      "scope": "configured dbt profile settings",
+      "threads": 1
+    },
+    "incremental_full_model_signatures_equal": true,
+    "logical_cpus": 32,
+    "os": "Windows-11-10.0.26200-SP0",
+    "processor": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+    "profile": "enterprise",
+    "published_release_equal": true,
+    "python": "3.12.14",
+    "release_id": "8c84dea3109e36c68dadb9173417a0a2994d5f916006a2e4e582dc971f0efeb5",
+    "source_economics": "passed; all source-level economic and booking-authority checks",
+    "source_repeat_byte_hashes_equal": true,
+    "status": "passed",
+    "streamlit": "six cards, regional ARR, segment and offering selection passed AppTest",
+    "stress": "configured; not executed, no measured performance claim",
+    "timing_caveat": "Single measured execution on a shared runner; not a controlled benchmark or production capacity claim. Incremental command rebuilds all non-incremental models.",
+    "timings_seconds": {
+      "bounded_snapshot_and_source_hashes": 7.917,
+      "bulk_load": 3.396,
+      "corrected_full_refresh_dbt_build": 22.848,
+      "corrected_incremental_dbt_build": 14.646,
+      "dbt_docs": 3.676,
+      "initial_dbt_build": 22.756,
+      "repeat_source_generation": 4.46,
+      "source_generation": 4.173
+    }
+  },
+  "notes": [
+    "Unchanged verifier ran before source edits. Manual SHA dispatch returned 422 because workflow_dispatch requires a ref; main dispatch then executed the exact required SHA.",
+    "Verifier exited zero; Windows temporary-directory finalizer emitted a cleanup PermissionError after verification; retained privately. Subsequent executions set TEMP/TMP to ignored local workspace.",
+    "Historical native Snowflake records validated offline only; no new Snowflake execution."
+  ]
+}
