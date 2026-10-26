@@ -20,7 +20,7 @@ Read the [generated review and account-level discrepancy bridge](docs/evidence/c
 
 The established enterprise Q1 review produces **$197.46M in net bookings, $189.42M net invoiced and $174.61M allocated cash**. Period-end installed ARR is $754.39M; open pipeline is $222.34M. The mature 30-day current-quarter cohort win rate is 18.67%.
 
-**Installed ARR ≠ quarterly bookings ≠ quarterly invoicing ≠ quarterly cash.** Customers acquired over 2020–2025 continue to contribute ARR. Only signed Q1 new business, renewals, expansions, upgrades, contractions and cancellations enter Q1 bookings. Billing continues for existing contracts; some collections settle opening invoices.
+**Installed ARR ≠ quarterly bookings ≠ quarterly invoicing ≠ quarterly cash.** Customers acquired over 2020-2025 continue to contribute ARR. Only signed Q1 new business, renewals, expansions, upgrades, contractions and cancellations enter Q1 bookings. Billing continues for existing contracts; some collections settle opening invoices.
 
 | Generated enterprise profile | Actual value |
 |---|---:|
