@@ -214,7 +214,7 @@ for key, label in labels:
             st.write(f"**{field.replace('_', ' ').capitalize()}:** {definition[field]}")
 
 st.download_button(
-    "Download analyst CSV — same metrics",
+    "Download analyst CSV (same metrics)",
     analyst_csv(result, region),
     file_name="commercial-review.csv",
     mime="text/csv",

@@ -8,8 +8,8 @@
     ".gitignore": "88dce890ae625ec1190fe84ea7f2b4e5d50bc14c650388ca90ce8808911914c3",
     ".streamlit/config.toml": "8eed9d6bf3a91f6305ffe4936f271453ba16c59fd39f1ef54a16783c216cb403",
     "LICENSE": "bfa35d897efdd7b0c543024c4d8a4d39feb8d9132f5432c1644f7f74443b4c13",
-    "README.md": "956c33c5037072ae1487f5d2cbffba02e4e8a94093820ed9c43193b4b08562c1",
-    "app.py": "24d5e5cec0fc0a33cd6a24d8410d044985118651fa3455e4278eb6470605a2a0",
+    "README.md": "8260f89eecf407345186a92a2f8274637add6554178532563fe23e7eb952d491",
+    "app.py": "8be6828aea954c5dea8d9170dfe9ebe3d9c6f69c949c44d7068ebefbd3917e14",
     "data/account_history.csv": "a4c6fe6a1219f4ee8d96aea4d08f10a067edbdacaf4a10516d87dc865c07fcb7",
     "data/booking_events.csv": "e5318baee6d728d2587bfa29538e1a440e5ab6c3237b2faa5b8b10967fb39faa",
     "data/calendar.csv": "c95f5bb25803d26c6177a1116162c05269e03906878d373abaf65e784e9205cc",
@@ -137,7 +137,7 @@
     "docs/images/enterprise-flow-bridge.svg": "c2c9809fee6a7e56f7fbabef65efd7dd58fe2d788864d9a025ba3eb9036b286f",
     "docs/metrics.md": "6aab92888db38e6579ddbaa7d2bf293c30c047a46bee6e44b8a7cc17bf565a99",
     "docs/performance.md": "5fcc01927f09b81eeba9cf0d229d56bc977fbb6d08a1cbf50251a2342fe0b7d9",
-    "docs/profiles.md": "c44f03df0d767741b0924c1e99eecc85ea0ddbf2ec62f83a3ad05edfe756d52c",
+    "docs/profiles.md": "2317497a4df035170d365ea9bbfea93620cf2c1622a486a8018e01021b6e74f1",
     "docs/snowflake.md": "e11ad394a762476a2d90a54a0144411fa3b0c505f6f3e25049c23c7967d9ba94",
     "docs/testing.md": "330e26719b3c3e16b0605db9a014ae539b5d3980e9933115e587ab05362cd553",
     "metrics/catalog.json": "f6186633482342a8711634b16a81a1f5b90548ae9612614b88d2382b96f2887e",
@@ -181,5 +181,5 @@
     "tests/test_snowflake_controls.py": "67e7a6a3e2b9a58144c2d29451dd00875f700dad0289306ce2c6b66b4836ffc8",
     "tests/test_snowflake_setup.py": "43053964bbe54080cae723e53c880a4797e419e1d990a82337f4188dc4f86cb0"
   },
-  "scope": "Every delivered file except this manifest"
+  "scope": "Every packaged file except this manifest itself (no self-referential hash)."
 }
